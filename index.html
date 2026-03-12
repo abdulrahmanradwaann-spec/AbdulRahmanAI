@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عبد الرحمن تكنولوجيا | الدليل الشامل للذكاء الاصطناعي</title>
+    <!-- Font Awesome 6 (أيقونات محدثة) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: مزيج أنيق من Plus Jakarta Sans وCairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* متغيرات ثيم متقدمة */
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --bg-light: #f8fafc;
+            --bg-dark: #0f172a;
+            --surface-light: rgba(255, 255, 255, 0.7);
+            --surface-dark: rgba(30, 41, 59, 0.8);
+            --text-light: #1e293b;
+            --text-dark: #f1f5f9;
+            --border-light: rgba(203, 213, 225, 0.5);
+            --border-dark: rgba(51, 65, 85, 0.5);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-hover: 0 30px 60px -15px rgba(59,130,246,0.5);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+            --glass-border-dark: 1px solid rgba(255, 255, 255, 0.05);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif;
+            background: linear-gradient(145deg, var(--bg-light) 0%, #eef2f6 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+            user-select: none; /* منع التحديد */
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* خلفية ديناميكية متطورة */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(59,130,246,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139,92,246,0.1) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 2px, transparent 2px, transparent 8px);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* طبقة زجاجية متحركة */
+        body::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+            mix-blend-mode: overlay;
+            animation: rotate 60s linear infinite;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* الوضع الداكن حسب تفضيل النظام */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(145deg, var(--bg-dark) 0%, #0b1120 100%);
+                color: var(--text-dark);
+            }
+            body::before {
+                background: 
+                    radial-gradient(circle at 20% 30%, rgba(59,130,246,0.2) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, rgba(139,92,246,0.2) 0%, transparent 50%),
+                    repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 8px);
+            }
+            body::after {
+                background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, transparent 60%);
+                mix-blend-mode: soft-light;
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ========== الهيدر المتطور ========== */
+        .header {
+            padding: 60px 0 30px;
+            text-align: center;
+            animation: reveal 1s ease-out;
+        }
+
+        @keyframes reveal {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .header h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, var(--primary), var(--secondary), var(--accent));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 16px;
+            letter-spacing: -1.5px;
+            animation: gradientShift 6s infinite, float 5s ease-in-out infinite;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .typing-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 500;
+            min-height: 60px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            width: fit-content;
+            margin: 0 auto;
+            padding: 12px 32px;
+            border-radius: 60px;
+            border: 1px solid rgba(59,130,246,0.3);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.2);
+        }
+
+        #typingText {
+            direction: ltr; /* للحفاظ على النص الإنجليزي */
+            font-family: 'Plus Jakarta Sans', monospace;
+        }
+
+        .cursor {
+            width: 3px;
+            height: 2rem;
+            background: var(--primary);
+            border-radius: 3px;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* ========== شريط البحث فائق التصميم ========== */
+        .search-section {
+            margin: 40px 0 60px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            transform: scale(1);
+            transition: transform 0.4s;
+        }
+
+        .search-wrapper:hover {
+            transform: scale(1.02);
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 20px 70px 20px 30px;
+            border: none;
+            border-radius: 70px;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(59,130,246,0.2);
+            font-size: 1.2rem;
+            font-family: inherit;
+            color: inherit;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+            user-select: text;
+        }
+
+        .search-wrapper input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 8px rgba(59,130,246,0.2), 0 20px 40px -15px var(--primary);
+            background: rgba(255,255,255,0.95);
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.6rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+            pointer-events: none;
+        }
+
+        .search-wrapper:hover i {
+            transform: translateY(-50%) rotate(10deg) scale(1.1);
+        }
+
+        /* ========== أقسام التصنيفات بطاقة عصرية ========== */
+        .category {
+            margin-bottom: 70px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: slideUp 0.8s forwards;
+        }
+
+        .category:nth-child(odd) { animation-delay: 0.1s; }
+        .category:nth-child(even) { animation-delay: 0.2s; }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 12px 35px;
+            background: var(--surface-light);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 80px;
+            border: var(--glass-border);
+            box-shadow: 0 15px 30px -15px rgba(0,0,0,0.15);
+            width: fit-content;
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .category-header {
+                background: var(--surface-dark);
+                border-color: var(--glass-border-dark);
+            }
+        }
+
+        .category-header:hover {
+            background: rgba(255,255,255,0.9);
+            border-color: var(--primary);
+            transform: translateX(15px) scale(1.02);
+            box-shadow: 0 20px 40px -15px var(--primary);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            transition: transform 0.6s;
+        }
+
+        .category-header:hover .category-icon {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .category-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, var(--text-light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .category-title {
+                background: linear-gradient(145deg, #fff, var(--primary));
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+        }
+
+        /* شبكة البطاقات المطورة */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .tool-card {
+            background: var(--surface-light);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 36px;
+            padding: 28px 24px;
+            border: var(--glass-border);
+            box-shadow: 0 20px 35px -15px rgba(0,0,0,0.15);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: cardAppear 0.5s forwards;
+            animation-delay: calc(0.03s * var(--card-index, 1));
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card {
+                background: var(--surface-dark);
+                border-color: var(--glass-border-dark);
+            }
+        }
+
+        @keyframes cardAppear {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.6s;
+            transform-origin: right;
+        }
+
+        .tool-card:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+            background: rgba(255,255,255,0.95);
+            border-color: transparent;
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(145deg, #e0f2fe, #ede9fe);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: var(--transition);
+            box-shadow: 0 10px 15px -5px rgba(59,130,246,0.3);
+        }
+
+        .tool-card:hover .card-icon {
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
+            color: white;
+            transform: rotate(6deg) scale(1.15);
+            box-shadow: 0 15px 25px -5px var(--primary);
+        }
+
+        .tool-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            transition: color 0.3s;
+        }
+
+        .tool-card:hover .tool-name {
+            color: var(--primary);
+        }
+
+        .tool-desc {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 20px;
+            flex: 1;
+            line-height: 1.7;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-desc {
+                color: #a0aec0;
+            }
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 22px;
+            background: rgba(59,130,246,0.1);
+            border-radius: 50px;
+            color: inherit;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            border: 1px solid rgba(59,130,246,0.2);
+            align-self: flex-start;
+            margin-top: 8px;
+            width: 100%;
+            max-width: 140px;
+        }
+
+        .tool-link:hover {
+            background: var(--primary);
+            color: white;
+            gap: 16px;
+            border-color: transparent;
+            box-shadow: 0 10px 20px -8px var(--primary);
+        }
+
+        .tool-link i {
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+        }
+
+        .tool-link:hover i {
+            transform: translateX(-5px);
+        }
+
+        /* رسالة عدم وجود نتائج */
+        #noResults {
+            text-align: center;
+            padding: 80px 20px;
+            font-size: 1.8rem;
+            color: #94a3b8;
+            display: none;
+            animation: fadeIn 0.5s;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            margin: 40px 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* زر العودة للأعلى بشكل مبتكر */
+        .back-to-top {
+            position: fixed;
+            bottom: 35px;
+            right: 35px;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(59,130,246,0.5);
+            transition: var(--transition);
+            border: 2px solid rgba(255,255,255,0.3);
+            z-index: 99;
+            animation: softPulse 3s infinite;
+        }
+
+        @keyframes softPulse {
+            0% { box-shadow: 0 10px 25px rgba(59,130,246,0.5); }
+            50% { box-shadow: 0 10px 40px rgba(59,130,246,0.9); }
+            100% { box-shadow: 0 10px 25px rgba(59,130,246,0.5); }
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.2) rotate(360deg);
+            background: linear-gradient(145deg, var(--secondary), var(--accent));
+            box-shadow: 0 15px 35px rgba(139,92,246,0.7);
+        }
+
+        .back-to-top i {
+            font-size: 1.8rem;
+        }
+
+        /* الفوتر الأنيق */
+        .footer {
+            text-align: center;
+            padding: 35px 0;
+            margin-top: 60px;
+            border-top: 1px solid rgba(59,130,246,0.2);
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.05);
+            font-size: 1.1rem;
+        }
+
+        .footer .copyright {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        /* تحسينات للأجهزة المحمولة */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 3rem; }
+            .typing-container { font-size: 1.2rem; padding: 10px 20px; }
+            .category-header { padding: 8px 20px; }
+            .category-title { font-size: 1.6rem; }
+            .category-icon { width: 50px; height: 50px; font-size: 1.5rem; }
+            .tools-grid { gap: 18px; }
+            .back-to-top { width: 55px; height: 55px; bottom: 20px; left: 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .header h1 { font-size: 2.5rem; }
+            .search-wrapper input { padding: 18px 55px 18px 20px; font-size: 1rem; }
+        }
+
+        /* منع التحديد */
+        img, a, i {
+            -webkit-user-drag: none;
+            user-drag: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>عبد الرحمن تكنولوجيا</h1>
+            <div class="typing-container">
+                <span id="typingText"></span>
+                <span class="cursor"></span>
+            </div>
+        </header>
+
+        <div class="search-section">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="ابحث عن أداة ذكاء اصطناعي..." onkeyup="filterTools()">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <div id="categoriesContainer"></div>
+        <div id="noResults">
+            <i class="fas fa-exclamation-circle"></i> لا توجد أدوات تطابق بحثك. جرب كلمة أخرى!
+        </div>
+    </div>
+
+    <div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <footer class="footer">
+        <p class="copyright">© 2026 Abdulrahman Radwan. جميع الحقوق محفوظة.</p>
+        <p>تصميم فاخر بتقنيات 2026 | دليل AI الشامل</p>
+    </footer>
+
+    <script>
+        // قائمة التصنيفات (نفس الكود الأصلي بالكامل مع الحفاظ على المحتوى)
+        const categories = [
+            // التصنيفات الأصلية بالكامل (من 1 إلى 90) مع إضافة الأدوات الجديدة ضمنها
+            {
+                name: "مساعدات الذكاء الاصطناعي العامة",
+                icon: "fa-solid fa-comments",
+                tools: [
+                    { name: "ChatGPT", desc: "كتابة – برمجة – بحث – شرح – أفكار.", url: "https://chat.openai.com", icon: "fa-brands fa-openai" },
+                    { name: "Claude", desc: "تحليل وكتابة نصوص طويلة.", url: "https://www.anthropic.com/claude", icon: "fa-solid fa-message" },
+                    { name: "Gemini", desc: "مساعد ذكاء اصطناعي متعدد الوسائط من Google.", url: "https://gemini.google.com", icon: "fa-solid fa-gem" },
+                    { name: "Qwen Chat", desc: "روبوت دردشة متقدم.", url: "https://chat.qwen.ai", icon: "fa-solid fa-comment-dots" },
+                    { name: "HuggingChat", desc: "دردشة مفتوحة المصدر.", url: "https://huggingface.co/chat", icon: "fa-solid fa-face-smile" },
+                    { name: "Perplexity", desc: "محرك بحث يجيب مع مصادر.", url: "https://www.perplexity.ai", icon: "fa-solid fa-magnifying-glass" },
+                    { name: "DeepAI", desc: "واجهات برمجية AI مجانية.", url: "https://deepai.org", icon: "fa-solid fa-brain" }
+                ]
+            },
+            {
+                name: "إنشاء التطبيقات والمواقع",
+                icon: "fa-solid fa-laptop-code",
+                tools: [
+                    { name: "Rocket.new", desc: "إنشاء تطبيقات تلقائياً.", url: "https://www.rocket.new", icon: "fa-solid fa-rocket" },
+                    { name: "Bolt.new", desc: "بناء مواقع وتطبيقات بسرعة.", url: "https://bolt.new", icon: "fa-solid fa-bolt" },
+                    { name: "Emergent.sh", desc: "يساعد المطورين في بناء البرامج.", url: "https://emergent.sh", icon: "fa-solid fa-code-branch" }
+                ]
+            },
+            {
+                name: "تطبيقات بدون برمجة (No Code)",
+                icon: "fa-solid fa-cubes",
+                tools: [
+                    { name: "Bubble", desc: "إنشاء مواقع وأنظمة كاملة.", url: "https://bubble.io", icon: "fa-solid fa-bubble" },
+                    { name: "Base44", desc: "إنشاء تطبيقات وأنظمة بسهولة.", url: "https://base44.com", icon: "fa-solid fa-layer-group" }
+                ]
+            },
+            {
+                name: "أدوات البرمجة والمطورين",
+                icon: "fa-solid fa-terminal",
+                tools: [
+                    { name: "Replit", desc: "برمجة مباشرة داخل المتصفح.", url: "https://replit.com", icon: "fa-solid fa-code" },
+                    { name: "Codeium", desc: "مساعد برمجي مجاني.", url: "https://codeium.com", icon: "fa-solid fa-bolt" },
+                    { name: "GitHub Copilot", desc: "يكتب الكود تلقائياً.", url: "https://github.com/features/copilot", icon: "fa-brands fa-github" },
+                    { name: "Cursor", desc: "محرر أكواد بالذكاء الاصطناعي.", url: "https://cursor.sh", icon: "fa-solid fa-cursor" },
+                    { name: "Rork", desc: "إدارة وتنظيم المشاريع البرمجية.", url: "https://rork.com", icon: "fa-solid fa-diagram-project" }
+                ]
+            },
+            {
+                name: "إنشاء الصور والتصميم",
+                icon: "fa-solid fa-paintbrush",
+                tools: [
+                    { name: "Midjourney", desc: "توليد صور إبداعية.", url: "https://www.midjourney.com", icon: "fa-solid fa-image" },
+                    { name: "DALL·E", desc: "إنشاء الصور باستخدام الذكاء الاصطناعي.", url: "https://openai.com/dall-e", icon: "fa-solid fa-cloud" },
+                    { name: "Craiyon", desc: "توليد صور من النصوص.", url: "https://www.craiyon.com", icon: "fa-solid fa-palette" },
+                    { name: "Playground AI", desc: "توليد وتعديل الصور.", url: "https://playgroundai.com", icon: "fa-solid fa-paint-roller" },
+                    { name: "Canva", desc: "تصميم باحترافية.", url: "https://www.canva.com", icon: "fa-brands fa-canva" },
+                    { name: "Pixlr", desc: "تعديل الصور أونلاين.", url: "https://pixlr.com", icon: "fa-solid fa-crop" },
+                    { name: "Photopea", desc: "بديل فوتوشوب مجاني.", url: "https://www.photopea.com", icon: "fa-solid fa-layers" },
+                    { name: "Cleanup Pictures", desc: "إزالة العناصر من الصور.", url: "https://cleanup.pictures", icon: "fa-solid fa-eraser" },
+                    { name: "Remove.bg", desc: "حذف خلفية الصور.", url: "https://www.remove.bg", icon: "fa-solid fa-image-portrait" },
+                    { name: "AutoDraw", desc: "رسم تلقائي بالذكاء الاصطناعي.", url: "https://www.autodraw.com", icon: "fa-solid fa-draw-polygon" },
+                    { name: "Looka", desc: "إنشاء الشعارات والهوية البصرية.", url: "https://looka.com", icon: "fa-solid fa-star" }
+                ]
+            },
+            {
+                name: "صناعة الفيديو",
+                icon: "fa-solid fa-video",
+                tools: [
+                    { name: "Runway", desc: "تعديل فيديو احترافي.", url: "https://runwayml.com", icon: "fa-solid fa-film" },
+                    { name: "Synthesia", desc: "إنشاء فيديوهات بشخصيات افتراضية.", url: "https://www.synthesia.io", icon: "fa-solid fa-robot" },
+                    { name: "OpusClip", desc: "تحويل الفيديو الطويل إلى مقاطع قصيرة.", url: "https://www.opus.pro", icon: "fa-solid fa-scissors" },
+                    { name: "Faceless.video", desc: "إنشاء فيديوهات بدون وجه.", url: "https://faceless.video", icon: "fa-solid fa-mask" }
+                ]
+            },
+            {
+                name: "الصوت وتحويل النص",
+                icon: "fa-solid fa-headphones",
+                tools: [
+                    { name: "ElevenLabs", desc: "أصوات واقعية بالذكاء الاصطناعي.", url: "https://www.elevenlabs.io", icon: "fa-solid fa-volume-high" },
+                    { name: "Murf", desc: "تسجيلات صوتية احترافية.", url: "https://murf.ai", icon: "fa-solid fa-waveform" },
+                    { name: "TTSMaker", desc: "تحويل النص إلى صوت.", url: "https://ttsmaker.com", icon: "fa-solid fa-microphone" },
+                    { name: "LUVVOICE", desc: "توليد أصوات من النص.", url: "https://luvvoice.com", icon: "fa-solid fa-heart" },
+                    { name: "15.ai", desc: "إنشاء أصوات شخصيات.", url: "https://15.ai", icon: "fa-solid fa-mask" },
+                    { name: "Whisper", desc: "تحويل الصوت إلى نص.", url: "https://huggingface.co/spaces/openai/whisper", icon: "fa-solid fa-ear-listen" }
+                ]
+            },
+            {
+                name: "الكتابة وصناعة المحتوى",
+                icon: "fa-solid fa-feather",
+                tools: [
+                    { name: "Jasper", desc: "كتابة المحتوى التسويقي.", url: "https://www.jasper.ai", icon: "fa-solid fa-feather" },
+                    { name: "Copy.ai", desc: "كتابة الإعلانات والإيميلات.", url: "https://www.copy.ai", icon: "fa-solid fa-copy" },
+                    { name: "Writesonic", desc: "كتابة محتوى SEO.", url: "https://writesonic.com", icon: "fa-solid fa-pencil" },
+                    { name: "Grammarly", desc: "تصحيح القواعد وتحسين الكتابة.", url: "https://www.grammarly.com", icon: "fa-solid fa-check-double" },
+                    { name: "TextFixer", desc: "إعادة صياغة وتنظيف النصوص.", url: "https://www.textfixer.com", icon: "fa-solid fa-spell-check" }
+                ]
+            },
+            {
+                name: "العروض التقديمية والدراسة",
+                icon: "fa-solid fa-chalkboard-user",
+                tools: [
+                    { name: "Gamma", desc: "إنشاء عروض تقديمية تلقائياً.", url: "https://gamma.app", icon: "fa-solid fa-chart-pie" },
+                    { name: "Tome", desc: "عروض تقديمية وقصص باستخدام AI.", url: "https://tome.app", icon: "fa-solid fa-book" },
+                    { name: "EssayGrader", desc: "تصحيح المقالات تلقائياً.", url: "https://essaygrader.ai", icon: "fa-solid fa-graduation-cap" },
+                    { name: "Notion", desc: "تنظيم الملاحظات والمستندات.", url: "https://www.notion.so", icon: "fa-solid fa-note-sticky" }
+                ]
+            },
+            {
+                name: "الأتمتة وتنظيم العمل",
+                icon: "fa-solid fa-robot",
+                tools: [
+                    { name: "Zapier", desc: "أتمتة المهام بين التطبيقات.", url: "https://zapier.com", icon: "fa-solid fa-bolt" },
+                    { name: "n8n", desc: "أتمتة العمليات التقنية.", url: "https://n8n.io", icon: "fa-solid fa-network-wired" }
+                ]
+            },
+            {
+                name: "الاجتماعات وإدارة العمل",
+                icon: "fa-solid fa-people-group",
+                tools: [
+                    { name: "Otter.ai", desc: "تسجيل الاجتماعات وتحويلها لنص.", url: "https://otter.ai", icon: "fa-solid fa-headphones" },
+                    { name: "Fireflies.ai", desc: "تلخيص الاجتماعات واستخراج الملاحظات.", url: "https://fireflies.ai", icon: "fa-solid fa-fire" },
+                    { name: "Superwrapper", desc: "أداة متكاملة للاجتماعات.", url: "https://superwrapper.ai", icon: "fa-solid fa-wrappers" }
+                ]
+            },
+            {
+                name: "التسويق وإدارة العملاء",
+                icon: "fa-solid fa-chart-line",
+                tools: [
+                    { name: "AdCreative", desc: "إنشاء إعلانات وبنرات تلقائياً.", url: "https://www.adcreative.ai", icon: "fa-solid fa-rectangle-ad" },
+                    { name: "HubSpot", desc: "إدارة العملاء والتسويق بالذكاء الاصطناعي.", url: "https://www.hubspot.com", icon: "fa-brands fa-hubspot" },
+                    { name: "Attio", desc: "نظام CRM مدعوم بالذكاء الاصطناعي.", url: "https://attio.com", icon: "fa-solid fa-users" }
+                ]
+            },
+            {
+                name: "إدارة الوقت والجدولة",
+                icon: "fa-solid fa-clock",
+                tools: [
+                    { name: "Reclaim.ai", desc: "تنظيم المواعيد تلقائياً.", url: "https://reclaim.ai", icon: "fa-solid fa-calendar-check" },
+                    { name: "Clockwise", desc: "مساعد ذكي لإدارة الوقت.", url: "https://www.getclockwise.com", icon: "fa-solid fa-clock" }
+                ]
+            },
+            {
+                name: "الوظائف والسيرة الذاتية",
+                icon: "fa-solid fa-file-lines",
+                tools: [
+                    { name: "Kickresume", desc: "إنشاء السيرة الذاتية ورسائل التوظيف.", url: "https://kickresume.com", icon: "fa-solid fa-file-lines" },
+                    { name: "Teal", desc: "تحسين السيرة الذاتية للتوظيف.", url: "https://www.tealhq.com", icon: "fa-solid fa-briefcase" }
+                ]
+            },
+            {
+                name: "مواقع تجمع أدوات الذكاء الاصطناعي",
+                icon: "fa-solid fa-compass",
+                tools: [
+                    { name: "Futurepedia", desc: "دليل لاكتشاف أدوات الذكاء الاصطناعي.", url: "https://www.futurepedia.io", icon: "fa-solid fa-compass" },
+                    { name: "There's An AI For That", desc: "البحث عن أدوات AI حسب المهمة.", url: "https://theresanaiforthat.com", icon: "fa-solid fa-magnifying-glass-chart" }
+                ]
+            },
+            // التصنيفات الجديدة (من 91 إلى 300)
+            {
+                name: "أدوات التسويق والإعلانات",
+                icon: "fa-solid fa-bullhorn",
+                tools: [
+                    { name: "AdCreative", desc: "إنشاء تصاميم إعلانات احترافية تلقائيًا.", url: "https://www.adcreative.ai", icon: "fa-solid fa-rectangle-ad" },
+                    { name: "Predis", desc: "إنشاء منشورات سوشيال ميديا تلقائيًا.", url: "https://predis.ai", icon: "fa-solid fa-hashtag" },
+                    { name: "Ocoya", desc: "كتابة وجدولة المحتوى التسويقي.", url: "https://www.ocoya.com", icon: "fa-solid fa-calendar-check" },
+                    { name: "Pencil", desc: "توليد أفكار إعلانات وفيديوهات تسويقية.", url: "https://pencil.so", icon: "fa-solid fa-pencil" },
+                    { name: "CopyMonkey", desc: "كتابة وصف منتجات أمازون.", url: "https://copymonkey.ai", icon: "fa-brands fa-amazon" },
+                    { name: "Clickable", desc: "إنشاء إعلانات رقمية بسرعة.", url: "https://clickable.ai", icon: "fa-solid fa-mouse-pointer" },
+                    { name: "Creasquare", desc: "تصميم محتوى كامل للحملات الإعلانية.", url: "https://creasquare.io", icon: "fa-solid fa-square" },
+                    { name: "Zopto", desc: "أتمتة التسويق عبر LinkedIn.", url: "https://zopto.com", icon: "fa-brands fa-linkedin" },
+                    { name: "Drift", desc: "روبوت محادثة لتحويل الزوار إلى عملاء.", url: "https://www.drift.com", icon: "fa-solid fa-comment-dots" },
+                    { name: "Optmyzr", desc: "تحسين إعلانات Google تلقائيًا.", url: "https://optmyzr.com", icon: "fa-brands fa-google" },
+                    { name: "Pattern89", desc: "توقع أداء الإعلانات قبل نشرها.", url: "https://pattern89.com", icon: "fa-solid fa-chart-line" },
+                    { name: "Revealbot", desc: "إدارة الحملات الإعلانية تلقائيًا.", url: "https://revealbot.com", icon: "fa-solid fa-robot" },
+                    { name: "Adzooma", desc: "تحليل وتحسين الإعلانات.", url: "https://adzooma.com", icon: "fa-solid fa-magnifying-glass-chart" },
+                    { name: "Madgicx", desc: "تحسين إعلانات فيسبوك.", url: "https://madgicx.com", icon: "fa-brands fa-facebook" },
+                    { name: "Marpipe", desc: "اختبار تصاميم الإعلانات بسرعة.", url: "https://marpipe.com", icon: "fa-solid fa-flask" }
+                ]
+            },
+            {
+                name: "إدارة السوشيال ميديا",
+                icon: "fa-solid fa-hashtag",
+                tools: [
+                    { name: "TweetHunter", desc: "تخطيط وتحليل تغريدات تويتر.", url: "https://tweethunter.io", icon: "fa-brands fa-twitter" },
+                    { name: "Typefully", desc: "كتابة وجدولة تغريدات.", url: "https://typefully.com", icon: "fa-brands fa-twitter" },
+                    { name: "Buffer", desc: "جدولة المنشورات على كل المنصات.", url: "https://buffer.com", icon: "fa-solid fa-clock" },
+                    { name: "Hootsuite", desc: "إدارة حسابات السوشيال ميديا.", url: "https://hootsuite.com", icon: "fa-brands fa-hootsuite" },
+                    { name: "Metricool", desc: "تحليل وجدولة المحتوى.", url: "https://metricool.com", icon: "fa-solid fa-chart-simple" },
+                    { name: "SocialBee", desc: "نشر المحتوى وتنظيمه.", url: "https://socialbee.io", icon: "fa-brands fa-twitter" },
+                    { name: "Publer", desc: "جدولة وتحليل المنشورات.", url: "https://publer.io", icon: "fa-solid fa-share-nodes" },
+                    { name: "Loomly", desc: "إدارة أفكار وجدولة المحتوى.", url: "https://loomly.com", icon: "fa-solid fa-lightbulb" },
+                    { name: "ContentStudio", desc: "تتبع الترند وصناعة المحتوى.", url: "https://contentstudio.io", icon: "fa-solid fa-pen-fancy" },
+                    { name: "Later", desc: "جدولة الصور والفيديوهات.", url: "https://later.com", icon: "fa-solid fa-calendar-alt" },
+                    { name: "Planable", desc: "معاينة وجدولة البوستات.", url: "https://planable.io", icon: "fa-solid fa-eye" },
+                    { name: "Zoho Social", desc: "إدارة منصات التواصل مع تحليلات.", url: "https://zoho.com/social", icon: "fa-solid fa-chart-bar" },
+                    { name: "Sprout Social", desc: "تحليل الجمهور والأداء.", url: "https://sproutsocial.com", icon: "fa-brands fa-sprout-social" },
+                    { name: "Sendible", desc: "أتمتة نشر المحتوى.", url: "https://sendible.com", icon: "fa-solid fa-share-alt" },
+                    { name: "Vista Social", desc: "إدارة كاملة للسوشيال ميديا.", url: "https://vistasocial.com", icon: "fa-solid fa-globe" }
+                ]
+            },
+            {
+                name: "التسويق بالبريد الإلكتروني",
+                icon: "fa-solid fa-envelope-open-text",
+                tools: [
+                    { name: "Mailchimp", desc: "إنشاء حملات بريدية احترافية.", url: "https://mailchimp.com", icon: "fa-brands fa-mailchimp" },
+                    { name: "ConvertKit", desc: "إنشاء قوائم بريدية للمبدعين.", url: "https://convertkit.com", icon: "fa-solid fa-bolt" },
+                    { name: "ActiveCampaign", desc: "أتمتة التسويق عبر البريد.", url: "https://activecampaign.com", icon: "fa-solid fa-campaigns" },
+                    { name: "MailerLite", desc: "تصميم رسائل بريدية بسهولة.", url: "https://mailerlite.com", icon: "fa-solid fa-feather" },
+                    { name: "GetResponse", desc: "تسويق بالبريد مع صفحات هبوط.", url: "https://getresponse.com", icon: "fa-solid fa-reply" },
+                    { name: "AWeber", desc: "قوالب جاهزة للبريد التسويقي.", url: "https://aweber.com", icon: "fa-solid fa-a" },
+                    { name: "Sendinblue", desc: "إدارة البريد والرسائل التسويقية.", url: "https://sendinblue.com", icon: "fa-solid fa-send" },
+                    { name: "Campaign Monitor", desc: "تحليلات متقدمة لحملات البريد.", url: "https://campaignmonitor.com", icon: "fa-solid fa-chart-line" },
+                    { name: "Moosend", desc: "حملات بريدية ذكية.", url: "https://moosend.com", icon: "fa-solid fa-envelope" },
+                    { name: "Klaviyo", desc: "مثالي للتجارة الإلكترونية.", url: "https://klaviyo.com", icon: "fa-solid fa-cart-shopping" },
+                    { name: "Drip", desc: "أتمتة مبيعات البريد الإلكتروني.", url: "https://drip.com", icon: "fa-solid fa-droplet" },
+                    { name: "HubSpot Email", desc: "تسويق بالبريد مع CRM.", url: "https://hubspot.com/products/email", icon: "fa-brands fa-hubspot" },
+                    { name: "Omnisend", desc: "رسائل تسويقية متعددة القنوات.", url: "https://omnisend.com", icon: "fa-solid fa-bullhorn" },
+                    { name: "Benchmark Email", desc: "إنشاء حملات بريدية بسهولة.", url: "https://benchmarkemail.com", icon: "fa-solid fa-check" },
+                    { name: "Mailjet", desc: "إرسال رسائل بريد احترافية.", url: "https://mailjet.com", icon: "fa-solid fa-paper-plane" }
+                ]
+            },
+            {
+                name: "أدوات العروض التقديمية",
+                icon: "fa-solid fa-chalkboard",
+                tools: [
+                    { name: "Beautiful", desc: "إنشاء عروض تقديمية تلقائيًا.", url: "https://beautiful.ai", icon: "fa-solid fa-wand-magic-sparkles" },
+                    { name: "Pitch", desc: "تصميم عروض احترافية.", url: "https://pitch.com", icon: "fa-solid fa-up-right-from-square" },
+                    { name: "Slidesgo", desc: "قوالب PowerPoint مجانية.", url: "https://slidesgo.com", icon: "fa-brands fa-google" },
+                    { name: "Visme", desc: "تصميم عروض وموشن جرافيك.", url: "https://visme.co", icon: "fa-solid fa-chart-pie" },
+                    { name: "Prezi", desc: "عروض تفاعلية مبتكرة.", url: "https://prezi.com", icon: "fa-solid fa-p" },
+                    { name: "Canva Presentations", desc: "تصميم عروض بسهولة.", url: "https://canva.com/presentations", icon: "fa-brands fa-canva" },
+                    { name: "Tome", desc: "إنشاء عروض بالذكاء الاصطناعي.", url: "https://tome.app", icon: "fa-solid fa-book" },
+                    { name: "Slidebean", desc: "عروض جاهزة للمستثمرين.", url: "https://slidebean.com", icon: "fa-solid fa-seedling" },
+                    { name: "Zoho Show", desc: "عروض تقديمية أونلاين.", url: "https://zoho.com/show", icon: "fa-solid fa-presentation" },
+                    { name: "Powtoon", desc: "عروض متحركة جذابة.", url: "https://powtoon.com", icon: "fa-solid fa-film" },
+                    { name: "Genially", desc: "عروض تفاعلية.", url: "https://genial.ly", icon: "fa-solid fa-hand-pointer" },
+                    { name: "Haiku Deck", desc: "عروض بسيطة وأنيقة.", url: "https://haikudeck.com", icon: "fa-solid fa-leaf" },
+                    { name: "Google Slides", desc: "إنشاء عروض مشتركة.", url: "https://slides.google.com", icon: "fa-brands fa-google" },
+                    { name: "Storydoc", desc: "عروض مبيعات تفاعلية.", url: "https://storydoc.com", icon: "fa-solid fa-book-open" },
+                    { name: "Pitcherific", desc: "تدريب على تقديم العروض.", url: "https://pitcherific.com", icon: "fa-solid fa-baseball" }
+                ]
+            },
+            {
+                name: "أدوات الإنتاجية وإدارة المشاريع",
+                icon: "fa-solid fa-tasks",
+                tools: [
+                    { name: "Notion AI", desc: "تنظيم الملاحظات والمهام والكتابة بالذكاء الاصطناعي.", url: "https://notion.so", icon: "fa-solid fa-note-sticky" },
+                    { name: "Taskade", desc: "إدارة المشاريع والعمل الجماعي.", url: "https://taskade.com", icon: "fa-solid fa-list-check" },
+                    { name: "Trello", desc: "إدارة المهام بلوحات مرئية.", url: "https://trello.com", icon: "fa-brands fa-trello" },
+                    { name: "ClickUp", desc: "إدارة مشاريع وفرق العمل.", url: "https://clickup.com", icon: "fa-solid fa-arrow-up" },
+                    { name: "Asana", desc: "تنظيم المهام بين الفرق.", url: "https://asana.com", icon: "fa-brands fa-asana" },
+                    { name: "Monday", desc: "إدارة المشاريع ولوحات العمل.", url: "https://monday.com", icon: "fa-solid fa-calendar-week" },
+                    { name: "Airtable", desc: "جداول بيانات متقدمة وقواعد بيانات.", url: "https://airtable.com", icon: "fa-solid fa-table" },
+                    { name: "Evernote", desc: "تدوين الملاحظات وتنظيمها.", url: "https://evernote.com", icon: "fa-brands fa-evernote" },
+                    { name: "Miro", desc: "لوحات عمل وتخطيط بصري.", url: "https://miro.com", icon: "fa-brands fa-miro" },
+                    { name: "Quire", desc: "تنظيم المهام والمشاريع.", url: "https://quire.io", icon: "fa-solid fa-quote-right" },
+                    { name: "Basecamp", desc: "منصة تعاون للفرق.", url: "https://basecamp.com", icon: "fa-solid fa-campground" },
+                    { name: "Coda", desc: "مستندات ذكية لإدارة المشاريع.", url: "https://coda.io", icon: "fa-solid fa-code" },
+                    { name: "Zenkit", desc: "إدارة البيانات والمشاريع.", url: "https://zenkit.com", icon: "fa-solid fa-kaaba" },
+                    { name: "Hypercontext", desc: "تنظيم الاجتماعات وأهداف الفرق.", url: "https://hypercontext.com", icon: "fa-solid fa-fire" },
+                    { name: "Fellow", desc: "متابعة المهام بين أعضاء الفريق.", url: "https://fellow.app", icon: "fa-solid fa-user-group" }
+                ]
+            },
+            {
+                name: "أدوات المبيعات",
+                icon: "fa-solid fa-money-bill-trend-up",
+                tools: [
+                    { name: "Apollo", desc: "البحث عن العملاء المحتملين.", url: "https://apollo.io", icon: "fa-solid fa-moon" },
+                    { name: "LinkedIn Sales Navigator", desc: "إيجاد العملاء عبر LinkedIn.", url: "https://linkedin.com/sales", icon: "fa-brands fa-linkedin" },
+                    { name: "Close CRM", desc: "إدارة علاقات العملاء.", url: "https://close.com", icon: "fa-solid fa-xmark" },
+                    { name: "Pipedrive", desc: "تتبع الصفقات والمبيعات.", url: "https://pipedrive.com", icon: "fa-solid fa-arrow-trend-up" },
+                    { name: "HubSpot Sales", desc: "أتمتة المبيعات وتحليل الأداء.", url: "https://hubspot.com/sales", icon: "fa-brands fa-hubspot" },
+                    { name: "Zoho CRM", desc: "إدارة العملاء والشركات.", url: "https://zoho.com/crm", icon: "fa-solid fa-z" },
+                    { name: "Freshsales", desc: "تتبع العملاء من أول تواصل حتى البيع.", url: "https://freshworks.com/freshsales", icon: "fa-solid fa-leaf" },
+                    { name: "Salesloft", desc: "تحسين عمليات البيع.", url: "https://salesloft.com", icon: "fa-solid fa-bolt" },
+                    { name: "Outreach", desc: "أتمتة التواصل مع العملاء.", url: "https://outreach.io", icon: "fa-solid fa-rocket" },
+                    { name: "Clari", desc: "توقع المبيعات بدقة.", url: "https://clari.com", icon: "fa-solid fa-chart-line" },
+                    { name: "Yesware", desc: "تتبع رسائل البريد للمبيعات.", url: "https://yesware.com", icon: "fa-solid fa-check" },
+                    { name: "Reply", desc: "إرسال رسائل مبيعات تلقائيًا.", url: "https://reply.io", icon: "fa-solid fa-reply" },
+                    { name: "Leadfeeder", desc: "معرفة من يزور موقعك.", url: "https://leadfeeder.com", icon: "fa-solid fa-chart-pie" },
+                    { name: "Drift Sales", desc: "محادثات ذكية لزيادة المبيعات.", url: "https://drift.com/sales", icon: "fa-solid fa-comment" },
+                    { name: "Gong", desc: "تحليل مكالمات المبيعات.", url: "https://gong.io", icon: "fa-solid fa-gong" }
+                ]
+            },
+            {
+                name: "أدوات الاجتماعات والتعاون",
+                icon: "fa-solid fa-video",
+                tools: [
+                    { name: "Zoom", desc: "اجتماعات فيديو وتسجيلها.", url: "https://zoom.us", icon: "fa-brands fa-zoom" },
+                    { name: "Google Meet", desc: "اجتماعات فيديو عبر جوجل.", url: "https://meet.google.com", icon: "fa-brands fa-google" },
+                    { name: "Microsoft Teams", desc: "تعاون الفرق والاجتماعات.", url: "https://microsoft.com/teams", icon: "fa-brands fa-microsoft" },
+                    { name: "Whereby", desc: "اجتماعات فيديو بدون تحميل برامج.", url: "https://whereby.com", icon: "fa-solid fa-wifi" },
+                    { name: "Around", desc: "مكالمات فيديو بتصميم حديث.", url: "https://around.co", icon: "fa-solid fa-circle" },
+                    { name: "MeetGeek", desc: "تلخيص الاجتماعات تلقائيًا.", url: "https://meetgeek.ai", icon: "fa-solid fa-geek" },
+                    { name: "Fireflies", desc: "تسجيل وتفريغ الاجتماعات.", url: "https://fireflies.ai", icon: "fa-solid fa-fire" },
+                    { name: "Otter", desc: "تحويل الصوت إلى نص للاجتماعات.", url: "https://otter.ai", icon: "fa-solid fa-otter" },
+                    { name: "Krisp", desc: "إزالة الضوضاء من الصوت.", url: "https://krisp.ai", icon: "fa-solid fa-ear-deaf" },
+                    { name: "Fathom", desc: "تلخيص الاجتماعات بسرعة.", url: "https://fathom.video", icon: "fa-solid fa-fathom" },
+                    { name: "tl;dv", desc: "تسجيل وتلخيص مكالمات الفيديو.", url: "https://tldv.io", icon: "fa-solid fa-tv" },
+                    { name: "Loom", desc: "تسجيل الشاشة بالفيديو.", url: "https://loom.com", icon: "fa-solid fa-loom" },
+                    { name: "Mmhmm", desc: "عروض تقديمية بالفيديو.", url: "https://mmhmm.app", icon: "fa-solid fa-camera" },
+                    { name: "Vowel", desc: "اجتماعات مع أدوات ذكاء اصطناعي.", url: "https://vowel.com", icon: "fa-solid fa-vowel" },
+                    { name: "Tactiq", desc: "استخراج النقاط المهمة من الاجتماعات.", url: "https://tactiq.io", icon: "fa-solid fa-t" }
+                ]
+            },
+            {
+                name: "تحليل المنافسين والبحث",
+                icon: "fa-solid fa-magnifying-glass-chart",
+                tools: [
+                    { name: "Perplexity AI", desc: "محرك بحث ذكي مع مصادر.", url: "https://perplexity.ai", icon: "fa-solid fa-magnifying-glass" },
+                    { name: "SimilarWeb", desc: "تحليل المواقع والمنافسين.", url: "https://similarweb.com", icon: "fa-solid fa-chart-simple" },
+                    { name: "SpyFu", desc: "معرفة كلمات المنافسين الإعلانية.", url: "https://spyfu.com", icon: "fa-solid fa-eye" },
+                    { name: "BuzzSumo", desc: "اكتشاف المحتوى الأكثر انتشارًا.", url: "https://buzzsumo.com", icon: "fa-solid fa-bolt" },
+                    { name: "SEMrush Trends", desc: "تحليل اتجاهات السوق.", url: "https://semrush.com/trends", icon: "fa-solid fa-trend-up" },
+                    { name: "AnswerThePublic", desc: "معرفة الأسئلة التي يبحث عنها الناس.", url: "https://answerthepublic.com", icon: "fa-solid fa-question" },
+                    { name: "Google Trends", desc: "معرفة الكلمات الأكثر بحثًا.", url: "https://trends.google.com", icon: "fa-brands fa-google" },
+                    { name: "Ahrefs Keywords Explorer", desc: "البحث عن الكلمات المفتاحية.", url: "https://ahrefs.com/keywords-explorer", icon: "fa-solid fa-key" },
+                    { name: "Brandwatch", desc: "مراقبة سمعة العلامة التجارية.", url: "https://brandwatch.com", icon: "fa-solid fa-brandwatch" },
+                    { name: "Mention", desc: "معرفة من يذكر علامتك.", url: "https://mention.com", icon: "fa-solid fa-at" },
+                    { name: "Quantcast", desc: "تحليل الجمهور المستهدف.", url: "https://quantcast.com", icon: "fa-solid fa-chart-bar" },
+                    { name: "Tableau", desc: "تحليل البيانات بصريًا.", url: "https://tableau.com", icon: "fa-solid fa-tableau" },
+                    { name: "Looker Studio", desc: "إنشاء تقارير ولوحات بيانات.", url: "https://lookerstudio.google.com", icon: "fa-brands fa-google" },
+                    { name: "MarketMuse", desc: "تحليل المحتوى وتحسينه.", url: "https://marketmuse.com", icon: "fa-solid fa-brain" },
+                    { name: "Crayon", desc: "تتبع تحركات المنافسين.", url: "https://crayon.co", icon: "fa-solid fa-crayon" }
+                ]
+            },
+            {
+                name: "أدوات إنشاء المواقع",
+                icon: "fa-solid fa-laptop-code",
+                tools: [
+                    { name: "Wix ADI", desc: "إنشاء موقع كامل تلقائيًا باستخدام الذكاء الاصطناعي.", url: "https://wix.com", icon: "fa-brands fa-wix" },
+                    { name: "Squarespace AI", desc: "تصميم مواقع احترافية بسهولة.", url: "https://squarespace.com", icon: "fa-brands fa-squarespace" },
+                    { name: "Shopify Magic", desc: "إنشاء متجر إلكتروني بالذكاء الاصطناعي.", url: "https://shopify.com", icon: "fa-brands fa-shopify" },
+                    { name: "WordPress AI", desc: "إنشاء وإدارة مواقع ومدونات بسهولة.", url: "https://wordpress.com", icon: "fa-brands fa-wordpress" },
+                    { name: "Durable AI", desc: "إنشاء موقع كامل خلال أقل من دقيقة.", url: "https://durable.co", icon: "fa-solid fa-globe" },
+                    { name: "Zyro AI", desc: "تصميم مواقع بسرعة باستخدام AI.", url: "https://zyro.com", icon: "fa-solid fa-bolt" },
+                    { name: "Webflow AI", desc: "إنشاء مواقع احترافية متجاوبة.", url: "https://webflow.com", icon: "fa-brands fa-webflow" },
+                    { name: "Framer AI", desc: "تصميم مواقع تفاعلية بسهولة.", url: "https://framer.com", icon: "fa-solid fa-framer" },
+                    { name: "Bookmark", desc: "إنشاء موقع بخطوات بسيطة.", url: "https://bookmark.com", icon: "fa-solid fa-bookmark" },
+                    { name: "Ucraft", desc: "تصميم مواقع للشركات والمتاجر.", url: "https://ucraft.com", icon: "fa-solid fa-paintbrush" },
+                    { name: "Hostinger Website Builder", desc: "إنشاء موقع بسرعة عبر قوالب جاهزة.", url: "https://hostinger.com", icon: "fa-brands fa-hostinger" },
+                    { name: "Jimdo", desc: "إنشاء مواقع تلقائيًا بالذكاء الاصطناعي.", url: "https://jimdo.com", icon: "fa-solid fa-j" },
+                    { name: "Duda", desc: "إنشاء مواقع احترافية للشركات.", url: "https://duda.co", icon: "fa-solid fa-d" },
+                    { name: "PageXL", desc: "إنشاء صفحات هبوط بسرعة.", url: "https://pagexl.com", icon: "fa-solid fa-file-lines" },
+                    { name: "Tilda", desc: "تصميم مواقع حديثة بدون برمجة.", url: "https://tilda.cc", icon: "fa-solid fa-t" }
+                ]
+            },
+            {
+                name: "أدوات الأتمتة",
+                icon: "fa-solid fa-robot",
+                tools: [
+                    { name: "Zapier", desc: "ربط التطبيقات وأتمتة المهام بين آلاف الخدمات.", url: "https://zapier.com", icon: "fa-brands fa-zapier" },
+                    { name: "Make (Integromat)", desc: "إنشاء عمليات أتمتة معقدة عبر واجهة مرئية.", url: "https://make.com", icon: "fa-solid fa-link" },
+                    { name: "Bardeen AI", desc: "أتمتة المهام مباشرة من المتصفح.", url: "https://bardeen.ai", icon: "fa-solid fa-bolt" },
+                    { name: "IFTTT", desc: "ربط التطبيقات عبر قواعد “إذا حدث هذا افعل ذلك”.", url: "https://ifttt.com", icon: "fa-solid fa-toggle-on" },
+                    { name: "Automate.io", desc: "أتمتة التسويق وربط التطبيقات.", url: "https://automate.io", icon: "fa-solid fa-cogs" },
+                    { name: "n8n", desc: "أتمتة مفتوحة المصدر مع تحكم كامل في سير العمل.", url: "https://n8n.io", icon: "fa-solid fa-network-wired" },
+                    { name: "Parabola", desc: "أتمتة معالجة البيانات.", url: "https://parabola.io", icon: "fa-solid fa-chart-line" },
+                    { name: "Tray.io", desc: "منصة أتمتة للشركات.", url: "https://tray.io", icon: "fa-solid fa-tray" },
+                    { name: "Albato", desc: "ربط التطبيقات وأتمتة المهام.", url: "https://albato.com", icon: "fa-solid fa-albato" },
+                    { name: "Integrately", desc: "إنشاء أتمتة بنقرة واحدة.", url: "https://integrately.com", icon: "fa-solid fa-integral" },
+                    { name: "Pabbly Connect", desc: "ربط التطبيقات وإنشاء workflows.", url: "https://pabbly.com/connect", icon: "fa-solid fa-p" },
+                    { name: "Tallyfy", desc: "أتمتة سير العمل داخل الشركات.", url: "https://tallyfy.com", icon: "fa-solid fa-tally" },
+                    { name: "Workato", desc: "أتمتة متقدمة للمؤسسات.", url: "https://workato.com", icon: "fa-solid fa-w" },
+                    { name: "CloudHQ", desc: "أتمتة البريد الإلكتروني.", url: "https://cloudhq.net", icon: "fa-solid fa-cloud" },
+                    { name: "Actiondesk", desc: "أتمتة التقارير والبيانات.", url: "https://actiondesk.io", icon: "fa-solid fa-desk" }
+                ]
+            },
+            {
+                name: "إضافات المتصفح",
+                icon: "fa-solid fa-puzzle-piece",
+                tools: [
+                    { name: "Grammarly", desc: "تصحيح النصوص والقواعد تلقائيًا.", url: "https://grammarly.com", icon: "fa-brands fa-grammarly" },
+                    { name: "Loom", desc: "تسجيل الشاشة بسرعة.", url: "https://loom.com", icon: "fa-solid fa-loom" },
+                    { name: "Hunter", desc: "البحث عن إيميلات الشركات.", url: "https://hunter.io", icon: "fa-solid fa-h" },
+                    { name: "Scribe", desc: "إنشاء شروحات تلقائيًا.", url: "https://scribehow.com", icon: "fa-solid fa-pen" },
+                    { name: "Tango", desc: "توثيق خطوات العمل.", url: "https://tango.us", icon: "fa-solid fa-t" },
+                    { name: "Keywords Everywhere", desc: "تحليل الكلمات المفتاحية.", url: "https://keywordseverywhere.com", icon: "fa-solid fa-key" },
+                    { name: "Momentum", desc: "صفحة بداية محفزة للمتصفح.", url: "https://momentumdash.com", icon: "fa-solid fa-rocket" },
+                    { name: "Notion Web Clipper", desc: "حفظ الصفحات داخل Notion.", url: "https://notion.so/web-clipper", icon: "fa-brands fa-notion" },
+                    { name: "MightyText", desc: "إرسال رسائل الهاتف من الكمبيوتر.", url: "https://mightytext.net", icon: "fa-solid fa-message" },
+                    { name: "SEOquake", desc: "تحليل صفحات الويب.", url: "https://seoquake.com", icon: "fa-solid fa-chart-simple" },
+                    { name: "GMass", desc: "إرسال بريد جماعي عبر Gmail.", url: "https://gmass.co", icon: "fa-solid fa-envelope" },
+                    { name: "VidIQ", desc: "تحليل قنوات يوتيوب.", url: "https://vidiq.com", icon: "fa-brands fa-youtube" },
+                    { name: "TubeBuddy", desc: "تحسين قنوات يوتيوب.", url: "https://tubebuddy.com", icon: "fa-brands fa-youtube" },
+                    { name: "Evernote Web Clipper", desc: "حفظ محتوى الإنترنت.", url: "https://evernote.com/webclipper", icon: "fa-brands fa-evernote" },
+                    { name: "WhatFont", desc: "معرفة الخطوط في أي موقع.", url: "https://whatfont.org", icon: "fa-solid fa-font" }
+                ]
+            },
+            {
+                name: "نماذج الذكاء الاصطناعي",
+                icon: "fa-solid fa-brain",
+                tools: [
+                    { name: "ChatGPT", desc: "مساعد ذكي للكتابة والبرمجة.", url: "https://chat.openai.com", icon: "fa-brands fa-openai" },
+                    { name: "Claude AI", desc: "تحليل النصوص وكتابة المحتوى.", url: "https://claude.ai", icon: "fa-solid fa-message" },
+                    { name: "Gemini (Bard سابقًا)", desc: "مساعد ذكاء اصطناعي من Google.", url: "https://gemini.google.com", icon: "fa-brands fa-google" },
+                    { name: "Perplexity AI", desc: "محرك بحث يعتمد على الذكاء الاصطناعي.", url: "https://perplexity.ai", icon: "fa-solid fa-magnifying-glass" },
+                    { name: "Quillbot", desc: "إعادة صياغة النصوص.", url: "https://quillbot.com", icon: "fa-solid fa-pen" },
+                    { name: "Originality AI", desc: "كشف النصوص المكتوبة بالذكاء الاصطناعي.", url: "https://originality.ai", icon: "fa-solid fa-check-double" },
+                    { name: "GPTZero", desc: "كشف النصوص التي كتبها AI.", url: "https://gptzero.me", icon: "fa-solid fa-zero" },
+                    { name: "Copyleaks", desc: "كشف الانتحال والذكاء الاصطناعي.", url: "https://copyleaks.com", icon: "fa-solid fa-copyright" },
+                    { name: "Sapling AI", desc: "مساعد كتابة فوري.", url: "https://sapling.ai", icon: "fa-solid fa-seedling" },
+                    { name: "Chatsonic", desc: "روبوت محادثة متقدم.", url: "https://writesonic.com/chatsonic", icon: "fa-solid fa-headphones" },
+                    { name: "YouChat", desc: "محرك بحث مع دردشة.", url: "https://you.com", icon: "fa-solid fa-y" },
+                    { name: "Phind", desc: "محرك بحث للمبرمجين.", url: "https://phind.com", icon: "fa-solid fa-code" },
+                    { name: "Ora", desc: "تشغيل وتجربة نماذج الذكاء الاصطناعي.", url: "https://ora.sh", icon: "fa-solid fa-o" },
+                    { name: "Forefront AI", desc: "منصة نماذج ذكاء اصطناعي متعددة.", url: "https://forefront.ai", icon: "fa-solid fa-f" },
+                    { name: "LLaMA", desc: "نموذج ذكاء اصطناعي مفتوح المصدر من Meta.", url: "https://ai.meta.com/llama", icon: "fa-brands fa-meta" }
+                ]
+            },
+            {
+                name: "أدوات التعليم والحياة اليومية",
+                icon: "fa-solid fa-graduation-cap",
+                tools: [
+                    { name: "Elsa Speak", desc: "تعلم النطق الصحيح للإنجليزية.", url: "https://elsaspeak.com", icon: "fa-solid fa-ear-listen" },
+                    { name: "Duolingo", desc: "تعلم اللغات.", url: "https://duolingo.com", icon: "fa-brands fa-duolingo" },
+                    { name: "Replika", desc: "صديق افتراضي للدردشة.", url: "https://replika.ai", icon: "fa-solid fa-robot" },
+                    { name: "MyFitnessPal", desc: "خطط غذائية ومتابعة السعرات.", url: "https://myfitnesspal.com", icon: "fa-solid fa-heart-pulse" },
+                    { name: "Calm", desc: "التأمل والاسترخاء.", url: "https://calm.com", icon: "fa-solid fa-leaf" },
+                    { name: "Sleep Reset", desc: "تحسين النوم.", url: "https://sleepreset.com", icon: "fa-solid fa-bed" },
+                    { name: "Socratic", desc: "حل الواجبات المدرسية.", url: "https://socratic.org", icon: "fa-brands fa-google" },
+                    { name: "Photomath", desc: "حل مسائل الرياضيات.", url: "https://photomath.com", icon: "fa-solid fa-calculator" },
+                    { name: "Yummly", desc: "وصفات طبخ ذكية.", url: "https://yummly.com", icon: "fa-solid fa-utensils" },
+                    { name: "WolframAlpha", desc: "محرك حسابات علمية.", url: "https://wolframalpha.com", icon: "fa-brands fa-wolfram" },
+                    { name: "Mealime", desc: "تخطيط الوجبات.", url: "https://mealime.com", icon: "fa-solid fa-utensils" },
+                    { name: "Fabulous", desc: "تحسين العادات اليومية.", url: "https://fabulous.co", icon: "fa-solid fa-star" },
+                    { name: "Headspace", desc: "جلسات التأمل.", url: "https://headspace.com", icon: "fa-solid fa-brain" },
+                    { name: "Coach.me", desc: "متابعة الأهداف.", url: "https://coach.me", icon: "fa-solid fa-bullseye" },
+                    { name: "Flo", desc: "متابعة الصحة.", url: "https://flo.health", icon: "fa-solid fa-heart" }
+                ]
+            },
+            {
+                name: "أدوات التعليم (تكملة)",
+                icon: "fa-solid fa-school",
+                tools: [
+                    { name: "Khan Academy", desc: "تعليم مجاني في الرياضيات والعلوم.", url: "https://khanacademy.org", icon: "fa-brands fa-khan" },
+                    { name: "Coursera", desc: "دورات جامعية عبر الإنترنت.", url: "https://coursera.org", icon: "fa-brands fa-coursera" },
+                    { name: "Udemy", desc: "دورات تعليمية متنوعة.", url: "https://udemy.com", icon: "fa-brands fa-udemy" },
+                    { name: "Quizlet", desc: "إنشاء اختبارات وبطاقات تعليمية.", url: "https://quizlet.com", icon: "fa-solid fa-q" },
+                    { name: "Brilliant", desc: "تعلم الرياضيات والعلوم تفاعليًا.", url: "https://brilliant.org", icon: "fa-solid fa-lightbulb" },
+                    { name: "Lingvist", desc: "تعلم اللغات بسرعة.", url: "https://lingvist.com", icon: "fa-solid fa-language" },
+                    { name: "Skillshare", desc: "تعلم المهارات الإبداعية.", url: "https://skillshare.com", icon: "fa-brands fa-skillshare" },
+                    { name: "FutureLearn", desc: "دورات تعليمية عالمية.", url: "https://futurelearn.com", icon: "fa-solid fa-graduation-cap" },
+                    { name: "Preply", desc: "دروس مع مدرسين خصوصيين.", url: "https://preply.com", icon: "fa-solid fa-chalkboard-user" },
+                    { name: "Busuu", desc: "تعلم اللغات مع مجتمع عالمي.", url: "https://busuu.com", icon: "fa-brands fa-busuu" },
+                    { name: "Babbel", desc: "تحسين المحادثة اللغوية.", url: "https://babbel.com", icon: "fa-brands fa-babbel" },
+                    { name: "Memrise", desc: "تعلم كلمات اللغات بالصور والصوت.", url: "https://memrise.com", icon: "fa-solid fa-m" },
+                    { name: "Duolingo Max", desc: "تعلم لغات باستخدام الذكاء الاصطناعي.", url: "https://duolingo.com", icon: "fa-brands fa-duolingo" },
+                    { name: "Elsa Speak", desc: "تحسين النطق الإنجليزي.", url: "https://elsaspeak.com", icon: "fa-solid fa-ear-listen" },
+                    { name: "Socratic", desc: "شرح الدروس وحل الواجبات.", url: "https://socratic.org", icon: "fa-brands fa-google" }
+                ]
+            }
+        ];
+
+        // تأثير الكتابة المحسن
+        const textElement = document.getElementById('typingText');
+        const phrases = ["دليل متكامل لأدوات الذكاء الاصطناعي", "اكتشف المستقبل اليوم", "أحدث تقنيات 2026", "أدوات AI احترافية"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) {
+                textElement.innerHTML = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    setTimeout(typeEffect, 400);
+                    return;
+                }
+            } else {
+                textElement.innerHTML = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(typeEffect, 2000);
+                    return;
+                }
+            }
+            setTimeout(typeEffect, isDeleting ? 60 : 120);
+        }
+        setTimeout(typeEffect, 1000);
+
+        // عرض جميع التصنيفات
+        function renderAllTools() {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = '';
+            categories.forEach(cat => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                categoryDiv.innerHTML = `
+                    <div class="category-header">
+                        <div class="category-icon"><i class="${cat.icon}"></i></div>
+                        <h2 class="category-title">${cat.name}</h2>
+                    </div>
+                    <div class="tools-grid">
+                        ${cat.tools.map((tool, index) => `
+                            <div class="tool-card" style="--card-index: ${index + 1};">
+                                <div class="card-icon"><i class="${tool.icon}"></i></div>
+                                <h3 class="tool-name">${tool.name}</h3>
+                                <p class="tool-desc">${tool.desc}</p>
+                                <a href="${tool.url}" class="tool-link" target="_blank" rel="noopener noreferrer">
+                                    <span>زيارة</span>
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                </a>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(categoryDiv);
+            });
+        }
+
+        // وظيفة البحث
+        function filterTools() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const container = document.getElementById('categoriesContainer');
+            const noResults = document.getElementById('noResults');
+            if (query === '') {
+                renderAllTools();
+                noResults.style.display = 'none';
+                return;
+            }
+
+            let anyVisible = false;
+            container.innerHTML = '';
+            categories.forEach(cat => {
+                const filteredTools = cat.tools.filter(tool =>
+                    tool.name.toLowerCase().includes(query) ||
+                    tool.desc.toLowerCase().includes(query)
+                );
+                if (filteredTools.length > 0) {
+                    anyVisible = true;
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'category';
+                    categoryDiv.innerHTML = `
+                        <div class="category-header">
+                            <div class="category-icon"><i class="${cat.icon}"></i></div>
+                            <h2 class="category-title">${cat.name}</h2>
+                        </div>
+                        <div class="tools-grid">
+                            ${filteredTools.map((tool, index) => `
+                                <div class="tool-card" style="--card-index: ${index + 1};">
+                                    <div class="card-icon"><i class="${tool.icon}"></i></div>
+                                    <h3 class="tool-name">${tool.name}</h3>
+                                    <p class="tool-desc">${tool.desc}</p>
+                                    <a href="${tool.url}" class="tool-link" target="_blank" rel="noopener noreferrer">
+                                        <span>زيارة</span>
+                                        <i class="fa-solid fa-arrow-left"></i>
+                                    </a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    container.appendChild(categoryDiv);
+                }
+            });
+            noResults.style.display = anyVisible ? 'none' : 'block';
+        }
+
+        // منع النسخ وأدوات المطور (نفس الحماية)
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'v' || e.key === 's' || e.key === 'p')) {
+                e.preventDefault();
+                alert("النسخ غير مسموح به.");
+            }
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+                alert("أدوات المطور مقفلة.");
+            }
+        });
+        document.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            alert("النقر بالزر الأيمن غير متاح.");
+        });
+
+        window.onload = renderAllTools;
+    </script>
+</body>
+</html>
