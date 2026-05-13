@@ -4,7 +4,7 @@
 /* ============================================ */
 
 /* ============================================ */
-/* 1. المتغيرات العالمية ونظام الألوان          */
+/* 1. المتغيرات العامة ونظام الألوان            */
 /* ============================================ */
 :root {
     --primary: #6366f1;
@@ -120,7 +120,7 @@ body.light-mode {
 }
 
 /* ============================================ */
-/* 2. إعادة التعيين والأنماط الأساسية            */
+/* 2. إعادة التعيين والأنماط الأساسية           */
 /* ============================================ */
 *, *::before, *::after {
     margin: 0;
@@ -181,9 +181,54 @@ body {
     bottom: 0;
     z-index: -1;
     background: 
-        radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 50%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 100%, rgba(244, 63, 94, 0.1) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(14, 165, 233, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(244, 63, 94, 0.15) 0%, transparent 50%);
+}
+
+.neural-network-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+#neuralCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+}
+
+.particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(rgba(99, 102, 241, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridMove 30s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
 }
 
 .circuit-lines {
@@ -193,66 +238,199 @@ body {
     right: 0;
     bottom: 0;
     background-image: 
-        linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: circuitMove 20s linear infinite;
+        radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.3) 0%, transparent 25%),
+        radial-gradient(circle at 75% 75%, rgba(14, 165, 233, 0.3) 0%, transparent 25%);
+    animation: circuitPulse 4s ease-in-out infinite;
 }
 
-@keyframes circuitMove {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(50px); }
+@keyframes circuitPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
 }
 
 .glow-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
+    filter: blur(60px);
     animation: float 8s ease-in-out infinite;
 }
 
 .orb-1 {
-    width: 300px;
-    height: 300px;
-    background: rgba(99, 102, 241, 0.3);
-    top: 10%;
-    left: 10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
+    top: -50px;
+    left: -100px;
     animation-delay: 0s;
 }
 
 .orb-2 {
-    width: 250px;
-    height: 250px;
-    background: rgba(14, 165, 233, 0.25);
-    top: 20%;
-    right: 10%;
-    animation-delay: -3s;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.35) 0%, transparent 70%);
+    top: -30px;
+    right: -80px;
+    animation-delay: -2s;
 }
 
 .orb-3 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(244, 63, 94, 0.3) 0%, transparent 70%);
+    bottom: -50px;
+    left: 20%;
+    animation-delay: -4s;
+}
+
+.orb-4 {
     width: 200px;
     height: 200px;
-    background: rgba(244, 63, 94, 0.2);
-    bottom: 20%;
-    left: 30%;
-    animation-delay: -5s;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.3) 0%, transparent 70%);
+    top: 40%;
+    left: 10%;
+    animation-delay: -1s;
+}
+
+.orb-5 {
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+    top: 30%;
+    right: 15%;
+    animation-delay: -3s;
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-30px) scale(1.1); }
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-40px) scale(1.1); opacity: 1; }
+}
+
+.hexagon {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(14, 165, 233, 0.2) 100%);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    animation: hexFloat 10s ease-in-out infinite;
+    opacity: 0.5;
+}
+
+.hex-1 {
+    top: 15%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.hex-2 {
+    top: 25%;
+    right: 25%;
+    animation-delay: -3s;
+}
+
+.hex-3 {
+    bottom: 30%;
+    left: 40%;
+    animation-delay: -6s;
+}
+
+@keyframes hexFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+}
+
+.ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(14, 165, 233, 0.2) 100%);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+.ai-badge i {
+    font-size: 1rem;
+    animation: iconSpin 4s linear infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.5); }
+}
+
+@keyframes iconSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .header h1 {
-    font-size: var(--font-5xl);
+    font-size: clamp(2.5rem, 7vw, 4rem);
     font-weight: 900;
     letter-spacing: -0.03em;
-    background: var(--gradient-main);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
     background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-bottom: 0.8em;
+    margin-bottom: 0.5em;
+    text-shadow: 0 0 60px rgba(99, 102, 241, 0.5);
+    animation: titleShine 5s ease-in-out infinite;
+}
+
+@keyframes titleShine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.header-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--surface-light);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-light);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.stat-item i {
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.stat-item span:first-of-type {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.stat-item span:last-of-type {
+    color: var(--text-muted-light);
 }
 
 .typing-container {
@@ -290,7 +468,7 @@ body {
 }
 
 /* ============================================ */
-/* 5. البحث والاقتراحات                         */
+/* 5. البحث والفلترة                            */
 /* ============================================ */
 .search-section {
     margin: 1.5rem 0 3.5rem;
@@ -381,7 +559,7 @@ body {
 }
 
 /* ============================================ */
-/* 6. بطاقات الأقسام                            */
+/* 6. بطاقات الأقسام                           */
 /* ============================================ */
 .categories-grid {
     display: grid;
@@ -457,7 +635,7 @@ body.dark-mode .category-card {
 }
 
 /* ============================================ */
-/* 7. بطاقات الأدوات                            */
+/* 7. بطاقات الأدوات                           */
 /* ============================================ */
 .tools-grid {
     display: grid;
@@ -533,7 +711,7 @@ body.dark-mode .tool-card {
 }
 
 /* ============================================ */
-/* 8. السايدبار                                   */
+/* 8. الشريط الجانبي                            */
 /* ============================================ */
 .sidebar-overlay {
     position: fixed;
@@ -575,7 +753,7 @@ body.dark-mode .sidebar {
 }
 
 /* ============================================ */
-/* 9. المودال                                     */
+/* 9. الإشعارات                                 */
 /* ============================================ */
 .modal-overlay {
     position: fixed;
@@ -621,7 +799,7 @@ body.dark-mode .modal {
 }
 
 /* ============================================ */
-/* 10. الفوتر                                     */
+/* 10. الفوتر                                    */
 /* ============================================ */
 .footer {
     background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, #0f172a 100%);
@@ -701,7 +879,7 @@ body.dark-mode .modal {
 }
 
 /* ============================================ */
-/* 11. أزرار التحكم                               */
+/* 4. أنماط الهيدر                              */
 /* ============================================ */
 .btn {
     display: inline-flex;
@@ -740,7 +918,7 @@ body.dark-mode .modal {
 }
 
 /* ============================================ */
-/* 12. مؤشر التحميل                              */
+/* 12. مؤشر التحميل                             */
 /* ============================================ */
 .page-loader-full {
     position: fixed;
@@ -775,7 +953,7 @@ body.dark-mode .modal {
 }
 
 /* ============================================ */
-/* 13._BACK-TO-TOP                              */
+/* 13. زر العودة للأعلى                         */
 /* ============================================ */
 .back-to-top {
     position: fixed;
@@ -1185,13 +1363,17 @@ body.dark-mode .new-sidebar {
 }
 
 .new-top-tools,
-.new-favorites {
+.new-favorites,
+.new-trending-list,
+.new-recent-list {
     list-style: none;
     padding: 0;
 }
 
 .new-top-tools li,
-.new-favorites li {
+.new-favorites li,
+.new-trending-list li,
+.new-recent-list li {
     padding: 0.5rem;
     border-bottom: 1px solid var(--border-light);
     display: flex;
@@ -1199,11 +1381,33 @@ body.dark-mode .new-sidebar {
     align-items: center;
     font-size: 0.9rem;
     transition: background 0.3s;
+    cursor: pointer;
 }
 
 .new-top-tools li:hover,
-.new-favorites li:hover {
+.new-favorites li:hover,
+.new-trending-list li:hover,
+.new-recent-list li:hover {
     background: rgba(99, 102, 241, 0.1);
+}
+
+.new-trending-list li {
+    color: var(--accent);
+}
+
+.new-trending-list li::before {
+    content: '\f0e7';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-left: 0.5rem;
+}
+
+.new-recent-list li::before {
+    content: '\f017';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-left: 0.5rem;
+    color: var(--secondary);
 }
 
 /* ============================================ */

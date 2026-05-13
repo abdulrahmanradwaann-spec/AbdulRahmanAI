@@ -42,29 +42,62 @@
         <!-- الهيدر -->
         <header class="header">
             <div class="header-bg">
-                <div class="circuit-lines"></div>
+                <div class="neural-network-bg" id="neuralBg">
+                    <canvas id="neuralCanvas"></canvas>
+                </div>
+                <div class="particles-container" id="headerParticles"></div>
                 <div class="glow-orb orb-1"></div>
                 <div class="glow-orb orb-2"></div>
                 <div class="glow-orb orb-3"></div>
+                <div class="glow-orb orb-4"></div>
+                <div class="glow-orb orb-5"></div>
+                <div class="hexagon hex-1"></div>
+                <div class="hexagon hex-2"></div>
+                <div class="hexagon hex-3"></div>
+                <div class="circuit-lines"></div>
+                <div class="grid-overlay"></div>
             </div>
-            <h1>Abdulrahman AI</h1>
-            <div class="typing-container">
-                <span id="typingText"></span>
-                <span class="cursor"></span>
+            <div class="header-content">
+                <div class="ai-badge">
+                    <i class="fas fa-brain"></i>
+                    <span>AI Powered</span>
+                </div>
+                <h1>Abdulrahman AI</h1>
+                <div class="typing-container">
+                    <span id="typingText"></span>
+                    <span class="cursor"></span>
+                </div>
+                <p class="header-subtitle">دليلك الشامل لأدوات الذكاء الاصطناعي</p>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-layer-group"></i>
+                        <span id="statCategories">31</span>
+                        <span>قسم</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-robot"></i>
+                        <span id="statTools">576</span>
+                        <span>أداة</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-bolt"></i>
+                        <span>2026</span>
+                        <span>سنة</span>
+                    </div>
+                </div>
             </div>
-            <p class="header-subtitle">Your Ultimate Guide to AI Tools</p>
         </header>
         
         <!-- مسار التنقل -->
         <div class="breadcrumbs" id="breadcrumbs">
-            <a href="/">Home</a>
+            <a href="/">الرئيسية</a>
         </div>
         
         <!-- البحث -->
         <div class="search-section">
             <div class="search-wrapper">
                 <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search for AI tools..." autocomplete="off">
+                <input type="text" id="searchInput" placeholder="ابحث عن أداة ذكاء اصطناعي..." autocomplete="off">
                 <i class="fas fa-times clear-search" id="clearSearch"></i>
                 <div class="autocomplete-box" id="autocompleteBox"></div>
             </div>
@@ -72,16 +105,16 @@
         
         <!-- أدوات الترتيب -->
         <div class="sort-controls" id="sortControls">
-            <button class="sort-btn active" data-sort="default">Default</button>
-            <button class="sort-btn" data-sort="name">By Name</button>
-            <button class="sort-btn" data-sort="count">By Count</button>
+            <button class="sort-btn active" data-sort="default">الافتراضي</button>
+            <button class="sort-btn" data-sort="name">بالاسم</button>
+            <button class="sort-btn" data-sort="count">بالعدد</button>
         </div>
         
         <!-- المحتوى -->
         <div id="contentContainer"></div>
         <div id="noResults">
             <i class="fas fa-exclamation-circle"></i>
-            <div>No tools match your search. Try another keyword!</div>
+            <div>لا توجد أدوات مطابقة. جرب كلمة مفتاحية أخرى!</div>
         </div>
     </div>
     
@@ -98,7 +131,7 @@
     <!-- الشريط الجانبي -->
     <div class="new-sidebar" id="newSidebar">
         <div class="new-sidebar-header">
-            <h3>Smart Menu</h3>
+            <h3>القائمة الذكية</h3>
             <i class="fas fa-times" id="newSidebarClose"></i>
         </div>
         <div class="new-sidebar-content">
@@ -106,22 +139,32 @@
                 <div class="new-stat-item">
                     <i class="fas fa-folder"></i>
                     <span id="newStatCategories">0</span>
-                    <span>Categories</span>
+                    <span>الأقسام</span>
                 </div>
                 <div class="new-stat-item">
                     <i class="fas fa-tools"></i>
                     <span id="newStatTools">0</span>
-                    <span>Tools</span>
+                    <span>الأدوات</span>
                 </div>
                 <div class="new-stat-item">
                     <i class="fas fa-star"></i>
                     <span id="newFavCount">0</span>
-                    <span>Favorites</span>
+                    <span>المفضلة</span>
                 </div>
             </div>
             
             <div class="new-section">
-                <h4><i class="fas fa-star"></i> My Favorites</h4>
+                <h4><i class="fas fa-fire"></i> الأكثر استخداماً</h4>
+                <ul class="new-trending-list" id="newTrendingList"></ul>
+            </div>
+            
+            <div class="new-section">
+                <h4><i class="fas fa-clock"></i> الاستخدام الأخير</h4>
+                <ul class="new-recent-list" id="newRecentList"></ul>
+            </div>
+            
+            <div class="new-section">
+                <h4><i class="fas fa-star"></i> المفضلة</h4>
                 <ul class="new-favorites" id="newFavoritesList"></ul>
             </div>
         </div>

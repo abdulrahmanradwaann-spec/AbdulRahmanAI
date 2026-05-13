@@ -1,6 +1,149 @@
 // Abdulrahman AI - البيانات
 const categories = [
     {
+        name: "Premium AI Models",
+        icon: "fa-solid fa-brain",
+        tools: [
+            { name: "GPT-5", desc: "Most advanced OpenAI model with supercharged reasoning.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Best", badgeColor: "gold" },
+            { name: "GPT-5-Pro", desc: "Professional tier with unlimited access.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Pro", badgeColor: "purple" },
+            { name: "GPT-5-Chat", desc: "Optimized for conversational AI.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Chat", badgeColor: "blue" },
+            { name: "GPT-5-mini", desc: "Fast and efficient for simple tasks.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Fast", badgeColor: "green" },
+            { name: "Claude-Sonnet-4.5", desc: "Top-tier Anthropic model for complex analysis.", url: "https://claude.ai", icon: "fa-solid fa-comment", badge: "Best", badgeColor: "gold" },
+            { name: "Claude-Opus-4", desc: "Anthropic's most capable model.", url: "https://claude.ai", icon: "fa-solid fa-comment", badge: "Pro", badgeColor: "purple" },
+            { name: "Claude-Opus-4.1", desc: "Enhanced reasoning and accuracy.", url: "https://claude.ai", icon: "fa-solid fa-comment", badge: "New", badgeColor: "cyan" },
+            { name: "Gemini-2.5-Pro", desc: "Google's most advanced multimodal AI.", url: "https://gemini.google.com", icon: "fa-brands fa-google", badge: "Best", badgeColor: "gold" },
+            { name: "Grok-4", desc: "xAI's latest model with real-time knowledge.", url: "https://x.ai/grok", icon: "fa-solid fa-rocket", badge: "New", badgeColor: "orange" },
+            { name: "o3", desc: "Advanced reasoning model.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Reasoning", badgeColor: "blue" },
+            { name: "o4-mini", desc: "Compact reasoning model for efficiency.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Fast", badgeColor: "green" },
+            { name: "DeepSeek-V4-Pro-EL", desc: "High-performance reasoning model.", url: "https://chat.deepseek.com", icon: "fa-solid fa-brain", badge: "Pro", badgeColor: "purple" },
+            { name: "DeepSeek-V4-Flash-EL", desc: "Lightning-fast responses.", url: "https://chat.deepseek.com", icon: "fa-solid fa-bolt", badge: "Fast", badgeColor: "green" },
+            { name: "Qwen3.6-Max-Preview", desc: "Alibaba's latest flagship model.", url: "https://chat.qwen.ai", icon: "fa-solid fa-comment-dots", badge: "Preview", badgeColor: "cyan" }
+        ]
+    },
+    {
+        name: "Search & Research",
+        icon: "fa-solid fa-magnifying-glass-chart",
+        tools: [
+            { name: "Web-Search", desc: "General web search powered by AI.", url: "https://chat.openai.com", icon: "fa-solid fa-globe" },
+            { name: "GPT-4o-Search", desc: "OpenAI model with web search.", url: "https://chat.openai.com", icon: "fa-brands fa-openai" },
+            { name: "GPT-4o-mini-Search", desc: "Fast search with OpenAI.", url: "https://chat.openai.com", icon: "fa-brands fa-openai" },
+            { name: "o3-deep-research", desc: "Comprehensive research AI.", url: "https://chat.openai.com", icon: "fa-solid fa-microscope" },
+            { name: "o4-mini-deep-research", desc: "Quick deep research.", url: "https://chat.openai.com", icon: "fa-solid fa-microscope" },
+            { name: "Gemini Search", desc: "Google's search AI.", url: "https://gemini.google.com", icon: "fa-brands fa-google" }
+        ]
+    },
+    {
+        name: "Developer Workspace",
+        icon: "fa-solid fa-code",
+        tools: [
+            { name: "App-Creator", desc: "Build apps from prompts.", url: "https://bolt.new", icon: "fa-solid fa-rocket" },
+            { name: "GPT-5-Codex", desc: "Code generation and debugging.", url: "https://github.com/features/copilot", icon: "fa-brands fa-github" },
+            { name: "Python AI", desc: "Python coding assistant.", url: "https://replit.com", icon: "fa-brands fa-python" },
+            { name: "DebugMyCode", desc: "Smart code debugging.", url: "https://cursor.sh", icon: "fa-solid fa-bug" },
+            { name: "Seed-2.0-Code", desc: "Code completion AI.", url: "https://codeium.com", icon: "fa-solid fa-seedling" },
+            { name: "PlantUMLbot", desc: "Generate UML diagrams.", url: "https://plantuml.com", icon: "fa-solid fa-diagram-project" },
+            { name: "PowerAppsMaster", desc: "Microsoft Power Apps assistant.", url: "https://powerapps.microsoft.com", icon: "fa-brands fa-microsoft" },
+            { name: "CopilotStudio", desc: "Create AI agents.", url: "https://copilotstudio.microsoft.com", icon: "fa-brands fa-microsoft" },
+            { name: "PowerPlatform100", desc: "Microsoft Power Platform tools.", url: "https://powerplatform.microsoft.com", icon: "fa-brands fa-microsoft" },
+            { name: "Kluge", desc: "AI-powered development assistant.", url: "https://kluge.ai", icon: "fa-solid fa-code" }
+        ]
+    },
+    {
+        name: "AI Image Studio",
+        icon: "fa-solid fa-image",
+        tools: [
+            { name: "Magic-Mirror-AI", desc: "Transform photos with AI.", url: "https://designs.ai", icon: "fa-solid fa-wand-magic-sparkles" },
+            { name: "Beautiful-Picture", desc: "Generate stunning images.", url: "https://midjourney.com", icon: "fa-solid fa-image" },
+            { name: "Wow-Dream", desc: "Dream-like image generation.", url: "https://dream.ai", icon: "fa-solid fa-cloud-moon" },
+            { name: "Dream-Wow", desc: "High-quality image creation.", url: "https://playgroundai.com", icon: "fa-solid fa-wand-magic-sparkles" },
+            { name: "Glitter-Glitch", desc: "Create glitch art effects.", url: "https://designs.ai", icon: "fa-solid fa-sparkles" },
+            { name: "UPSCALER-lite", desc: "Quick image upscaling.", url: "https://designs.ai", icon: "fa-solid fa-magnifying-glass-plus" },
+            { name: "Seedream-5.0-Lite-EL", desc: "Fast image generation.", url: "https://designs.ai", icon: "fa-solid fa-seedling" },
+            { name: "Ask-OctopAI", desc: "AI image analysis.", url: "https://designs.ai", icon: "fa-solid fa-octopus-deploy" },
+            { name: "Danbooru-Chat", desc: "Anime-style image search.", url: "https://designs.ai", icon: "fa-solid fa-face-smile" },
+            { name: "ALT-text-Files", desc: "Generate image alt text.", url: "https://designs.ai", icon: "fa-solid fa-font" }
+        ]
+    },
+    {
+        name: "AI Video Studio",
+        icon: "fa-solid fa-video",
+        tools: [
+            { name: "Ai-PROMPT-ViD", desc: "Prompt-based video creation.", url: "https://designs.ai", icon: "fa-solid fa-wand-magic-sparkles" },
+            { name: "ProfessionalVideos", desc: "Create professional videos.", url: "https://runwayml.com", icon: "fa-solid fa-film" },
+            { name: "HappyHorse-1.0-EL", desc: "Fun video generation.", url: "https://designs.ai", icon: "fa-solid fa-horse" },
+            { name: "Seedance-2.0-Fast-EL", desc: "Fast video rendering.", url: "https://designs.ai", icon: "fa-solid fa-seedling" },
+            { name: "MiMo-V2.5", desc: "Multimodal video AI.", url: "https://designs.ai", icon: "fa-solid fa-video" },
+            { name: "MiMo-V2.5-Pro", desc: "Professional video AI.", url: "https://designs.ai", icon: "fa-solid fa-film" },
+            { name: "Sora-2-Pro", desc: "OpenAI's advanced video model.", url: "https://openai.com/sora", icon: "fa-solid fa-video" },
+            { name: "Kling-2.5-Turbo", desc: "Turbo video generation.", url: "https://klingai.com", icon: "fa-solid fa-clapperboard" }
+        ]
+    },
+    {
+        name: "AI Audio Lab",
+        icon: "fa-solid fa-microphone",
+        tools: [
+            { name: "Gemini-3.1-Flash-TTS", desc: "Google's fast text-to-speech.", url: "https://designs.ai", icon: "fa-brands fa-google" },
+            { name: "Echo", desc: "Voice echo effects.", url: "https://designs.ai", icon: "fa-solid fa-waveform" },
+            { name: "ElevenLabs-v3", desc: "Realistic voice AI.", url: "https://elevenlabs.io", icon: "fa-solid fa-waveform" },
+            { name: "ElevenLabs-Music", desc: "AI music generation.", url: "https://elevenlabs.io", icon: "fa-solid fa-music" },
+            { name: "Suno-Music", desc: "Create full songs with AI.", url: "https://suno.ai", icon: "fa-solid fa-music" },
+            { name: "Murf-Voice", desc: "Professional voiceovers.", url: "https://murf.ai", icon: "fa-solid fa-microphone" }
+        ]
+    },
+    {
+        name: "Content Creator Hub",
+        icon: "fa-solid fa-pen-fancy",
+        tools: [
+            { name: "LinkedIn.GPTbot", desc: "LinkedIn post optimizer.", url: "https://designs.ai", icon: "fa-brands fa-linkedin" },
+            { name: "LetterOfComplaint", desc: "Generate complaint letters.", url: "https://designs.ai", icon: "fa-solid fa-file-lines" },
+            { name: "AI-Writing-Cleaner", desc: "Clean and polish writing.", url: "https://quillbot.com", icon: "fa-solid fa-spell-check" },
+            { name: "FictionWriterCleaner", desc: "Fiction writing assistant.", url: "https://novelai.net", icon: "fa-solid fa-book" },
+            { name: "ChooseYourReality", desc: "Interactive fiction AI.", url: "https://aidungeon.io", icon: "fa-solid fa-book-open" },
+            { name: "RecipeFromFridge", desc: "AI recipe generator.", url: "https://designs.ai", icon: "fa-solid fa-utensils" },
+            { name: "AITimeTravel", desc: "Historical content creation.", url: "https://designs.ai", icon: "fa-solid fa-clock-rotate-left" }
+        ]
+    },
+    {
+        name: "Smart Agents",
+        icon: "fa-solid fa-robot",
+        tools: [
+            { name: "Assistant", desc: "General AI assistant.", url: "https://chat.openai.com", icon: "fa-solid fa-user-tie" },
+            { name: "AllGPT", desc: "Access all GPT models.", url: "https://poe.com", icon: "fa-solid fa-gears" },
+            { name: "BotSearch", desc: "Find the right bot.", url: "https://designs.ai", icon: "fa-solid fa-magnifying-glass" },
+            { name: "Poe-Bot-Finder", desc: "Discover Poe bots.", url: "https://poe.com", icon: "fa-solid fa-robot" },
+            { name: "AIConcierge", desc: "Personal AI assistant.", url: "https://designs.ai", icon: "fa-solid fa-bell-concierge" },
+            { name: "AgenticAI-v01", desc: "Autonomous AI agent.", url: "https://designs.ai", icon: "fa-solid fa-brain" },
+            { name: "0mn1Scienc3", desc: "Science research agent.", url: "https://designs.ai", icon: "fa-solid fa-flask" },
+            { name: "VerifyTrustAI", desc: "Fact-checking agent.", url: "https://designs.ai", icon: "fa-solid fa-shield-halved" },
+            { name: "AugmentedLLM", desc: "Enhanced language model.", url: "https://huggingface.co", icon: "fa-solid fa-brain" }
+        ]
+    },
+    {
+        name: "Creative Generation Lab",
+        icon: "fa-solid fa-wand-magic-sparkles",
+        tools: [
+            { name: "FLUX-schnell", desc: "Ultra-fast image generation.", url: "https://designs.ai", icon: "fa-solid fa-bolt" },
+            { name: "Imagen", desc: "Google's image generation.", url: "https://imagen.google.com", icon: "fa-brands fa-google" },
+            { name: "StableDiffusionXL", desc: "High quality Stable Diffusion.", url: "https://stability.ai", icon: "fa-solid fa-dice-d6" },
+            { name: "Veo-3.1", desc: "Google's video AI.", url: "https://designs.ai", icon: "fa-solid fa-video" },
+            { name: "Kling-2.5-Turbo-Pro", desc: "Turbo video generation.", url: "https://klingai.com", icon: "fa-solid fa-rocket" }
+        ]
+    },
+    {
+        name: "AI Utilities",
+        icon: "fa-solid fa-toolbox",
+        tools: [
+            { name: "FileFormatShifter", desc: "Convert file formats.", url: "https://designs.ai", icon: "fa-solid fa-file-arrow-right" },
+            { name: "DecisionValidator", desc: "AI decision helper.", url: "https://designs.ai", icon: "fa-solid fa-scale-balanced" },
+            { name: "Emojis", desc: "AI emoji generator.", url: "https://designs.ai", icon: "fa-solid fa-face-smile" },
+            { name: "Oracle-von-Cleef", desc: "Wise AI advisor.", url: "https://designs.ai", icon: "fa-solid fa-hat-cowboy" },
+            { name: "Rappgod", desc: "Rap lyrics generator.", url: "https://designs.ai", icon: "fa-solid fa-microphone-lines" },
+            { name: "CreativeWriter", desc: "Creative content AI.", url: "https://writesonic.com", icon: "fa-solid fa-pen-nib" },
+            { name: "TranslationMaster", desc: "Professional translation.", url: "https://deepl.com", icon: "fa-solid fa-language" },
+            { name: "TextAnalyzer", desc: "Analyze text quality.", url: "https://quillbot.com", icon: "fa-solid fa-magnifying-glass-chart" }
+        ]
+    },
+    {
         name: "مساعدات الذكاء الاصطناعي",
         icon: "fa-solid fa-robot",
         tools: [
@@ -639,24 +782,6 @@ const translations = {
         sortDefault: "Default",
         sortName: "By Name",
         sortCount: "By Count"
-    },
-    ar: {
-        mainTitle: "Abdulrahman AI",
-        homeLink: "الرئيسية",
-        searchPlaceholder: "البحث عن أدوات الذكاء الاصطناعي...",
-        noResultsMsg: "لا توجد أدوات تطابق بحثك. جرب كلمة أخرى!",
-        backLink: "العودة إلى جميع الأقسام",
-        visitBtn: "زيارة",
-        sidebarTitle: "القائمة الذكية",
-        statCategories: "الأقسام",
-        statTools: "الأدوات",
-        statFav: "المفضلة",
-        topToolsTitle: "الأكثر زيارة",
-        favoritesTitle: "مفضلتي",
-        copyright: "© 2026 Abdulrahman Radwan. جميع الحقوق محفوظة.",
-        sortDefault: "الافتراضي",
-        sortName: "بالاسم",
-        sortCount: "بالعدد"
     }
 };
 

@@ -84,7 +84,7 @@ function renderCategoryPage(index) {
     
     container.innerHTML = `
         <a href="${window.location.pathname}" class="back-link">
-            <i class="fa-solid fa-arrow-right"></i> Back to all categories
+            <i class="fa-solid fa-arrow-left"></i> العودة لجميع الأقسام
         </a>
         <div class="category-header" onclick="window.location.href='${window.location.pathname}'">
             <div class="category-icon"><i class="${cat.icon}"></i></div>
@@ -97,8 +97,8 @@ function renderCategoryPage(index) {
                     <h3 class="tool-name">${tool.name}</h3>
                     <p class="tool-desc">${tool.desc}</p>
                     <a href="${tool.url}" class="tool-link" target="_blank" rel="noopener noreferrer">
-                        <span>Visit</span>
-                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>زيارة</span>
+                        <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             `).join('')}
@@ -371,7 +371,7 @@ function initTheme() {
 }
 
 // =================================================================
-// 9. خلفية الجسيمات
+// 9. خلفية الجسيمات والشبكة العصبية
 // =================================================================
 function initParticles() {
     const canvas = document.getElementById('particle-canvas');
@@ -389,7 +389,7 @@ function initParticles() {
     resize();
     window.addEventListener('resize', resize);
 
-    const particleCount = 50;
+    const particleCount = 60;
     for (let i = 0; i < particleCount; i++) {
         particles.push({
             x: Math.random() * width,
@@ -397,6 +397,7 @@ function initParticles() {
             radius: Math.random() * 2 + 1,
             dx: (Math.random() - 0.5) * 0.5,
             dy: (Math.random() - 0.5) * 0.5,
+            color: ['rgba(99, 102, 241, 0.5)', 'rgba(14, 165, 233, 0.5)', 'rgba(244, 63, 94, 0.5)'][Math.floor(Math.random() * 3)]
         });
     }
 
@@ -404,11 +405,11 @@ function initParticles() {
         if (!ctx) return;
         ctx.clearRect(0, 0, width, height);
         const isDark = document.body.classList.contains('dark-mode');
-        ctx.fillStyle = isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)';
 
         particles.forEach(p => {
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.15)';
             ctx.fill();
 
             p.x += p.dx;
@@ -417,6 +418,93 @@ function initParticles() {
             if (p.x < 0 || p.x > width) p.dx *= -1;
             if (p.y < 0 || p.y > height) p.dy *= -1;
         });
+
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 150) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - distance / 150)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+function initNeuralNetwork() {
+    const canvas = document.getElementById('neuralCanvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let nodes = [];
+    const nodeCount = 25;
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = 400;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    for (let i = 0; i < nodeCount; i++) {
+        nodes.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            radius: Math.random() * 3 + 2
+        });
+    }
+
+    function animate() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
+
+        nodes.forEach(node => {
+            node.x += node.vx;
+            node.y += node.vy;
+
+            if (node.x < 0 || node.x > width) node.vx *= -1;
+            if (node.y < 0 || node.y > height) node.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(99, 102, 241, 0.6)';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, node.radius * 2, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(99, 102, 241, 0.1)';
+            ctx.fill();
+        });
+
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx = nodes[i].x - nodes[j].x;
+                const dy = nodes[i].y - nodes[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(nodes[i].x, nodes[i].y);
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                    ctx.strokeStyle = `rgba(14, 165, 233, ${0.4 * (1 - distance / 120)})`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            }
+        }
 
         requestAnimationFrame(animate);
     }
@@ -456,10 +544,14 @@ function updateSidebarStats() {
     const catElem = document.getElementById('newStatCategories');
     const toolsElem = document.getElementById('newStatTools');
     const favElem = document.getElementById('newFavCount');
+    const headerCats = document.getElementById('statCategories');
+    const headerTools = document.getElementById('statTools');
     
     if (catElem) catElem.textContent = totalCategories;
     if (toolsElem) toolsElem.textContent = totalTools;
     if (favElem) favElem.textContent = favorites.length;
+    if (headerCats) headerCats.textContent = totalCategories;
+    if (headerTools) headerTools.textContent = totalTools;
 }
 
 function updateTopTools() {
@@ -467,18 +559,56 @@ function updateTopTools() {
     if (!topToolsList) return;
     
     const sorted = Object.entries(clickStats)
-        .sort((a, b) => b[1] - a[1])
+        .sort((a, b) => b[1].count - a[1].count)
         .slice(0, 5)
-        .map(([url, count]) => {
+        .map(([url, data]) => {
             const allTools = getAllTools();
             const tool = allTools.find(t => t.url === url);
-            return tool ? { name: tool.name, url, count } : null;
+            return tool ? { name: tool.name, url, count: data.count } : null;
         })
         .filter(t => t);
     
     topToolsList.innerHTML = sorted.length ? sorted.map(t => `
         <li><span title="${t.url}">${t.name}</span></li>
     `).join('') : '';
+}
+
+function updateTrending() {
+    const trendingList = document.getElementById('newTrendingList');
+    if (!trendingList) return;
+    
+    const sorted = Object.entries(clickStats)
+        .sort((a, b) => b[1].count - a[1].count)
+        .slice(0, 5)
+        .map(([url, data]) => {
+            const allTools = getAllTools();
+            const tool = allTools.find(t => t.url === url);
+            return tool ? { name: tool.name, url, count: data.count } : null;
+        })
+        .filter(t => t);
+    
+    trendingList.innerHTML = sorted.length ? sorted.map(t => `
+        <li onclick="window.open('${t.url}', '_blank')"><span>${t.name}</span></li>
+    `).join('') : '<li style="text-align:center;">لا يوجد بيانات بعد</li>';
+}
+
+function updateRecentlyUsed() {
+    const recentList = document.getElementById('newRecentList');
+    if (!recentList) return;
+    
+    const sorted = Object.entries(clickStats)
+        .sort((a, b) => b[1].lastUsed - a[1].lastUsed)
+        .slice(0, 5)
+        .map(([url, data]) => {
+            const allTools = getAllTools();
+            const tool = allTools.find(t => t.url === url);
+            return tool ? { name: tool.name, url } : null;
+        })
+        .filter(t => t);
+    
+    recentList.innerHTML = sorted.length ? sorted.map(t => `
+        <li onclick="window.open('${t.url}', '_blank')"><span>${t.name}</span></li>
+    `).join('') : '<li style="text-align:center;">لا يوجد بيانات بعد</li>';
 }
 
 function updateFavorites() {
@@ -508,9 +638,14 @@ function updateFavorites() {
 }
 
 function recordClick(url) {
-    clickStats[url] = (clickStats[url] || 0) + 1;
+    const now = Date.now();
+    clickStats[url] = clickStats[url] || { count: 0, lastUsed: 0 };
+    clickStats[url].count++;
+    clickStats[url].lastUsed = now;
     localStorage.setItem('new_clickStats', JSON.stringify(clickStats));
     updateTopTools();
+    updateTrending();
+    updateRecentlyUsed();
     updateSidebarStats();
 }
 
@@ -559,7 +694,7 @@ function attachToolEvents() {
             if (favorites.some(f => f.url === tool.url)) {
                 favorites = favorites.filter(f => f.url !== tool.url);
                 newStarBtn.style.color = 'var(--accent)';
-                window.showToast('تمت الإزالة من المفضلة', 'success');
+window.showToast('تمت الإزالة من المفضلة', 'success');
             } else {
                 favorites.push(tool);
                 newStarBtn.style.color = 'gold';
@@ -627,7 +762,7 @@ function initVisitorStats() {
     localStorage.setItem('visits', JSON.stringify(visits));
     const totalVisits = Object.values(visits).reduce((a, b) => a + b, 0);
     const statsDiv = document.getElementById('visitorStats');
-    if (statsDiv) statsDiv.innerHTML = `📊 زوار اليوم: ${visits[today]} | إجمالي الزيارات: ${totalVisits}`;
+    if (statsDiv) statsDiv.innerHTML = `Today's visitors: ${visits[today]} | Total visits: ${totalVisits}`;
 }
 
 // =================================================================
@@ -651,12 +786,15 @@ function initApp() {
     setupClearSearch();
     initTheme();
     initParticles();
+    initNeuralNetwork();
     typeEffect();
     window.addEventListener('scroll', updateProgressBar);
     initSortControls();
     initSidebar();
     updateFavorites();
     updateSidebarStats();
+    updateTrending();
+    updateRecentlyUsed();
     
     // إخفاء مؤشر التحميل
     setTimeout(() => {
@@ -665,11 +803,13 @@ function initApp() {
     }, 500);
 }
 
-// تشغيل التطبيق عند تحميل الصفحة
+// =================================================================
+// 21. إعدادات PWA والتطبيق
+// =================================================================
 document.addEventListener('DOMContentLoaded', initApp);
 
 // =================================================================
-// 16. منع النسخ وأدوات المطور
+// 22. منع النسخ وأدوات المطور
 // =================================================================
 document.addEventListener('keydown', e => {
     if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'v' || e.key === 's' || e.key === 'p')) {
@@ -699,8 +839,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// =================================================================
-// 18. Online/Offline Status
 // =================================================================
 // 18. Online/Offline Status
 // =================================================================
