@@ -30,11 +30,6 @@
     <!-- شريط التقدم -->
     <div class="progress-bar" id="progressBar"></div>
     
-    <!-- زر تبديل الوضع -->
-    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
-        <i class="fas fa-moon"></i>
-    </button>
-    
     <!-- خلفية الجسيمات -->
     <canvas id="particle-canvas"></canvas>
     
@@ -110,6 +105,92 @@
             <button class="sort-btn" data-sort="count">بالعدد</button>
         </div>
         
+        <!-- نظام التصفية المتقدم -->
+        <div class="filter-section" id="filterSection">
+            <div class="filter-header" id="filterHeader">
+                <div class="filter-title">
+                    <i class="fas fa-filter"></i>
+                    <span>تصفية الأدوات</span>
+                </div>
+                <button class="filter-toggle-btn" id="filterToggleBtn">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="filter-body" id="filterBody">
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-tag"></i> السعر</label>
+                    <div class="filter-options" data-filter="price">
+                        <label class="filter-option"><input type="radio" name="price" value="all" checked> الكل</label>
+                        <label class="filter-option"><input type="radio" name="price" value="free"> مجاني</label>
+                        <label class="filter-option"><input type="radio" name="price" value="freemium"> فريميوم</label>
+                        <label class="filter-option"><input type="radio" name="price" value="paid"> مدفوع</label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-cube"></i> النوع</label>
+                    <div class="filter-options" data-filter="type">
+                        <label class="filter-option"><input type="checkbox" value="tool"> أداة متخصصة</label>
+                        <label class="filter-option"><input type="checkbox" value="assistant"> مساعد ذكي</label>
+                        <label class="filter-option"><input type="checkbox" value="platform"> منصة متكاملة</label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-globe"></i> المنصة</label>
+                    <div class="filter-options" data-filter="platform">
+                        <label class="filter-option"><input type="checkbox" value="web"> ويب</label>
+                        <label class="filter-option"><input type="checkbox" value="mobile"> موبايل</label>
+                        <label class="filter-option"><input type="checkbox" value="desktop"> ديسكتوب</label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-language"></i> اللغة</label>
+                    <div class="filter-options" data-filter="lang">
+                        <label class="filter-option"><input type="checkbox" value="ar"> يدعم العربية</label>
+                        <label class="filter-option"><input type="checkbox" value="en"> يدعم الإنجليزية</label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-star"></i> التقييم الأدنى</label>
+                    <div class="rating-filter">
+                        <div class="rating-stars" id="ratingStars">
+                            <span data-value="1">★</span>
+                            <span data-value="2">★</span>
+                            <span data-value="3">★</span>
+                            <span data-value="4">★</span>
+                            <span data-value="5">★</span>
+                        </div>
+                        <span class="rating-value" id="ratingValue">أي تقييم</span>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-calendar"></i> السنة</label>
+                    <div class="filter-range">
+                        <input type="range" id="yearRange" min="2020" max="2026" value="2020">
+                        <div class="range-values">
+                            <span>2020</span>
+                            <span id="yearValue">2026</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn-apply" id="applyFiltersBtn"><i class="fas fa-check"></i> تطبيق</button>
+                    <button class="btn-reset" id="resetFiltersBtn"><i class="fas fa-undo"></i> إعادة تعيين</button>
+                </div>
+            </div>
+            
+            <div class="filter-results-count" id="filterResultsCount">
+                <i class="fas fa-chart-line"></i>
+                <span id="resultsCount">0</span> نتيجة
+            </div>
+        </div>
+        
+        <div id="filteredToolsIndicator" class="filtered-indicator" style="display:none">
+            <i class="fas fa-filter"></i>
+            <span id="filteredCount"></span>
+            <button id="clearFiltersBtn">إلغاء التصفية <i class="fas fa-times"></i></button>
+        </div>
+        
         <!-- المحتوى -->
         <div id="contentContainer"></div>
         <div id="noResults">
@@ -118,15 +199,20 @@
         </div>
     </div>
     
+    <!-- الأزرار العائمة -->
+    <div class="floating-buttons">
+        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button class="new-sidebar-toggle" id="newSidebarToggle" title="Open Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    
     <!-- زر العودة للأعلى -->
     <div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
         <i class="fas fa-chevron-up"></i>
     </div>
-    
-    <!-- زر الشريط الجانبي -->
-    <button class="new-sidebar-toggle" id="newSidebarToggle" title="Open Menu">
-        <i class="fas fa-bars"></i>
-    </button>
     
     <!-- الشريط الجانبي -->
     <div class="new-sidebar" id="newSidebar">
@@ -175,11 +261,9 @@
     
     <!-- الفوتر -->
     <footer class="footer">
-        <div class="footer-brand">
-            <span class="footer-name">Abdulrahman Radwan</span>
-            <span class="footer-year">2026</span>
+        <div class="footer-container">
+            <p class="footer-rights">جميع الحقوق محفوظة &copy; 2026 Abdulrahman Radwan</p>
         </div>
-        <p class="footer-rights">All Rights Reserved</p>
     </footer>
     
     <a href="#contentContainer" class="skip-to-content">Skip to content</a>

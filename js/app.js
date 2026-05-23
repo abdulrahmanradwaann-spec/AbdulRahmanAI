@@ -134,6 +134,22 @@ function updateBreadcrumbs(categoryName = null) {
 // =================================================================
 // 4. البحث والتصفية
 // =================================================================
+
+// =================================================================
+// 4.5 نظام التصفية المتقدم
+// =================================================================
+
+let filterState = {
+    price: 'all',      // all | free | freemium | paid
+    type: [],           // tool | assistant | platform
+    platform: [],       // web | mobile | desktop
+    lang: [],           // ar | en
+    rating: 0,          // 0 = any, 1-5
+    year: 2026
+};
+
+let isFilterActive = false;
+
 function debounceFilter() {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
@@ -371,14 +387,19 @@ function initTheme() {
 }
 
 // =================================================================
-// 9. خلفية الجسيمات والشبكة العصبية
+// 9. خلفية الجسيمات
 // =================================================================
 function initParticles() {
     const canvas = document.getElementById('particle-canvas');
     if (!canvas) return;
+    
+    const isLowEndDevice = window.navigator.hardwareConcurrency <= 4;
+    const particleCount = isLowEndDevice ? 30 : 60;
+    
     const ctx = canvas.getContext('2d');
     let width, height;
     let particles = [];
+    let animationId = null;
 
     function resize() {
         width = window.innerWidth;
@@ -389,23 +410,30 @@ function initParticles() {
     resize();
     window.addEventListener('resize', resize);
 
-    const particleCount = 60;
-    for (let i = 0; i < particleCount; i++) {
-        particles.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            radius: Math.random() * 2 + 1,
-            dx: (Math.random() - 0.5) * 0.5,
-            dy: (Math.random() - 0.5) * 0.5,
-            color: ['rgba(99, 102, 241, 0.5)', 'rgba(14, 165, 233, 0.5)', 'rgba(244, 63, 94, 0.5)'][Math.floor(Math.random() * 3)]
-        });
+    function initParticlesArray() {
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 2 + 1,
+                dx: (Math.random() - 0.5) * 0.3,
+                dy: (Math.random() - 0.5) * 0.3,
+            });
+        }
     }
+    
+    initParticlesArray();
 
     function animate() {
-        if (!ctx) return;
+        if (!ctx) {
+            if (animationId) cancelAnimationFrame(animationId);
+            return;
+        }
+        
         ctx.clearRect(0, 0, width, height);
+        
         const isDark = document.body.classList.contains('dark-mode');
-
         particles.forEach(p => {
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -419,95 +447,28 @@ function initParticles() {
             if (p.y < 0 || p.y > height) p.dy *= -1;
         });
 
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < 150) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - distance / 150)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
+        if (!isLowEndDevice) {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.1 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
                 }
             }
         }
 
-        requestAnimationFrame(animate);
+        animationId = requestAnimationFrame(animate);
     }
-    animate();
-}
-
-function initNeuralNetwork() {
-    const canvas = document.getElementById('neuralCanvas');
-    if (!canvas) return;
     
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let nodes = [];
-    const nodeCount = 25;
-
-    function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = 400;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    for (let i = 0; i < nodeCount; i++) {
-        nodes.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
-            radius: Math.random() * 3 + 2
-        });
-    }
-
-    function animate() {
-        if (!ctx) return;
-        ctx.clearRect(0, 0, width, height);
-
-        nodes.forEach(node => {
-            node.x += node.vx;
-            node.y += node.vy;
-
-            if (node.x < 0 || node.x > width) node.vx *= -1;
-            if (node.y < 0 || node.y > height) node.vy *= -1;
-
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(99, 102, 241, 0.6)';
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, node.radius * 2, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(99, 102, 241, 0.1)';
-            ctx.fill();
-        });
-
-        for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-                const dx = nodes[i].x - nodes[j].x;
-                const dy = nodes[i].y - nodes[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 120) {
-                    ctx.beginPath();
-                    ctx.moveTo(nodes[i].x, nodes[i].y);
-                    ctx.lineTo(nodes[j].x, nodes[j].y);
-                    ctx.strokeStyle = `rgba(14, 165, 233, ${0.4 * (1 - distance / 120)})`;
-                    ctx.lineWidth = 1;
-                    ctx.stroke();
-                }
-            }
-        }
-
-        requestAnimationFrame(animate);
-    }
     animate();
 }
 
@@ -528,14 +489,361 @@ function setupClearSearch() {
 // =================================================================
 // 11. الإحصائيات والمفضلة
 // =================================================================
+function inferFilterProps(tool, categoryName) {
+    const name = tool.name.toLowerCase();
+    const desc = tool.desc.toLowerCase();
+    let price = 'free';
+    if (name.includes('pro') || name.includes('premium') || name.includes('enterprise') || tool.badge === 'Pro') price = 'paid';
+    if (name.includes('lite') || name.includes('mini') || name.includes('trial') || name.includes('basic')) price = 'freemium';
+    if (name.includes('turbo') || name.includes('flash')) price = 'freemium';
+    
+    let type = 'tool';
+    if (name.includes('assistant') || name.includes('chat') || name.includes('bot') || name.includes('gpt')) type = 'assistant';
+    if (categoryName.includes('Platform') || name.includes('studio') || name.includes('workspace')) type = 'platform';
+    
+    let platform = 'web';
+    if (name.includes('app') || categoryName.includes('Mobile')) platform = 'mobile';
+    if (name.includes('desktop') || name.includes('studio')) platform = 'desktop';
+    
+    let lang = 'en';
+    if (desc.includes('arabic') || desc.includes('عربي') || desc.includes('بالعربية')) lang = 'ar';
+    
+    let rating = 3;
+    if (tool.badge === 'Best' || tool.badgeColor === 'gold') rating = 5;
+    else if (tool.badge === 'Pro' || tool.badgeColor === 'purple') rating = 4;
+    else if (tool.badge === 'New' || tool.badgeColor === 'cyan') rating = 4;
+    else if (tool.badge === 'Fast' || tool.badgeColor === 'green') rating = 3;
+    else if (name.includes('turbo')) rating = 4;
+    
+    let year = 2026;
+    return { price, type, platform, lang, rating, year };
+}
+
 function getAllTools() {
     const all = [];
     categories.forEach(cat => {
         cat.tools.forEach(tool => {
-            all.push({ ...tool, category: cat.name, categoryIcon: cat.icon });
+            const props = inferFilterProps(tool, cat.name);
+            all.push({
+                ...tool,
+                category: cat.name,
+                categoryIcon: cat.icon,
+                price: tool.price || props.price,
+                type: tool.type || props.type,
+                platform: tool.platform || props.platform,
+                lang: tool.lang || props.lang,
+                rating: tool.rating || props.rating,
+                year: tool.year || props.year,
+                _filterIndex: all.length
+            });
         });
     });
     return all;
+}
+
+// =================================================================
+// 4.5 نظام التصفية المتقدم
+// =================================================================
+
+function initFilterSystem() {
+    const filterToggle = document.getElementById('filterToggleBtn');
+    const filterHeader = document.getElementById('filterHeader');
+    const filterBody = document.getElementById('filterBody');
+    
+    if (filterHeader && filterBody) {
+        filterHeader.addEventListener('click', function(e) {
+            if (!e.target.closest('.filter-toggle-btn') && !e.target.closest('.filter-actions')) {
+                filterBody.classList.toggle('show');
+                if (filterToggle) filterToggle.classList.toggle('active');
+            }
+        });
+    }
+    if (filterToggle) {
+        filterToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            filterBody.classList.toggle('show');
+            filterToggle.classList.toggle('active');
+        });
+    }
+    
+    initRatingStars();
+    initYearRange();
+    initFilterEvents();
+    updateResultsCount();
+}
+
+function initRatingStars() {
+    const stars = document.querySelectorAll('#ratingStars span');
+    const ratingValue = document.getElementById('ratingValue');
+    let selectedRating = 0;
+    
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const value = parseInt(this.dataset.value);
+            selectedRating = selectedRating === value ? 0 : value;
+            filterState.rating = selectedRating;
+            
+            stars.forEach(s => s.classList.remove('active'));
+            if (selectedRating > 0) {
+                stars.forEach(s => {
+                    if (parseInt(s.dataset.value) <= selectedRating) s.classList.add('active');
+                });
+            }
+            if (ratingValue) {
+                ratingValue.textContent = selectedRating > 0 ? selectedRating + '+ نجوم' : 'أي تقييم';
+            }
+        });
+        
+        star.addEventListener('mouseenter', function() {
+            const value = parseInt(this.dataset.value);
+            stars.forEach(s => {
+                if (parseInt(s.dataset.value) <= value) s.style.color = '#fbbf24';
+                else s.style.color = '';
+            });
+        });
+        
+        star.addEventListener('mouseleave', function() {
+            if (selectedRating === 0) {
+                stars.forEach(s => s.style.color = '');
+            } else {
+                stars.forEach(s => {
+                    if (parseInt(s.dataset.value) <= selectedRating) s.style.color = '#fbbf24';
+                    else s.style.color = '';
+                });
+            }
+        });
+    });
+}
+
+function initYearRange() {
+    const yearRange = document.getElementById('yearRange');
+    const yearValue = document.getElementById('yearValue');
+    if (yearRange && yearValue) {
+        yearRange.addEventListener('input', function() {
+            filterState.year = parseInt(this.value);
+            yearValue.textContent = this.value;
+        });
+    }
+}
+
+function initFilterEvents() {
+    document.querySelectorAll('.filter-options input[type="radio"]').forEach(input => {
+        input.addEventListener('change', function() {
+            const group = this.closest('.filter-options');
+            const filterKey = group.dataset.filter;
+            if (filterKey) {
+                filterState[filterKey] = this.value;
+            }
+        });
+    });
+    
+    document.querySelectorAll('.filter-options input[type="checkbox"]').forEach(input => {
+        input.addEventListener('change', function() {
+            const group = this.closest('.filter-options');
+            const filterKey = group.dataset.filter;
+            if (filterKey) {
+                if (this.checked) {
+                    if (!filterState[filterKey].includes(this.value)) {
+                        filterState[filterKey].push(this.value);
+                    }
+                } else {
+                    filterState[filterKey] = filterState[filterKey].filter(v => v !== this.value);
+                }
+            }
+        });
+    });
+    
+    const applyBtn = document.getElementById('applyFiltersBtn');
+    if (applyBtn) {
+        applyBtn.addEventListener('click', function() {
+            applyFilters();
+            const filterBody = document.getElementById('filterBody');
+            const filterToggle = document.getElementById('filterToggleBtn');
+            if (filterBody) filterBody.classList.remove('show');
+            if (filterToggle) filterToggle.classList.remove('active');
+        });
+    }
+    
+    const resetBtn = document.getElementById('resetFiltersBtn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', resetFilters);
+    }
+    
+    const clearBtn = document.getElementById('clearFiltersBtn');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            resetFilters();
+            const indicator = document.getElementById('filteredToolsIndicator');
+            if (indicator) indicator.style.display = 'none';
+            if (currentCategoryIndex === null) renderMainPage();
+            else renderCategoryPage(currentCategoryIndex);
+        });
+    }
+}
+
+function applyFilters() {
+    const price = filterState.price;
+    const types = filterState.type;
+    const platforms = filterState.platform;
+    const langs = filterState.lang;
+    const minRating = filterState.rating;
+    const minYear = filterState.year;
+    
+    isFilterActive = price !== 'all' || types.length > 0 || platforms.length > 0 || langs.length > 0 || minRating > 0 || minYear > 2020;
+    
+    if (!isFilterActive) {
+        const indicator = document.getElementById('filteredToolsIndicator');
+        if (indicator) indicator.style.display = 'none';
+        if (currentCategoryIndex === null) renderMainPage();
+        else renderCategoryPage(currentCategoryIndex);
+        return;
+    }
+    
+    const allTools = getAllTools();
+    let filtered = allTools.filter(tool => {
+        if (price !== 'all' && tool.price !== price) return false;
+        if (types.length > 0 && !types.includes(tool.type)) return false;
+        if (platforms.length > 0 && !platforms.includes(tool.platform)) return false;
+        if (langs.length > 0 && !langs.includes(tool.lang)) return false;
+        if (minRating > 0 && tool.rating < minRating) return false;
+        if (tool.year < minYear) return false;
+        return true;
+    });
+    
+    // تجميع النتائج حسب القسم
+    const grouped = {};
+    filtered.forEach(tool => {
+        if (!grouped[tool.category]) {
+            grouped[tool.category] = {
+                category: tool.category,
+                icon: tool.categoryIcon,
+                tools: []
+            };
+        }
+        grouped[tool.category].tools.push(tool);
+    });
+    
+    // عرض النتائج
+    const container = document.getElementById('contentContainer');
+    const sortControls = document.getElementById('sortControls');
+    if (sortControls) sortControls.style.display = 'none';
+    
+    const catsArray = Object.values(grouped);
+    // ترتيب حسب عدد الأدوات
+    catsArray.sort((a, b) => b.tools.length - a.tools.length);
+    
+    if (catsArray.length === 0) {
+        container.innerHTML = `
+            <div class="empty-filter">
+                <i class="fas fa-filter" style="font-size:3rem;color:var(--text-muted-light);margin-bottom:1rem;"></i>
+                <h3>لا توجد نتائج تطابق معايير التصفية</h3>
+                <p style="color:var(--text-muted-light);margin:.5rem 0 1rem;">حاول تغيير معايير التصفية أو إعادة تعيينها</p>
+                <button class="btn-reset-filter" onclick="resetFilters()">
+                    <i class="fas fa-undo"></i> إعادة تعيين التصفية
+                </button>
+            </div>
+        `;
+    } else {
+        container.innerHTML = catsArray.map(cat => `
+            <div class="filtered-category-section">
+                <div class="category-header-mini">
+                    <div class="category-icon-mini"><i class="${cat.icon}"></i></div>
+                    <span class="category-title-mini">${cat.category}</span>
+                    <span class="category-count-mini">${cat.tools.length} أدوات</span>
+                </div>
+                <div class="tools-grid">
+                    ${cat.tools.map(tool => {
+                        const badgePrice = tool.price === 'paid' ? 'مدفوع' : tool.price === 'freemium' ? 'فريميوم' : 'مجاني';
+                        const badgeClass = tool.price === 'paid' ? 'price-paid' : tool.price === 'freemium' ? 'price-freemium' : 'price-free';
+                        return `
+                            <div class="tool-card" style="--card-index: 1;">
+                                <div class="card-icon"><i class="${tool.icon}"></i></div>
+                                <h3 class="tool-name">${tool.name}</h3>
+                                <span class="price-badge ${badgeClass}">${badgePrice}</span>
+                                <p class="tool-desc">${tool.desc}</p>
+                                <div class="tool-meta">
+                                    <span><i class="fas fa-star" style="color:#fbbf24"></i> ${tool.rating}/5</span>
+                                    <span><i class="fas fa-calendar"></i> ${tool.year}</span>
+                                </div>
+                                <a href="${tool.url}" class="tool-link" target="_blank" rel="noopener noreferrer">
+                                    <span>زيارة</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    const indicator = document.getElementById('filteredToolsIndicator');
+    if (indicator) {
+        indicator.style.display = 'flex';
+        document.getElementById('filteredCount').textContent = `تم تطبيق التصفية - ${filtered.length} نتائج`;
+    }
+    
+    updateResultsCount();
+    attachToolEvents();
+}
+
+function resetFilters() {
+    filterState = {
+        price: 'all',
+        type: [],
+        platform: [],
+        lang: [],
+        rating: 0,
+        year: 2026
+    };
+    isFilterActive = false;
+    
+    // إعادة تعيين واجهة المستخدم
+    document.querySelectorAll('.filter-options input[type="radio"]').forEach(input => {
+        if (input.value === 'all') input.checked = true;
+        else input.checked = false;
+    });
+    document.querySelectorAll('.filter-options input[type="checkbox"]').forEach(input => {
+        input.checked = false;
+    });
+    
+    const yearRange = document.getElementById('yearRange');
+    const yearValue = document.getElementById('yearValue');
+    if (yearRange) yearRange.value = 2020;
+    if (yearValue) yearValue.textContent = '2026';
+    
+    const stars = document.querySelectorAll('#ratingStars span');
+    stars.forEach(s => s.classList.remove('active'));
+    const ratingValue = document.getElementById('ratingValue');
+    if (ratingValue) ratingValue.textContent = 'أي تقييم';
+    
+    const indicator = document.getElementById('filteredToolsIndicator');
+    if (indicator) indicator.style.display = 'none';
+    
+    updateResultsCount();
+    
+    // إعادة عرض الصفحة
+    if (currentCategoryIndex === null) renderMainPage();
+    else renderCategoryPage(currentCategoryIndex);
+}
+
+function updateResultsCount() {
+    const countElem = document.getElementById('resultsCount');
+    if (!countElem) return;
+    const activeFilters = isFilterActive;
+    if (activeFilters) {
+        countElem.textContent = getAllTools().filter(tool => {
+            if (filterState.price !== 'all' && tool.price !== filterState.price) return false;
+            if (filterState.type.length > 0 && !filterState.type.includes(tool.type)) return false;
+            if (filterState.platform.length > 0 && !filterState.platform.includes(tool.platform)) return false;
+            if (filterState.lang.length > 0 && !filterState.lang.includes(tool.lang)) return false;
+            if (filterState.rating > 0 && tool.rating < filterState.rating) return false;
+            if (tool.year < filterState.year) return false;
+            return true;
+        }).length;
+    } else {
+        countElem.textContent = getAllTools().length;
+    }
 }
 
 function updateSidebarStats() {
@@ -554,25 +862,6 @@ function updateSidebarStats() {
     if (headerTools) headerTools.textContent = totalTools;
 }
 
-function updateTopTools() {
-    const topToolsList = document.getElementById('newTopTools');
-    if (!topToolsList) return;
-    
-    const sorted = Object.entries(clickStats)
-        .sort((a, b) => b[1].count - a[1].count)
-        .slice(0, 5)
-        .map(([url, data]) => {
-            const allTools = getAllTools();
-            const tool = allTools.find(t => t.url === url);
-            return tool ? { name: tool.name, url, count: data.count } : null;
-        })
-        .filter(t => t);
-    
-    topToolsList.innerHTML = sorted.length ? sorted.map(t => `
-        <li><span title="${t.url}">${t.name}</span></li>
-    `).join('') : '';
-}
-
 function updateTrending() {
     const trendingList = document.getElementById('newTrendingList');
     if (!trendingList) return;
@@ -587,9 +876,17 @@ function updateTrending() {
         })
         .filter(t => t);
     
-    trendingList.innerHTML = sorted.length ? sorted.map(t => `
-        <li onclick="window.open('${t.url}', '_blank')"><span>${t.name}</span></li>
-    `).join('') : '<li style="text-align:center;">لا يوجد بيانات بعد</li>';
+    if (sorted.length === 0) {
+        trendingList.innerHTML = '<li style="text-align:center;">✨ لا توجد بيانات بعد</li>';
+        return;
+    }
+    
+    trendingList.innerHTML = sorted.map(t => `
+        <li onclick="window.open('${t.url}', '_blank')" title="تمت زيارته ${t.count} مرة">
+            <span>${t.name}</span>
+            <span class="trend-count">${t.count}</span>
+        </li>
+    `).join('');
 }
 
 function updateRecentlyUsed() {
@@ -643,7 +940,6 @@ function recordClick(url) {
     clickStats[url].count++;
     clickStats[url].lastUsed = now;
     localStorage.setItem('new_clickStats', JSON.stringify(clickStats));
-    updateTopTools();
     updateTrending();
     updateRecentlyUsed();
     updateSidebarStats();
@@ -708,6 +1004,8 @@ window.showToast('تمت الإزالة من المفضلة', 'success');
         card.style.position = 'relative';
         card.appendChild(newStarBtn);
     });
+    
+    addRatingButtonToTools();
 }
 
 // =================================================================
@@ -765,10 +1063,641 @@ function initVisitorStats() {
     if (statsDiv) statsDiv.innerHTML = `Today's visitors: ${visits[today]} | Total visits: ${totalVisits}`;
 }
 
+let wasOffline = false;
+
+function initNetworkStatus() {
+    function updateNetworkStatus() {
+        const isOnline = navigator.onLine;
+        
+        if (!isOnline && !wasOffline) {
+            showToast('⚠️ لا يوجد اتصال بالإنترنت. بعض الميزات قد لا تعمل.', 'error');
+            document.body.classList.add('offline-mode');
+        } else if (isOnline && wasOffline) {
+            showToast('✅ تم استعادة الاتصال بالإنترنت', 'success');
+            document.body.classList.remove('offline-mode');
+            if (currentCategoryIndex !== null) {
+                renderCategoryPage(currentCategoryIndex);
+            } else {
+                renderMainPage();
+            }
+        }
+        
+        wasOffline = !isOnline;
+    }
+    
+    window.addEventListener('online', updateNetworkStatus);
+    window.addEventListener('offline', updateNetworkStatus);
+    updateNetworkStatus();
+}
+
+const offlineStyles = `
+.offline-mode .tool-link {
+    opacity: 0.6;
+    pointer-events: none;
+}
+.offline-mode .search-wrapper input {
+    background: rgba(0,0,0,0.05);
+}
+`;
+document.head.insertAdjacentHTML('beforeend', `<style>${offlineStyles}</style>`);
+
+// =================================================================
+// 14. تحسينات إضافية - موبايل
+// =================================================================
+function initStickySearch() {
+    const searchSection = document.querySelector('.search-section');
+    const header = document.querySelector('.header');
+    if (!searchSection || !header) return;
+    
+    const observer = new IntersectionObserver(([e]) => {
+        searchSection.classList.toggle('sticky', e.intersectionRatio < 1);
+    }, { threshold: [1] });
+    
+    observer.observe(header);
+}
+
+// =================================================================
+// نظام التقييمات والتعليقات
+// =================================================================
+
+let reviews = JSON.parse(localStorage.getItem('tool_reviews')) || {};
+
+function getToolReviews(toolUrl) {
+    if (!reviews[toolUrl]) {
+        reviews[toolUrl] = {
+            averageRating: 0,
+            totalRatings: 0,
+            ratings: {1:0, 2:0, 3:0, 4:0, 5:0},
+            comments: []
+        };
+    }
+    return reviews[toolUrl];
+}
+
+function saveReviews() {
+    localStorage.setItem('tool_reviews', JSON.stringify(reviews));
+}
+
+function addOrUpdateUserRating(toolUrl, rating, userName) {
+    const tr = getToolReviews(toolUrl);
+    const key = `ur_${userName}_${toolUrl}`;
+    const prev = localStorage.getItem(key);
+    if (prev) { const o = parseInt(prev); tr.ratings[o]--; tr.totalRatings--; }
+    tr.ratings[rating]++; tr.totalRatings++;
+    let total = 0; for (let i=1;i<=5;i++) total += tr.ratings[i]*i;
+    tr.averageRating = tr.totalRatings ? total/tr.totalRatings : 0;
+    localStorage.setItem(key, rating);
+    saveReviews();
+    return tr;
+}
+
+function addComment(toolUrl, userName, rating, commentText) {
+    const tr = getToolReviews(toolUrl);
+    const c = {
+        id: Date.now().toString(36) + Math.random().toString(36).substr(2,6),
+        userName: userName || 'مستخدم',
+        userAvatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(userName||'مستخدم')}&background=6366f1&color=fff&bold=true`,
+        rating, comment: commentText, likes: 0, likedBy: [],
+        reported: false, date: new Date().toISOString(), isEdited: false, lastEdited: null
+    };
+    tr.comments.unshift(c); saveReviews(); return c;
+}
+
+function likeComment(toolUrl, commentId, userName) {
+    const tr = getToolReviews(toolUrl);
+    const c = tr.comments.find(x => x.id === commentId);
+    if (!c) return 0;
+    if (c.likedBy.includes(userName)) { c.likes--; c.likedBy = c.likedBy.filter(u=>u!==userName); }
+    else { c.likes++; c.likedBy.push(userName); }
+    saveReviews(); return c.likes;
+}
+
+function reportComment(toolUrl, commentId) {
+    const tr = getToolReviews(toolUrl);
+    const c = tr.comments.find(x => x.id === commentId);
+    if (!c || c.reported) return false;
+    c.reported = true; saveReviews(); return true;
+}
+
+function generateStars(rating, small) {
+    const f = Math.floor(rating), h = rating%1>=0.5, e = 5-f-(h?1:0);
+    let s = '';
+    for (let i=0;i<f;i++) s+='<i class="fas fa-star"></i>';
+    if (h) s+='<i class="fas fa-star-half-alt"></i>';
+    for (let i=0;i<e;i++) s+='<i class="far fa-star"></i>';
+    return `<div class="stars-display${small?' stars-small':''}">${s}</div>`;
+}
+
+function escapeHtml(text) {
+    const d = document.createElement('div');
+    d.textContent = text; return d.innerHTML;
+}
+
+function formatDate(dateString) {
+    const d = new Date(dateString), n = new Date();
+    const mins = Math.floor((n-d)/60000);
+    if (mins<1) return 'الآن';
+    if (mins<60) return `منذ ${mins} دقيقة`;
+    const hrs = Math.floor(mins/60);
+    if (hrs<24) return `منذ ${hrs} ساعة`;
+    const days = Math.floor(hrs/24);
+    if (days<7) return `منذ ${days} يوم`;
+    return d.toLocaleDateString('ar');
+}
+
+function renderCommentsList(comments, toolUrl) {
+    if (!comments.length) return `<div class="no-comments"><i class="fas fa-comment-slash"></i><p>لا توجد تعليقات بعد. كن أول من يقيّم!</p></div>`;
+    const visible = comments.filter(c=>!c.reported);
+    return visible.map(c => `
+        <div class="comment-item" data-id="${c.id}">
+            <div class="comment-avatar"><img src="${c.userAvatar}" alt="${c.userName}" loading="lazy"></div>
+            <div class="comment-content">
+                <div class="comment-header">
+                    <span class="comment-user">${escapeHtml(c.userName)}</span>
+                    ${generateStars(c.rating,true)}
+                    <span class="comment-date">${formatDate(c.date)}</span>
+                    ${c.isEdited?'<span class="edited-badge">(معدل)</span>':''}
+                </div>
+                <div class="comment-text">${escapeHtml(c.comment)}</div>
+                <div class="comment-actions">
+                    <button class="comment-like-btn${localStorage.getItem('lk_'+c.id)==='true'?' liked':''}" onclick="handleLikeComment('${toolUrl}','${c.id}')">
+                        <i class="fas fa-heart"></i> <span>${c.likes}</span>
+                    </button>
+                    <button class="comment-report-btn" onclick="handleReportComment('${toolUrl}','${c.id}')">
+                        <i class="fas fa-flag"></i> <span>إبلاغ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function showReviewsModal(tool) {
+    const old = document.getElementById('reviewsModal');
+    if (old) old.remove();
+    const tr = getToolReviews(tool.url);
+    const m = document.createElement('div');
+    m.id='reviewsModal'; m.className='reviews-modal-overlay';
+    m.innerHTML=`
+        <div class="reviews-modal">
+            <div class="reviews-modal-header">
+                <div class="reviews-modal-title"><i class="fas fa-star"></i><h3>${escapeHtml(tool.name)}</h3></div>
+                <button class="reviews-modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="reviews-modal-body">
+                <div class="ratings-summary">
+                    <div class="average-rating">
+                        <div class="rating-number">${tr.averageRating.toFixed(1)}</div>
+                        ${generateStars(tr.averageRating)}
+                        <div class="rating-count">${tr.totalRatings} تقييم</div>
+                    </div>
+                    <div class="rating-distribution">
+                        ${[5,4,3,2,1].map(s=>{
+                            const pct = tr.totalRatings ? (tr.ratings[s]/tr.totalRatings*100) : 0;
+                            return `<div class="rating-bar-item"><span class="rating-star-label">${s} <i class="fas fa-star"></i></span><div class="rating-bar-bg"><div class="rating-bar-fill" style="width:${pct}%"></div></div><span class="rating-percent">${tr.ratings[s]}</span></div>`;
+                        }).join('')}
+                    </div>
+                </div>
+                <div class="add-review-section">
+                    <h4><i class="fas fa-pen"></i> أضف تقييمك</h4>
+                    <div class="user-rating-input"><span>تقييمك:</span><div class="rating-input-stars" data-rating="0">${[1,2,3,4,5].map(s=>`<i class="far fa-star" data-value="${s}"></i>`).join('')}</div></div>
+                    <textarea class="review-textarea" id="reviewComment" placeholder="شارك تجربتك مع هذه الأداة..."></textarea>
+                    <div class="review-actions">
+                        <input type="text" id="reviewerName" placeholder="اسمك (اختياري)" maxlength="30">
+                        <button class="btn-submit-review" id="submitReviewBtn"><i class="fas fa-paper-plane"></i> نشر التقييم</button>
+                    </div>
+                </div>
+                <div class="comments-section">
+                    <h4><i class="fas fa-comments"></i> التعليقات (${tr.comments.length})</h4>
+                    <div class="comments-list" id="commentsList">${renderCommentsList(tr.comments,tool.url)}</div>
+                </div>
+            </div>
+        </div>`;
+    document.body.appendChild(m);
+    document.body.style.overflow = 'hidden';
+
+    const close = ()=>{ m.remove(); document.body.style.overflow=''; };
+    m.querySelector('.reviews-modal-close').onclick = close;
+    m.onclick = (e)=>{ if(e.target===m) close(); };
+
+    let selRating = 0;
+    const stars = m.querySelectorAll('.rating-input-stars i');
+    function upd(r, solid) { stars.forEach(s=>{ const v=parseInt(s.dataset.value); if(v<=r){ s.className=solid?'fas fa-star':'fas fa-star'; s.style.color='#fbbf24'; } else { s.className=solid?'far fa-star':'far fa-star'; s.style.color='#cbd5e1'; } }); }
+    stars.forEach(s=>{ s.onmouseenter=()=>upd(parseInt(s.dataset.value)); s.onclick=()=>{ selRating=parseInt(s.dataset.value); upd(selRating,true); }; });
+    m.querySelector('.rating-input-stars').onmouseleave=()=>upd(selRating,true);
+
+    m.querySelector('#submitReviewBtn').onclick=()=>{
+        const name = (m.querySelector('#reviewerName').value||'').trim()||'مستخدم';
+        const cmt = (m.querySelector('#reviewComment').value||'').trim();
+        if(!selRating) return showToast('الرجاء اختيار تقييم بالنجوم','error');
+        if(!cmt) return showToast('الرجاء كتابة تعليق','error');
+        addOrUpdateUserRating(tool.url, selRating, name);
+        addComment(tool.url, name, selRating, cmt);
+        showToast('تم إضافة تقييمك بنجاح!','success');
+        close();
+        setTimeout(()=>showReviewsModal(tool),300);
+    };
+}
+
+function handleLikeComment(toolUrl, commentId) {
+    const u = localStorage.getItem('reviewer_name')||'مستخدم';
+    const n = likeComment(toolUrl, commentId, u);
+    const el = document.querySelector(`.comment-item[data-id="${commentId}"]`);
+    if(el) {
+        const btn = el.querySelector('.comment-like-btn');
+        if(btn) { btn.querySelector('span').textContent=n; btn.classList.toggle('liked'); }
+        localStorage.setItem('lk_'+commentId, btn?.classList.contains('liked'));
+    }
+}
+
+function handleReportComment(toolUrl, commentId) {
+    if(!confirm('هل أنت متأكد من الإبلاغ عن هذا التعليق؟')) return;
+    if(reportComment(toolUrl, commentId)) {
+        showToast('تم الإبلاغ عن التعليق، شكراً لك','success');
+        const el = document.querySelector(`.comment-item[data-id="${commentId}"]`);
+        if(el){ el.style.opacity='0.5'; el.style.pointerEvents='none'; }
+    }
+}
+
+function addRatingButtonToTools() {
+    document.querySelectorAll('.tool-card').forEach(card => {
+        if (card.querySelector('.rating-btn')) return;
+        const n = card.querySelector('.tool-name');
+        const l = card.querySelector('.tool-link');
+        if (!n) return;
+        const tool = {
+            name: n.textContent,
+            desc: (card.querySelector('.tool-desc')||{}).textContent||'',
+            icon: (card.querySelector('.card-icon i')||{}).className||'fa-solid fa-robot',
+            url: l ? l.href : '#'
+        };
+        const tr = getToolReviews(tool.url);
+        const btn = document.createElement('button');
+        btn.className='rating-btn';
+        btn.innerHTML=`<i class="fas fa-star"></i><span class="rating-value">${tr.averageRating.toFixed(1)}</span><span class="rating-count">(${tr.totalRatings})</span>`;
+        btn.onclick=(e)=>{ e.preventDefault(); e.stopPropagation(); showReviewsModal(tool); };
+        if(l) l.parentNode.insertBefore(btn, l);
+        else card.appendChild(btn);
+    });
+}
+
+// تصدير الدوال العالمية
+window.showReviewsModal = showReviewsModal;
+window.handleLikeComment = handleLikeComment;
+window.handleReportComment = handleReportComment;
+
+// =================================================================
+// لوحة التحكم الشخصية
+// =================================================================
+
+let userProfile = JSON.parse(localStorage.getItem('user_profile')) || {
+    name: '', avatar: '', joinDate: new Date().toISOString(),
+    stats: {
+        totalVisits: 0, totalToolsClicked: 0, totalCategoriesViewed: 0,
+        totalTimeSpent: 0, favoriteCategory: '', favoriteTool: '',
+        lastActive: new Date().toISOString()
+    },
+    currentSession: { startTime: Date.now(), toolsViewed: [], categoriesViewed: [], searchQueries: [] },
+    achievements: [],
+    settings: { darkMode: false, notificationsEnabled: true, dashboardWidgets: ['stats','trending','favorites','achievements'] }
+};
+
+const achievementsList = [
+    { id:'first_click', name:'🚀 أول خطوة', description:'استخدم أول أداة ذكاء اصطناعي', icon:'fa-solid fa-rocket', condition:(s)=>s.totalToolsClicked>=1, reward:'10 نقطة' },
+    { id:'power_user', name:'⚡ مستخدم محترف', description:'استخدم 20 أداة مختلفة', icon:'fa-solid fa-bolt', condition:(s)=>s.totalToolsClicked>=20, reward:'50 نقطة' },
+    { id:'explorer', name:'🧭 مستكشف', description:'استكشف 10 أقسام مختلفة', icon:'fa-solid fa-compass', condition:(s)=>s.totalCategoriesViewed>=10, reward:'30 نقطة' },
+    { id:'super_fan', name:'💖 معجب حقيقي', description:'أضف 15 أداة إلى المفضلة', icon:'fa-solid fa-heart', condition:()=>favorites.length>=15, reward:'40 نقطة' },
+    { id:'reviewer', name:'📝 ناقد محترف', description:'اكتب 5 تعليقات على الأدوات', icon:'fa-solid fa-pen-fancy', condition:()=>{ let t=0; Object.values(reviews).forEach(r=>t+=r.comments.length); return t>=5; }, reward:'25 نقطة' },
+    { id:'time_master', name:'⏰ سيد الوقت', description:'اقضِ أكثر من ساعة في الموقع', icon:'fa-solid fa-clock', condition:(s)=>s.totalTimeSpent>=3600, reward:'20 نقطة' },
+    { id:'social_bird', name:'🐦 طائر اجتماعي', description:'شارك 3 أدوات مع أصدقائك', icon:'fa-solid fa-share-alt', condition:()=>userProfile.stats.sharedCount>=3, reward:'15 نقطة' },
+    { id:'searcher', name:'🔍 باحث محترف', description:'قم بـ 20 عملية بحث', icon:'fa-solid fa-search', condition:(s,p)=>p&&p.currentSession.searchQueries.length>=20, reward:'20 نقطة' }
+];
+
+function saveUserProfile() { localStorage.setItem('user_profile', JSON.stringify(userProfile)); }
+
+function updateUserStats(action, data) {
+    const now = Date.now();
+    switch(action) {
+        case 'tool_click':
+            userProfile.stats.totalToolsClicked++;
+            userProfile.currentSession.toolsViewed.push({ tool: data.toolName, category: data.category, timestamp: now });
+            updateFavoriteTool(data.toolName);
+            break;
+        case 'category_view':
+            if (!userProfile.currentSession.categoriesViewed.includes(data.category)) {
+                userProfile.currentSession.categoriesViewed.push(data.category);
+                userProfile.stats.totalCategoriesViewed = userProfile.currentSession.categoriesViewed.length;
+            }
+            updateFavoriteCategory();
+            break;
+        case 'search':
+            userProfile.currentSession.searchQueries.push({ query: data.query, timestamp: now });
+            break;
+        case 'share':
+            userProfile.stats.sharedCount = (userProfile.stats.sharedCount || 0) + 1;
+            break;
+        case 'session_end':
+            userProfile.stats.totalTimeSpent += Math.floor((now - userProfile.currentSession.startTime) / 1000);
+            break;
+    }
+    userProfile.stats.lastActive = new Date().toISOString();
+    saveUserProfile();
+    checkAchievements();
+}
+
+function updateFavoriteTool(toolName) {
+    const freq = {};
+    userProfile.currentSession.toolsViewed.forEach(t => freq[t.tool] = (freq[t.tool]||0)+1);
+    let max=0, fav='';
+    Object.entries(freq).forEach(([t,c])=> { if(c>max){ max=c; fav=t; } });
+    userProfile.stats.favoriteTool = fav;
+}
+
+function updateFavoriteCategory() {
+    const freq = {};
+    userProfile.currentSession.toolsViewed.forEach(t => { if(t.category) freq[t.category] = (freq[t.category]||0)+1; });
+    let max=0, fav='';
+    Object.entries(freq).forEach(([c,ct])=> { if(ct>max){ max=ct; fav=c; } });
+    userProfile.stats.favoriteCategory = fav;
+}
+
+function checkAchievements() {
+    achievementsList.forEach(a => {
+        if (userProfile.achievements.some(x => x.id === a.id)) return;
+        let met = false;
+        if (a.id === 'super_fan' || a.id === 'reviewer') met = a.condition();
+        else if (a.id === 'searcher') met = a.condition(userProfile.stats, userProfile);
+        else met = a.condition(userProfile.stats);
+        if (met) {
+            userProfile.achievements.push({ ...a, earnedAt: new Date().toISOString() });
+            showToast(`🎉 إنجاز جديد: ${a.name}! ${a.reward}`, 'success');
+        }
+    });
+    saveUserProfile();
+}
+
+function startSession() {
+    userProfile.stats.totalVisits++;
+    userProfile.currentSession = { startTime: Date.now(), toolsViewed: [], categoriesViewed: [], searchQueries: [] };
+    saveUserProfile();
+}
+
+function endSession() { updateUserStats('session_end'); }
+
+function calculateUserLevel() {
+    const pts = userProfile.achievements.length*10 + Math.floor(userProfile.stats.totalToolsClicked/5) + Math.floor(userProfile.stats.totalTimeSpent/600);
+    return Math.floor(pts/100)+1;
+}
+function calculateLevelProgress() {
+    const pts = userProfile.achievements.length*10 + Math.floor(userProfile.stats.totalToolsClicked/5) + Math.floor(userProfile.stats.totalTimeSpent/600);
+    return (pts%100);
+}
+
+function formatTime(seconds) {
+    const h = Math.floor(seconds/3600), m = Math.floor((seconds%3600)/60);
+    if (h>0) return `${h} ساعة ${m} دقيقة`;
+    if (m>0) return `${m} دقيقة`;
+    return `${seconds} ثانية`;
+}
+
+function formatRelativeTime(ts) {
+    const diff = Date.now()-ts, mins = Math.floor(diff/60000), hrs = Math.floor(diff/3600000), days = Math.floor(diff/86400000);
+    if (mins<1) return 'الآن';
+    if (mins<60) return `منذ ${mins} دقيقة`;
+    if (hrs<24) return `منذ ${hrs} ساعة`;
+    return `منذ ${days} يوم`;
+}
+
+function getWeeklyActivity() {
+    const act = [0,0,0,0,0,0,0];
+    const now = new Date(), start = new Date(now); start.setDate(now.getDate()-now.getDay());
+    userProfile.currentSession.toolsViewed.forEach(t => {
+        const d = new Date(t.timestamp);
+        if (d >= start) act[(d.getDay()+6)%7]++;
+    });
+    return act;
+}
+
+function renderActivityChart() {
+    const canvas = document.getElementById('activityChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const activity = getWeeklyActivity();
+    const w = canvas.width, h = canvas.height, barW = (w-80)/7-10, max = Math.max(...activity,1);
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle = 'rgba(99,102,241,0.05)';
+    ctx.fillRect(0,0,w,h);
+    const days = ['ن','ث','ر','خ','ج','س','ح'];
+    activity.forEach((v,i) => {
+        const bh = (v/max)*(h-60), x = 40+i*(barW+10), y = h-bh-20;
+        ctx.fillStyle = 'rgba(99,102,241,0.7)';
+        ctx.fillRect(x,y,barW,bh);
+        ctx.fillStyle = 'var(--text-muted-light)';
+        ctx.font = '10px sans-serif';
+        ctx.fillText(days[i], x+barW/2-5, h-10);
+        if (v>0) { ctx.fillStyle = 'var(--primary)'; ctx.fillText(v.toString(), x+barW/2-5, y-5); }
+    });
+}
+
+function renderFavoriteCategories() {
+    const freq = {};
+    userProfile.currentSession.toolsViewed.forEach(t => { if(t.category) freq[t.category] = (freq[t.category]||0)+1; });
+    const sorted = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,5);
+    if (!sorted.length) return '<p class="empty-message">لا توجد بيانات كافية بعد</p>';
+    return sorted.map(([cat,ct]) => `<div class="favorite-category-item"><span class="category-name">${cat}</span><span class="category-count">${ct} زيارة</span></div>`).join('');
+}
+
+function renderTopUserTools() {
+    const freq = {};
+    userProfile.currentSession.toolsViewed.forEach(t => freq[t.tool] = (freq[t.tool]||0)+1);
+    const sorted = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,5);
+    if (!sorted.length) return '<p class="empty-message">ابدأ باستخدام الأدوات لرؤية إحصائياتك</p>';
+    return sorted.map(([tool,ct],i) => `<div class="top-tool-item"><span class="tool-rank">#${i+1}</span><span class="tool-name">${tool}</span><span class="tool-count">${ct} مرة</span></div>`).join('');
+}
+
+function renderAchievements() {
+    if (!userProfile.achievements.length) return '<p class="empty-message">لا توجد إنجازات بعد. استخدم المزيد من الأدوات لكسب الإنجازات!</p>';
+    return userProfile.achievements.map(a => `
+        <div class="achievement-card">
+            <div class="achievement-icon"><i class="${a.icon}"></i></div>
+            <div class="achievement-info">
+                <div class="achievement-name">${a.name}</div>
+                <div class="achievement-desc">${a.description}</div>
+                <div class="achievement-date">${formatDate(a.earnedAt)}</div>
+            </div>
+            <div class="achievement-reward">${a.reward}</div>
+        </div>
+    `).join('');
+}
+
+function renderSearchHistory() {
+    const s = userProfile.currentSession.searchQueries.slice(-5).reverse();
+    if (!s.length) return '<p class="empty-message">لم تقم بأي بحث بعد</p>';
+    return s.map(q => `<div class="search-history-item" onclick="searchFor('${escapeHtml(q.query)}')"><i class="fas fa-search"></i><span>${escapeHtml(q.query)}</span><small>${formatRelativeTime(q.timestamp)}</small></div>`).join('');
+}
+
+function renderRecommendations() {
+    const interests = {};
+    userProfile.currentSession.toolsViewed.forEach(t => { if(t.category) interests[t.category] = (interests[t.category]||0)+1; });
+    const topCats = Object.entries(interests).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([c])=>c);
+    const used = new Set(userProfile.currentSession.toolsViewed.map(t=>t.tool));
+    const recs = [];
+    categories.forEach(cat => {
+        if (topCats.includes(cat.name)) cat.tools.forEach(t => { if(!used.has(t.name)&&recs.length<6) recs.push(t); });
+    });
+    if (!recs.length) return '<p class="empty-message">استخدم المزيد من الأدوات للحصول على توصيات مخصصة</p>';
+    return recs.map(t => `<div class="recommendation-card" onclick="window.open('${t.url}','_blank')"><div class="rec-icon"><i class="${t.icon}"></i></div><div class="rec-info"><div class="rec-name">${t.name}</div><div class="rec-category">${t.desc.substring(0,50)}...</div></div></div>`).join('');
+}
+
+function showDashboard() {
+    const old = document.getElementById('dashboardModal');
+    if (old) old.remove();
+    const d = document.createElement('div');
+    d.id='dashboardModal'; d.className='dashboard-overlay';
+    d.innerHTML = `
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div class="dashboard-title"><i class="fas fa-chart-line"></i><h2>لوحة التحكم الشخصية</h2></div>
+                <div class="dashboard-actions">
+                    <button class="dashboard-export-btn" id="exportStatsBtn"><i class="fas fa-download"></i><span class="hide-mobile">تصدير</span></button>
+                    <button class="dashboard-close-btn"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="dashboard-body">
+                <div class="welcome-card">
+                    <div class="user-info">
+                        <div class="user-avatar" id="userAvatar">${userProfile.avatar?`<img src="${userProfile.avatar}" alt="avatar">`:'<i class="fas fa-user-circle"></i>'}</div>
+                        <div class="user-details"><h3 id="userName">${userProfile.name||'زائر'}</h3><p>عضو منذ ${formatDate(userProfile.joinDate)}</p></div>
+                        <button class="edit-profile-btn" id="editProfileBtn"><i class="fas fa-pen"></i></button>
+                    </div>
+                    <div class="user-level">
+                        <div class="level-progress"><div class="level-bar" style="width:${calculateLevelProgress()}%"></div></div>
+                        <span class="level-text">المستوى ${calculateUserLevel()}</span>
+                    </div>
+                </div>
+                <div class="stats-grid-dashboard">
+                    <div class="stat-card-dashboard"><div class="stat-icon"><i class="fas fa-calendar-week"></i></div><div class="stat-info"><span class="stat-value" id="statVisits">${userProfile.stats.totalVisits}</span><span class="stat-label">زيارة</span></div></div>
+                    <div class="stat-card-dashboard"><div class="stat-icon"><i class="fas fa-mouse-pointer"></i></div><div class="stat-info"><span class="stat-value" id="statClicks">${userProfile.stats.totalToolsClicked}</span><span class="stat-label">نقرة على الأدوات</span></div></div>
+                    <div class="stat-card-dashboard"><div class="stat-icon"><i class="fas fa-clock"></i></div><div class="stat-info"><span class="stat-value" id="statTime">${formatTime(userProfile.stats.totalTimeSpent)}</span><span class="stat-label">وقت التصفح</span></div></div>
+                    <div class="stat-card-dashboard"><div class="stat-icon"><i class="fas fa-heart"></i></div><div class="stat-info"><span class="stat-value" id="statFavorites">${favorites.length}</span><span class="stat-label">المفضلة</span></div></div>
+                </div>
+                <div class="chart-section"><h4><i class="fas fa-chart-bar"></i> نشاطك الأسبوعي</h4><canvas id="activityChart" width="400" height="200"></canvas></div>
+                <div class="dashboard-two-columns">
+                    <div class="dashboard-card"><h4><i class="fas fa-folder-open"></i> أقسامك المفضلة</h4><div class="favorite-categories-list" id="favoriteCategoriesList">${renderFavoriteCategories()}</div></div>
+                    <div class="dashboard-card"><h4><i class="fas fa-trophy"></i> أفضل أدواتك</h4><div class="top-tools-list" id="topToolsList">${renderTopUserTools()}</div></div>
+                </div>
+                <div class="achievements-section"><h4><i class="fas fa-medal"></i> إنجازاتك</h4><div class="achievements-grid" id="achievementsGrid">${renderAchievements()}</div></div>
+                <div class="search-history-section"><h4><i class="fas fa-history"></i> آخر عمليات البحث</h4><div class="search-history-list" id="searchHistoryList">${renderSearchHistory()}</div></div>
+                <div class="recommendations-section"><h4><i class="fas fa-lightbulb"></i> قد يعجبك أيضاً</h4><div class="recommendations-grid" id="recommendationsGrid">${renderRecommendations()}</div></div>
+            </div>
+        </div>`;
+    document.body.appendChild(d);
+    document.body.style.overflow = 'hidden';
+
+    const close = ()=>{ d.remove(); document.body.style.overflow=''; };
+    d.querySelector('.dashboard-close-btn').onclick = close;
+    d.onclick = (e)=>{ if(e.target===d) close(); };
+    d.querySelector('#editProfileBtn').onclick = showEditProfileModal;
+    d.querySelector('#exportStatsBtn').onclick = exportUserStats;
+    renderActivityChart();
+}
+
+function closeDashboard() {
+    const d = document.getElementById('dashboardModal');
+    if (d) { d.remove(); document.body.style.overflow = ''; }
+}
+
+function showEditProfileModal() {
+    const m = document.createElement('div');
+    m.className = 'edit-profile-modal-overlay';
+    m.innerHTML = `
+        <div class="edit-profile-modal">
+            <div class="edit-profile-header"><h3><i class="fas fa-user-edit"></i> تعديل الملف الشخصي</h3><button class="edit-profile-close"><i class="fas fa-times"></i></button></div>
+            <div class="edit-profile-body">
+                <div class="form-group"><label>الاسم</label><input type="text" id="profileName" value="${escapeHtml(userProfile.name||'')}" placeholder="اسمك"></div>
+                <div class="form-group"><label>رابط الصورة (اختياري)</label><input type="url" id="profileAvatar" value="${userProfile.avatar||''}" placeholder="https://example.com/avatar.jpg"></div>
+                <div class="form-group"><label>البريد الإلكتروني (اختياري)</label><input type="email" id="profileEmail" value="${userProfile.email||''}" placeholder="your@email.com"></div>
+                <div class="form-actions"><button class="btn-save-profile" id="saveProfileBtn">حفظ التغييرات</button><button class="btn-reset-stats" id="resetStatsBtn">إعادة تعيين الإحصائيات</button></div>
+            </div>
+        </div>`;
+    document.body.appendChild(m);
+    m.querySelector('.edit-profile-close').onclick = ()=>m.remove();
+    m.querySelector('#saveProfileBtn').onclick = ()=>{
+        const n = (m.querySelector('#profileName').value||'').trim();
+        const a = (m.querySelector('#profileAvatar').value||'').trim();
+        const e = (m.querySelector('#profileEmail').value||'').trim();
+        if (n) userProfile.name=n;
+        if (a) userProfile.avatar=a;
+        if (e) userProfile.email=e;
+        saveUserProfile(); m.remove(); showDashboard();
+        showToast('تم تحديث الملف الشخصي!','success');
+    };
+    m.querySelector('#resetStatsBtn').onclick = ()=>{
+        if (!confirm('هل أنت متأكد؟ سيتم مسح جميع إحصائياتك ولا يمكن استعادتها!')) return;
+        userProfile.stats = {
+            totalVisits: userProfile.stats.totalVisits, totalToolsClicked: 0, totalCategoriesViewed: 0,
+            totalTimeSpent: 0, favoriteCategory: '', favoriteTool: '', lastActive: new Date().toISOString(), sharedCount: 0
+        };
+        userProfile.currentSession = { startTime: Date.now(), toolsViewed: [], categoriesViewed: [], searchQueries: [] };
+        userProfile.achievements = [];
+        saveUserProfile(); m.remove(); showDashboard();
+        showToast('تم إعادة تعيين الإحصائيات','info');
+    };
+}
+
+function exportUserStats() {
+    const data = { profile: { name: userProfile.name, joinDate: userProfile.joinDate, stats: userProfile.stats }, favorites, achievements: userProfile.achievements, exportDate: new Date().toISOString() };
+    const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `abdulrahman_ai_stats_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    showToast('تم تصدير الإحصائيات بنجاح!','success');
+}
+
+function addDashboardButton() {
+    if (document.getElementById('dashboardBtn')) return;
+    const btn = document.createElement('button');
+    btn.id='dashboardBtn'; btn.className='dashboard-btn';
+    btn.innerHTML='<i class="fas fa-chart-line"></i>';
+    btn.title='لوحة التحكم الشخصية';
+    btn.onclick=showDashboard;
+    const fb = document.querySelector('.floating-buttons');
+    if (fb) fb.insertBefore(btn, fb.firstChild);
+    else document.body.appendChild(btn);
+}
+
+function searchFor(query) {
+    const si = document.getElementById('searchInput');
+    if (si) { si.value = query; closeDashboard(); filterTools(); }
+}
+
+// تعديل recordClick لتسجيل الإحصائيات
+const originalRecordClick = recordClick;
+window.recordClick = function(url) {
+    originalRecordClick(url);
+    const all = getAllTools();
+    const tool = all.find(t => t.url === url);
+    if (tool) updateUserStats('tool_click', { toolName: tool.name, category: tool.category });
+};
+
+// تعديل filterTools لتسجيل عمليات البحث
+const originalFilterTools = filterTools;
+window.filterTools = function() {
+    const si = document.getElementById('searchInput');
+    if (si && si.value.trim().length > 2) updateUserStats('search', { query: si.value.trim() });
+    originalFilterTools();
+};
+
 // =================================================================
 // 15. التهيئة عند تحميل الصفحة
 // =================================================================
 function initApp() {
+    // بدء الجلسة
+    startSession();
+    window.addEventListener('beforeunload', () => { endSession(); });
+    
     const urlParams = new URLSearchParams(window.location.search);
     const catIndex = urlParams.get('index');
 
@@ -786,8 +1715,8 @@ function initApp() {
     setupClearSearch();
     initTheme();
     initParticles();
-    initNeuralNetwork();
     typeEffect();
+    initNetworkStatus();
     window.addEventListener('scroll', updateProgressBar);
     initSortControls();
     initSidebar();
@@ -795,6 +1724,23 @@ function initApp() {
     updateSidebarStats();
     updateTrending();
     updateRecentlyUsed();
+    initStickySearch();
+    initFilterSystem();
+    
+    // تحميل اسم المستخدم المحفوظ للتقييمات
+    const savedName = localStorage.getItem('reviewer_name');
+    if (savedName) {
+        const nameInput = document.getElementById('reviewerName');
+        if (nameInput) nameInput.value = savedName;
+    }
+    document.addEventListener('input', (e) => {
+        if (e.target.id === 'reviewerName') {
+            localStorage.setItem('reviewer_name', e.target.value);
+        }
+    });
+    
+    // إضافة زر لوحة التحكم
+    addDashboardButton();
     
     // إخفاء مؤشر التحميل
     setTimeout(() => {
@@ -809,18 +1755,23 @@ function initApp() {
 document.addEventListener('DOMContentLoaded', initApp);
 
 // =================================================================
-// 22. منع النسخ وأدوات المطور
+// 22. منع أدوات المطور
 // =================================================================
 document.addEventListener('keydown', e => {
-    if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'v' || e.key === 's' || e.key === 'p')) {
-        e.preventDefault();
-    }
-    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+    if (e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+        (e.ctrlKey && e.key === 'U')) {
         e.preventDefault();
     }
 });
 
 document.addEventListener('contextmenu', e => {
+    if (e.target.closest('.tool-link') || 
+        e.target.closest('.category-card') ||
+        e.target.closest('a')) {
+        return;
+    }
     e.preventDefault();
 });
 
@@ -840,7 +1791,7 @@ if ('serviceWorker' in navigator) {
 }
 
 // =================================================================
-// 18. Online/Offline Status
+// 17. Service Worker
 // =================================================================
 window.addEventListener('online', () => {
     if (window.showToast) window.showToast('Internet connection restored', 'success');

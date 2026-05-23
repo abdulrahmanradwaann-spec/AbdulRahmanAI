@@ -1,20 +1,16 @@
-const CACHE_NAME = 'abdulrahman-ai-v1';
+const CACHE_NAME = 'abdulrahman-ai-v2';
 const urlsToCache = [
   './',
   './index.html',
-  './js/data.js',
-  './js/app.js',
   './css/style.css',
   './icon.svg',
   './manifest.json'
 ];
 
-// Install event
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
       .catch((err) => {
@@ -24,34 +20,34 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Fetch event
 self.addEventListener('fetch', (event) => {
+  const url = event.request.url;
+
+  if (url.includes('data.js') || url.includes('app.js')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseToCache);
+          });
+          return response;
+        })
+        .catch(() => {
+          return caches.match(event.request);
+        })
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
-      .then((response) => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request)
-          .then((response) => {
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            const responseToCache = response.clone();
-            caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
-            return response;
-          });
-      })
+      .then(response => response || fetch(event.request))
       .catch(() => {
-        // Return offline page if available
       })
   );
 });
 
-// Activate event
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
