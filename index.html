@@ -5,19 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Abdulrahman AI | دليل أدوات الذكاء الاصطناعي</title>
     
-    <meta name="theme-color" content="#6366f1">
+    <meta name="theme-color" content="#3B82F6">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Abdulrahman AI">
-    <meta name="description" content="Your ultimate guide to AI tools - 500+ tools in one place">
+    <meta name="description" content="دليلك الشامل لأدوات الذكاء الاصطناعي - 500+ أداة في مكان واحد | Your ultimate guide to AI tools - 500+ tools in one place">
     <meta name="author" content="Abdulrahman Radwan">
+    <meta name="application-name" content="Abdulrahman AI">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar" content="black-translucent">
+    <meta name="msapplication-TileColor" content="#0B1120">
+    <meta name="msapplication-TileImage" content="icon.svg">
+    <meta property="og:title" content="Abdulrahman AI - أدوات الذكاء الاصطناعي">
+    <meta property="og:description" content="500+ أداة ذكاء اصطناعي في مكان واحد">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="icon.svg">
     
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/svg+xml" href="icon.svg">
     <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="mask-icon" href="icon.svg" color="#3B82F6">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap">
     
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -34,24 +44,28 @@
     <canvas id="particle-canvas"></canvas>
     
     <div class="container">
-        <!-- الهيدر -->
-        <header class="header">
-            <div class="header-bg">
-                <div class="neural-network-bg" id="neuralBg">
-                    <canvas id="neuralCanvas"></canvas>
+        <!-- شريط التنقل العلوي -->
+        <nav class="top-nav">
+            <div class="top-nav-right">
+                <div class="logo-mark">
+                    <i class="fas fa-brain"></i>
                 </div>
-                <div class="particles-container" id="headerParticles"></div>
-                <div class="glow-orb orb-1"></div>
-                <div class="glow-orb orb-2"></div>
-                <div class="glow-orb orb-3"></div>
-                <div class="glow-orb orb-4"></div>
-                <div class="glow-orb orb-5"></div>
-                <div class="hexagon hex-1"></div>
-                <div class="hexagon hex-2"></div>
-                <div class="hexagon hex-3"></div>
-                <div class="circuit-lines"></div>
-                <div class="grid-overlay"></div>
+                <span class="logo-text">Abdulrahman AI</span>
             </div>
+            <div class="top-nav-left">
+                <button class="lang-toggle" id="langToggle" title="تبديل اللغة">
+                    <i class="fas fa-globe"></i>
+                    <span id="langLabel">EN</span>
+                </button>
+                <button class="theme-toggle-nav" id="themeToggle" title="تبديل الوضع">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- الهيدر الرئيسي -->
+        <header class="header">
+            <div class="header-bg"></div>
             <div class="header-content">
                 <div class="ai-badge">
                     <i class="fas fa-brain"></i>
@@ -62,37 +76,39 @@
                     <span id="typingText"></span>
                     <span class="cursor"></span>
                 </div>
-                <p class="header-subtitle">دليلك الشامل لأدوات الذكاء الاصطناعي</p>
-                <div class="header-stats">
-                    <div class="stat-item">
-                        <i class="fas fa-layer-group"></i>
-                        <span id="statCategories">31</span>
-                        <span>قسم</span>
-                    </div>
-                    <div class="stat-item">
-                        <i class="fas fa-robot"></i>
-                        <span id="statTools">576</span>
-                        <span>أداة</span>
-                    </div>
-                    <div class="stat-item">
-                        <i class="fas fa-bolt"></i>
-                        <span>2026</span>
-                        <span>سنة</span>
-                    </div>
-                </div>
+                <p class="header-subtitle" data-i18n="header_subtitle">دليلك الشامل لأدوات الذكاء الاصطناعي</p>
             </div>
         </header>
         
+        <!-- بطاقات الإحصائيات -->
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-card-icon"><i class="fas fa-calendar-alt"></i></div>
+                <div class="stat-card-number">2026</div>
+                <div class="stat-card-label" data-i18n="stat_year">السنة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-icon"><i class="fas fa-robot"></i></div>
+                <div class="stat-card-number" id="statTools">576</div>
+                <div class="stat-card-label" data-i18n="stat_tools">أداة AI</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-icon"><i class="fas fa-layer-group"></i></div>
+                <div class="stat-card-number" id="statCategories">25</div>
+                <div class="stat-card-label" data-i18n="stat_categories">قسم</div>
+            </div>
+        </div>
+        
         <!-- مسار التنقل -->
         <div class="breadcrumbs" id="breadcrumbs">
-            <a href="/">الرئيسية</a>
+            <a href="/" data-i18n="breadcrumb_home">الرئيسية</a>
         </div>
         
         <!-- البحث -->
         <div class="search-section">
             <div class="search-wrapper">
                 <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="ابحث عن أداة ذكاء اصطناعي..." autocomplete="off">
+                <input type="text" id="searchInput" data-i18n-placeholder="search_placeholder" placeholder="ابحث عن أداة ذكاء اصطناعي..." autocomplete="off">
                 <i class="fas fa-times clear-search" id="clearSearch"></i>
                 <div class="autocomplete-box" id="autocompleteBox"></div>
             </div>
@@ -100,9 +116,9 @@
         
         <!-- أدوات الترتيب -->
         <div class="sort-controls" id="sortControls">
-            <button class="sort-btn active" data-sort="default">الافتراضي</button>
-            <button class="sort-btn" data-sort="name">بالاسم</button>
-            <button class="sort-btn" data-sort="count">بالعدد</button>
+            <button class="sort-btn active" data-sort="default" data-i18n="sort_default">الافتراضي</button>
+            <button class="sort-btn" data-sort="name" data-i18n="sort_name">بالاسم</button>
+            <button class="sort-btn" data-sort="count" data-i18n="sort_count">بالعدد</button>
         </div>
         
         <!-- نظام التصفية المتقدم -->
@@ -110,7 +126,7 @@
             <div class="filter-header" id="filterHeader">
                 <div class="filter-title">
                     <i class="fas fa-filter"></i>
-                    <span>تصفية الأدوات</span>
+                    <span data-i18n="filter_title">تصفية الأدوات</span>
                 </div>
                 <button class="filter-toggle-btn" id="filterToggleBtn">
                     <i class="fas fa-chevron-down"></i>
@@ -119,39 +135,39 @@
             
             <div class="filter-body" id="filterBody">
                 <div class="filter-group">
-                    <label class="filter-label"><i class="fas fa-tag"></i> السعر</label>
+                    <label class="filter-label"><i class="fas fa-tag"></i> <span data-i18n="filter_price">السعر</span></label>
                     <div class="filter-options" data-filter="price">
-                        <label class="filter-option"><input type="radio" name="price" value="all" checked> الكل</label>
-                        <label class="filter-option"><input type="radio" name="price" value="free"> مجاني</label>
-                        <label class="filter-option"><input type="radio" name="price" value="freemium"> فريميوم</label>
-                        <label class="filter-option"><input type="radio" name="price" value="paid"> مدفوع</label>
+                        <label class="filter-option"><input type="radio" name="price" value="all" checked> <span data-i18n="filter_all">الكل</span></label>
+                        <label class="filter-option"><input type="radio" name="price" value="free"> <span data-i18n="filter_free">مجاني</span></label>
+                        <label class="filter-option"><input type="radio" name="price" value="freemium"> <span data-i18n="filter_freemium">فريميوم</span></label>
+                        <label class="filter-option"><input type="radio" name="price" value="paid"> <span data-i18n="filter_paid">مدفوع</span></label>
                     </div>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label"><i class="fas fa-cube"></i> النوع</label>
+                    <label class="filter-label"><i class="fas fa-cube"></i> <span data-i18n="filter_type">النوع</span></label>
                     <div class="filter-options" data-filter="type">
-                        <label class="filter-option"><input type="checkbox" value="tool"> أداة متخصصة</label>
-                        <label class="filter-option"><input type="checkbox" value="assistant"> مساعد ذكي</label>
-                        <label class="filter-option"><input type="checkbox" value="platform"> منصة متكاملة</label>
+                        <label class="filter-option"><input type="checkbox" value="tool"> <span data-i18n="filter_tool">أداة متخصصة</span></label>
+                        <label class="filter-option"><input type="checkbox" value="assistant"> <span data-i18n="filter_assistant">مساعد ذكي</span></label>
+                        <label class="filter-option"><input type="checkbox" value="platform"> <span data-i18n="filter_platform">منصة متكاملة</span></label>
                     </div>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label"><i class="fas fa-globe"></i> المنصة</label>
+                    <label class="filter-label"><i class="fas fa-globe"></i> <span data-i18n="filter_platform_label">المنصة</span></label>
                     <div class="filter-options" data-filter="platform">
-                        <label class="filter-option"><input type="checkbox" value="web"> ويب</label>
-                        <label class="filter-option"><input type="checkbox" value="mobile"> موبايل</label>
-                        <label class="filter-option"><input type="checkbox" value="desktop"> ديسكتوب</label>
+                        <label class="filter-option"><input type="checkbox" value="web"> <span data-i18n="filter_web">ويب</span></label>
+                        <label class="filter-option"><input type="checkbox" value="mobile"> <span data-i18n="filter_mobile">موبايل</span></label>
+                        <label class="filter-option"><input type="checkbox" value="desktop"> <span data-i18n="filter_desktop">ديسكتوب</span></label>
                     </div>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label"><i class="fas fa-language"></i> اللغة</label>
+                    <label class="filter-label"><i class="fas fa-language"></i> <span data-i18n="filter_lang">اللغة</span></label>
                     <div class="filter-options" data-filter="lang">
-                        <label class="filter-option"><input type="checkbox" value="ar"> يدعم العربية</label>
-                        <label class="filter-option"><input type="checkbox" value="en"> يدعم الإنجليزية</label>
+                        <label class="filter-option"><input type="checkbox" value="ar"> <span data-i18n="filter_ar">يدعم العربية</span></label>
+                        <label class="filter-option"><input type="checkbox" value="en"> <span data-i18n="filter_en">يدعم الإنجليزية</span></label>
                     </div>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label"><i class="fas fa-star"></i> التقييم الأدنى</label>
+                    <label class="filter-label"><i class="fas fa-star"></i> <span data-i18n="filter_rating">التقييم الأدنى</span></label>
                     <div class="rating-filter">
                         <div class="rating-stars" id="ratingStars">
                             <span data-value="1">★</span>
@@ -160,11 +176,11 @@
                             <span data-value="4">★</span>
                             <span data-value="5">★</span>
                         </div>
-                        <span class="rating-value" id="ratingValue">أي تقييم</span>
+                        <span class="rating-value" id="ratingValue" data-i18n="filter_any_rating">أي تقييم</span>
                     </div>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label"><i class="fas fa-calendar"></i> السنة</label>
+                    <label class="filter-label"><i class="fas fa-calendar"></i> <span data-i18n="filter_year">السنة</span></label>
                     <div class="filter-range">
                         <input type="range" id="yearRange" min="2020" max="2026" value="2020">
                         <div class="range-values">
@@ -174,36 +190,33 @@
                     </div>
                 </div>
                 <div class="filter-actions">
-                    <button class="btn-apply" id="applyFiltersBtn"><i class="fas fa-check"></i> تطبيق</button>
-                    <button class="btn-reset" id="resetFiltersBtn"><i class="fas fa-undo"></i> إعادة تعيين</button>
+                    <button class="btn-apply" id="applyFiltersBtn"><i class="fas fa-check"></i> <span data-i18n="filter_apply">تطبيق</span></button>
+                    <button class="btn-reset" id="resetFiltersBtn"><i class="fas fa-undo"></i> <span data-i18n="filter_reset">إعادة تعيين</span></button>
                 </div>
             </div>
             
             <div class="filter-results-count" id="filterResultsCount">
                 <i class="fas fa-chart-line"></i>
-                <span id="resultsCount">0</span> نتيجة
+                <span id="resultsCount">0</span> <span data-i18n="filter_results">نتيجة</span>
             </div>
         </div>
         
         <div id="filteredToolsIndicator" class="filtered-indicator" style="display:none">
             <i class="fas fa-filter"></i>
             <span id="filteredCount"></span>
-            <button id="clearFiltersBtn">إلغاء التصفية <i class="fas fa-times"></i></button>
+            <button id="clearFiltersBtn"><span data-i18n="clear_filters">إلغاء التصفية</span> <i class="fas fa-times"></i></button>
         </div>
         
         <!-- المحتوى -->
         <div id="contentContainer"></div>
         <div id="noResults">
             <i class="fas fa-exclamation-circle"></i>
-            <div>لا توجد أدوات مطابقة. جرب كلمة مفتاحية أخرى!</div>
+            <div data-i18n="no_results">لا توجد أدوات مطابقة. جرب كلمة مفتاحية أخرى!</div>
         </div>
     </div>
     
     <!-- الأزرار العائمة -->
     <div class="floating-buttons">
-        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
-            <i class="fas fa-moon"></i>
-        </button>
         <button class="new-sidebar-toggle" id="newSidebarToggle" title="Open Menu">
             <i class="fas fa-bars"></i>
         </button>
@@ -217,40 +230,54 @@
     <!-- الشريط الجانبي -->
     <div class="new-sidebar" id="newSidebar">
         <div class="new-sidebar-header">
-            <h3>القائمة الذكية</h3>
+            <h3 data-i18n="sidebar_title">القائمة الذكية</h3>
             <i class="fas fa-times" id="newSidebarClose"></i>
         </div>
         <div class="new-sidebar-content">
+            <!-- بروفايل المطور -->
+            <div class="sidebar-developer-profile">
+                <div class="sidebar-avatar-wrapper">
+                    <img src="developer.jpg" alt="Abdul Rahman Radwan" class="sidebar-avatar">
+                    <div class="sidebar-avatar-ring"></div>
+                </div>
+                <h3 class="sidebar-developer-name">Abdul Rahman Radwan</h3>
+                <p class="sidebar-developer-role" data-i18n="developer_role">المطور والمؤسس</p>
+                <a href="mailto:icodeium@gmail.com" class="sidebar-developer-contact">
+                    <i class="fas fa-envelope"></i>
+                    <span data-i18n="contact_support">تواصل مع فريق الدعم</span>
+                </a>
+            </div>
+            
             <div class="new-stats">
                 <div class="new-stat-item">
                     <i class="fas fa-folder"></i>
                     <span id="newStatCategories">0</span>
-                    <span>الأقسام</span>
+                    <span data-i18n="sidebar_categories">الأقسام</span>
                 </div>
                 <div class="new-stat-item">
                     <i class="fas fa-tools"></i>
                     <span id="newStatTools">0</span>
-                    <span>الأدوات</span>
+                    <span data-i18n="sidebar_tools">الأدوات</span>
                 </div>
                 <div class="new-stat-item">
                     <i class="fas fa-star"></i>
                     <span id="newFavCount">0</span>
-                    <span>المفضلة</span>
+                    <span data-i18n="sidebar_favorites">المفضلة</span>
                 </div>
             </div>
             
             <div class="new-section">
-                <h4><i class="fas fa-fire"></i> الأكثر استخداماً</h4>
+                <h4><i class="fas fa-fire"></i> <span data-i18n="sidebar_trending">الأكثر استخداماً</span></h4>
                 <ul class="new-trending-list" id="newTrendingList"></ul>
             </div>
             
             <div class="new-section">
-                <h4><i class="fas fa-clock"></i> الاستخدام الأخير</h4>
+                <h4><i class="fas fa-clock"></i> <span data-i18n="sidebar_recent">الاستخدام الأخير</span></h4>
                 <ul class="new-recent-list" id="newRecentList"></ul>
             </div>
             
             <div class="new-section">
-                <h4><i class="fas fa-star"></i> المفضلة</h4>
+                <h4><i class="fas fa-star"></i> <span data-i18n="sidebar_favorites_title">المفضلة</span></h4>
                 <ul class="new-favorites" id="newFavoritesList"></ul>
             </div>
         </div>
@@ -262,12 +289,21 @@
     <!-- الفوتر -->
     <footer class="footer">
         <div class="footer-container">
-            <p class="footer-rights">جميع الحقوق محفوظة &copy; 2026 Abdulrahman Radwan</p>
+            <p class="footer-rights">&copy; 2026 Abdul Rahman Radwan. <span data-i18n="footer_rights">جميع الحقوق محفوظة</span></p>
         </div>
     </footer>
     
     <a href="#contentContainer" class="skip-to-content">Skip to content</a>
     
+    <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.log('SW error:', err));
+      });
+    }
+    </script>
     <script src="js/data.js"></script>
     <script src="js/app.js"></script>
 </body>

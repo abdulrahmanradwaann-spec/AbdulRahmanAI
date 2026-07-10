@@ -13,6 +13,219 @@ let favorites = JSON.parse(localStorage.getItem('new_favorites')) || [];
 let clickStats = JSON.parse(localStorage.getItem('new_clickStats')) || {};
 
 // =================================================================
+// 1b. نظام الترجمة (i18n)
+// =================================================================
+const translations = {
+    ar: {
+        developer_role: 'المطور والمؤسس',
+        contact_support: 'تواصل مع فريق الدعم',
+        header_subtitle: 'دليلك الشامل لأدوات الذكاء الاصطناعي',
+        stat_year: 'السنة',
+        stat_tools: 'أداة AI',
+        stat_categories: 'قسم',
+        breadcrumb_home: 'الرئيسية',
+        search_placeholder: 'ابحث عن أداة ذكاء اصطناعي...',
+        sort_default: 'الافتراضي',
+        sort_name: 'بالاسم',
+        sort_count: 'بالعدد',
+        filter_title: 'تصفية الأدوات',
+        filter_price: 'السعر',
+        filter_all: 'الكل',
+        filter_free: 'مجاني',
+        filter_freemium: 'فريميوم',
+        filter_paid: 'مدفوع',
+        filter_type: 'النوع',
+        filter_tool: 'أداة متخصصة',
+        filter_assistant: 'مساعد ذكي',
+        filter_platform: 'منصة متكاملة',
+        filter_platform_label: 'المنصة',
+        filter_web: 'ويب',
+        filter_mobile: 'موبايل',
+        filter_desktop: 'ديسكتوب',
+        filter_lang: 'اللغة',
+        filter_ar: 'يدعم العربية',
+        filter_en: 'يدعم الإنجليزية',
+        filter_rating: 'التقييم الأدنى',
+        filter_any_rating: 'أي تقييم',
+        filter_year: 'السنة',
+        filter_apply: 'تطبيق',
+        filter_reset: 'إعادة تعيين',
+        filter_results: 'نتيجة',
+        clear_filters: 'إلغاء التصفية',
+        no_results: 'لا توجد أدوات مطابقة. جرب كلمة مفتاحية أخرى!',
+        sidebar_title: 'القائمة الذكية',
+        sidebar_categories: 'الأقسام',
+        sidebar_tools: 'الأدوات',
+        sidebar_favorites: 'المفضلة',
+        sidebar_trending: 'الأكثر استخداماً',
+        sidebar_recent: 'الاستخدام الأخير',
+        sidebar_favorites_title: 'المفضلة',
+        footer_rights: 'جميع الحقوق محفوظة',
+        tools_count: 'أداة',
+        view_tool: 'زيارة',
+        categories_title: 'الأقسام',
+        tools_in_category: 'أداة',
+        back_home: 'العودة للرئيسية',
+        reviews: 'التقييمات',
+        write_review: 'اكتب تقييمك',
+        your_name: 'اسمك',
+        your_rating: 'تقييمك',
+        your_review: 'تعليقك',
+        submit_review: 'إرسال التقييم',
+        no_reviews: 'لا توجد تقييمات بعد. كن أول من يقيّم!',
+        average_rating: 'متوسط التقييم',
+        total_reviews: 'إجمالي التقييمات',
+        trending: 'الأكثر استخداماً',
+        recent: 'الأخيرة',
+        favorites_list: 'المفضلة',
+        no_favorites: 'لا توجد مفضلة بعد',
+        no_trending: 'لا توجد استخدامات بعد',
+        no_recent: 'لا توجد استخدامات حديثة',
+        dashboard: 'لوحة التحكم',
+        visits: 'الزيارات',
+        clicks: 'النقرات',
+        time_spent: 'وقت التصفح',
+        achievements: 'الإنجازات',
+        recommendations: 'توصيات',
+        export_stats: 'تصدير الإحصائيات',
+        reset_stats: 'إعادة تعيين',
+        edit_profile: 'تعديل الملف',
+        close: 'إغلاق',
+        save: 'حفظ',
+        cancel: 'إلغاء',
+        online: 'متصل',
+        offline: 'غير متصل — بعض الميزات قد لا تعمل',
+        connection_restored: 'تم استعادة الاتصال',
+        search_english: 'Search for an AI tool...',
+        sort_default_en: 'Default',
+        sort_name_en: 'By Name',
+        sort_count_en: 'By Count',
+        filter_title_en: 'Filter Tools',
+        filter_price_en: 'Price',
+        filter_all_en: 'All',
+        filter_free_en: 'Free',
+        filter_freemium_en: 'Freemium',
+        filter_paid_en: 'Paid',
+        filter_type_en: 'Type',
+        filter_tool_en: 'Specialized Tool',
+        filter_assistant_en: 'AI Assistant',
+        filter_platform_en: 'Platform',
+        filter_platform_label_en: 'Platform',
+        filter_web_en: 'Web',
+        filter_mobile_en: 'Mobile',
+        filter_desktop_en: 'Desktop',
+        filter_lang_en: 'Language',
+        filter_ar_en: 'Supports Arabic',
+        filter_en_en: 'Supports English',
+        filter_rating_en: 'Min Rating',
+        filter_any_rating_en: 'Any Rating',
+        filter_year_en: 'Year',
+        filter_apply_en: 'Apply',
+        filter_reset_en: 'Reset',
+        filter_results_en: 'results',
+        clear_filters_en: 'Clear Filters',
+        no_results_en: 'No matching tools. Try another keyword!',
+        sidebar_title_en: 'Smart Menu',
+        sidebar_categories_en: 'Categories',
+        sidebar_tools_en: 'Tools',
+        sidebar_favorites_en: 'Favorites',
+        sidebar_trending_en: 'Most Used',
+        sidebar_recent_en: 'Recent',
+        sidebar_favorites_title_en: 'Favorites',
+        footer_rights_en: 'All Rights Reserved',
+        tools_count_en: 'tools',
+        view_tool_en: 'Visit',
+        categories_title_en: 'Categories',
+        tools_in_category_en: 'tools',
+        back_home_en: 'Back to Home',
+        reviews_en: 'Reviews',
+        write_review_en: 'Write a review',
+        your_name_en: 'Your name',
+        your_rating_en: 'Your rating',
+        your_review_en: 'Your review',
+        submit_review_en: 'Submit Review',
+        no_reviews_en: 'No reviews yet. Be the first to review!',
+        average_rating_en: 'Average Rating',
+        total_reviews_en: 'Total Reviews',
+        trending_en: 'Most Used',
+        recent_en: 'Recent',
+        favorites_list_en: 'Favorites',
+        no_favorites_en: 'No favorites yet',
+        no_trending_en: 'No usage yet',
+        no_recent_en: 'No recent usage',
+        dashboard_en: 'Dashboard',
+        visits_en: 'Visits',
+        clicks_en: 'Clicks',
+        time_spent_en: 'Browsing Time',
+        achievements_en: 'Achievements',
+        recommendations_en: 'Recommendations',
+        export_stats_en: 'Export Stats',
+        reset_stats_en: 'Reset',
+        edit_profile_en: 'Edit Profile',
+        close_en: 'Close',
+        save_en: 'Save',
+        cancel_en: 'Cancel',
+        online_en: 'Online',
+        offline_en: 'Offline — some features may not work',
+        connection_restored_en: 'Connection restored'
+    },
+    en: {}
+};
+
+// Build English translations from Arabic keys
+(function buildEnTranslations() {
+    const en = translations.en;
+    const ar = translations.ar;
+    for (const key in ar) {
+        if (key.endsWith('_en')) {
+            const baseKey = key.slice(0, -3);
+            en[baseKey] = ar[key];
+        } else if (!key.endsWith('_en') && !ar[key + '_en']) {
+            en[key] = ar[key];
+        }
+    }
+})();
+
+function t(key) {
+    if (currentLang === 'ar') return translations.ar[key] || key;
+    return translations.en[key] || translations.ar[key] || key;
+}
+
+function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const translated = t(key);
+        if (translated) el.textContent = translated;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        const translated = t(key);
+        if (translated) el.placeholder = translated;
+    });
+    const langLabel = document.getElementById('langLabel');
+    if (langLabel) langLabel.textContent = currentLang === 'ar' ? 'EN' : 'عربي';
+}
+
+function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('appLang', lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    applyTranslations();
+}
+
+function initLanguage() {
+    const savedLang = localStorage.getItem('appLang') || 'ar';
+    setLanguage(savedLang);
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+            setLanguage(currentLang === 'ar' ? 'en' : 'ar');
+        });
+    }
+}
+
+// =================================================================
 // 2. دالة إظهار الإشعارات
 // =================================================================
 window.showToast = function(message, type = 'info') {
@@ -31,24 +244,34 @@ window.showToast = function(message, type = 'info') {
 // =================================================================
 // 3. دوال العرض الأساسية
 // =================================================================
+function catName(cat) {
+    return currentLang === 'en' && cat.nameEn ? cat.nameEn : cat.name;
+}
+
+function toolDesc(tool) {
+    return currentLang === 'en' && tool.descEn ? tool.descEn : tool.desc;
+}
+
 function renderMainPage() {
-    document.title = "Abdulrahman AI | دليل أدوات الذكاء الاصطناعي";
+    document.title = currentLang === 'ar' ? "Abdulrahman AI | دليل أدوات الذكاء الاصطناعي" : "Abdulrahman AI | AI Tools Guide";
     const container = document.getElementById('contentContainer');
     let catsToRender = [...categories];
     
     if (currentSort === 'name') {
-        catsToRender.sort((a, b) => a.name.localeCompare(b.name));
+        catsToRender.sort((a, b) => catName(a).localeCompare(catName(b)));
     } else if (currentSort === 'count') {
         catsToRender.sort((a, b) => b.tools.length - a.tools.length);
     }
     
+    const toolsLabel = currentLang === 'en' ? 'tools available' : 'أداة متاحة';
+    
     container.innerHTML = `
         <div class="categories-grid">
             ${catsToRender.map((cat, index) => `
-                <a href="?index=${categories.findIndex(c => c.name === cat.name)}" class="category-card" style="--card-index: ${index + 1};">
+                <a href="?index=${categories.findIndex(c => c.name === cat.name)}" class="category-card" style="--card-index: ${index + 1};" data-category="${cat.name}">
                     <div class="category-card-icon"><i class="${cat.icon}"></i></div>
-                    <h3>${cat.name}</h3>
-                    <p>${cat.tools.length} أداة متاحة</p>
+                    <h3>${catName(cat)}</h3>
+                    <p>${cat.tools.length} ${toolsLabel}</p>
                 </a>
             `).join('')}
         </div>
@@ -60,7 +283,7 @@ function renderMainPage() {
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         searchInput.value = '';
-        searchInput.placeholder = 'ابحث عن أداة ذكاء اصطناعي...';
+        searchInput.placeholder = t('search_placeholder');
     }
     
     updateBreadcrumbs();
@@ -69,6 +292,7 @@ function renderMainPage() {
     
     attachToolEvents();
     updateSidebarStats();
+    initCategoryCardGlow();
 }
 
 function renderCategoryPage(index) {
@@ -79,25 +303,30 @@ function renderCategoryPage(index) {
     }
     
     currentCategoryIndex = index;
-    document.title = `${cat.name} | Abdulrahman AI`;
+    const displayName = catName(cat);
+    document.title = `${displayName} | Abdulrahman AI`;
     const container = document.getElementById('contentContainer');
+    
+    const backText = currentLang === 'en' ? 'Back to all categories' : 'العودة لجميع الأقسام';
+    const visitText = t('view_tool');
+    const searchInText = currentLang === 'en' ? 'Search in' : 'ابحث في';
     
     container.innerHTML = `
         <a href="${window.location.pathname}" class="back-link">
-            <i class="fa-solid fa-arrow-left"></i> العودة لجميع الأقسام
+            <i class="fa-solid fa-arrow-left"></i> ${backText}
         </a>
         <div class="category-header" onclick="window.location.href='${window.location.pathname}'">
             <div class="category-icon"><i class="${cat.icon}"></i></div>
-            <h2 class="category-title">${cat.name}</h2>
+            <h2 class="category-title">${displayName}</h2>
         </div>
         <div class="tools-grid" id="toolsGrid">
             ${cat.tools.map((tool, idx) => `
                 <div class="tool-card" style="--card-index: ${idx + 1};">
                     <div class="card-icon"><i class="${tool.icon}"></i></div>
                     <h3 class="tool-name">${tool.name}</h3>
-                    <p class="tool-desc">${tool.desc}</p>
+                    <p class="tool-desc">${toolDesc(tool)}</p>
                     <a href="${tool.url}" class="tool-link" target="_blank" rel="noopener noreferrer">
-                        <span>زيارة</span>
+                        <span>${visitText}</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
@@ -107,14 +336,14 @@ function renderCategoryPage(index) {
     
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
-        searchInput.placeholder = `ابحث في ${cat.name}...`;
+        searchInput.placeholder = `${searchInText} ${displayName}...`;
         searchInput.value = '';
     }
     
     const noResults = document.getElementById('noResults');
     if (noResults) noResults.style.display = 'none';
     
-    updateBreadcrumbs(cat.name);
+    updateBreadcrumbs(displayName);
     const sortControls = document.getElementById('sortControls');
     if (sortControls) sortControls.style.display = 'none';
     
@@ -172,30 +401,74 @@ function filterTools() {
             return;
         }
         
-        const filteredCategories = categories.filter(cat =>
-            cat.name.toLowerCase().includes(query) ||
-            cat.tools.some(tool => tool.name.toLowerCase().includes(query) || tool.desc.toLowerCase().includes(query))
-        );
+        // البحث عن الأدوات الفردية في جميع الأقسام
+        const allTools = [];
+        categories.forEach(cat => {
+            cat.tools.forEach(tool => {
+                const nameMatch = tool.name.toLowerCase().includes(query);
+                const descMatch = tool.desc.toLowerCase().includes(query);
+                const descEnMatch = tool.descEn && tool.descEn.toLowerCase().includes(query);
+                const catNameMatch = cat.name.toLowerCase().includes(query);
+                const catNameEnMatch = cat.nameEn && cat.nameEn.toLowerCase().includes(query);
+                if (nameMatch || descMatch || descEnMatch || catNameMatch || catNameEnMatch) {
+                    allTools.push({ ...tool, category: cat.name, categoryIcon: cat.icon });
+                }
+            });
+        });
         
-        if (filteredCategories.length === 0) {
+        // تجميع النتائج حسب القسم
+        const grouped = {};
+        allTools.forEach(tool => {
+            if (!grouped[tool.category]) grouped[tool.category] = { icon: tool.categoryIcon, tools: [] };
+            grouped[tool.category].tools.push(tool);
+        });
+        
+        const catNames = Object.keys(grouped);
+        
+        // أيضاً عرض الأقسام التي اسمها يطابق البحث حتى لو مافي أدوات مطابقة
+        categories.forEach(cat => {
+            if ((cat.name.toLowerCase().includes(query) || (cat.nameEn && cat.nameEn.toLowerCase().includes(query))) && !grouped[cat.name]) {
+                grouped[cat.name] = { icon: cat.icon, tools: [] };
+            }
+        });
+        
+        const entries = Object.entries(grouped);
+        
+        if (entries.length === 0) {
             if (container) container.innerHTML = '';
             if (noResults) noResults.style.display = 'block';
         } else {
+            const toolsLabel = currentLang === 'en' ? 'tools' : 'أدوات';
+            const visitText = t('view_tool');
+            const allToolsText = currentLang === 'en' ? 'All tools in this category' : 'جميع أدوات هذا القسم';
             if (container) {
-                container.innerHTML = `
-                    <div class="categories-grid">
-                        ${filteredCategories.map((cat, index) => {
-                            const originalIndex = categories.findIndex(c => c.name === cat.name);
-                            return `
-                                <a href="?index=${originalIndex}" class="category-card" style="--card-index: ${index + 1};">
-                                    <div class="category-card-icon"><i class="${cat.icon}"></i></div>
-                                    <h3>${cat.name}</h3>
-                                    <p>${cat.tools.length} أداة متاحة</p>
-                                </a>
-                            `;
-                        }).join('')}
-                    </div>
-                `;
+                container.innerHTML = entries.map(([catKey, data]) => {
+                    const catObj = categories.find(c => c.name === catKey);
+                    const displayName = catObj ? catName(catObj) : catKey;
+                    return `
+                    <div class="filtered-category-section">
+                        <div class="category-header-mini">
+                            <div class="category-icon-mini"><i class="${data.icon}"></i></div>
+                            <span class="category-title-mini">${displayName}</span>
+                            <span class="category-count-mini">${data.tools.length} ${toolsLabel}</span>
+                            <a href="?index=${categories.findIndex(c => c.name === catKey)}" class="category-link-inside" title="${currentLang === 'en' ? 'View all categories' : 'عرض كل الأقسام'}"><i class="fas fa-arrow-left"></i></a>
+                        </div>
+                        ${data.tools.length > 0 ? `
+                        <div class="tools-grid">
+                            ${data.tools.map((tool, idx) => `
+                                <div class="tool-card" style="--card-index: ${idx + 1};">
+                                    <div class="card-icon"><i class="${tool.icon}"></i></div>
+                                    <h3 class="tool-name">${tool.name}</h3>
+                                    <p class="tool-desc">${toolDesc(tool)}</p>
+                                    <a href="${tool.url}" class="tool-link" target="_blank" rel="noopener noreferrer">
+                                        <span>${visitText}</span>
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            `).join('')}
+                        </div>` : `<p style="padding:1rem;color:var(--text-muted-light);font-size:0.85rem;">${allToolsText}</p>`}
+                    </div>`;
+                }).join('');
             }
             if (noResults) noResults.style.display = 'none';
         }
@@ -211,8 +484,8 @@ function filterTools() {
                     <h3 class="tool-name">${tool.name}</h3>
                     <p class="tool-desc">${tool.desc}</p>
                     <a href="${tool.url}" class="tool-link" target="_blank" rel="noopener noreferrer">
-                        <span>Visit</span>
-                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>زيارة</span>
+                        <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             `).join('');
@@ -232,8 +505,8 @@ function filterTools() {
                         <h3 class="tool-name">${tool.name}</h3>
                         <p class="tool-desc">${tool.desc}</p>
                         <a href="${tool.url}" class="tool-link" target="_blank" rel="noopener noreferrer">
-                            <span>Visit</span>
-                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>زيارة</span>
+                            <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                 `).join('');
@@ -387,19 +660,21 @@ function initTheme() {
 }
 
 // =================================================================
-// 9. خلفية الجسيمات
+// 9. الخلفية المتحركة الناعمة
 // =================================================================
 function initParticles() {
     const canvas = document.getElementById('particle-canvas');
     if (!canvas) return;
     
-    const isLowEndDevice = window.navigator.hardwareConcurrency <= 4;
-    const particleCount = isLowEndDevice ? 30 : 60;
-    
+    const isLowEnd = window.navigator.hardwareConcurrency <= 4;
     const ctx = canvas.getContext('2d');
-    let width, height;
-    let particles = [];
-    let animationId = null;
+    let width, height, time = 0;
+    let blobs = [
+        { x: 0.3, y: 0.25, r: 99, g: 102, b: 241, dx: 0.002, dy: 0.0015, size: 0.45 },
+        { x: 0.7, y: 0.35, r: 14, g: 165, b: 233, dx: -0.0015, dy: 0.002, size: 0.4 },
+        { x: 0.5, y: 0.7, r: 139, g: 92, b: 246, dx: 0.001, dy: -0.0015, size: 0.35 }
+    ];
+    if (isLowEnd) blobs = blobs.slice(0, 2);
 
     function resize() {
         width = window.innerWidth;
@@ -410,65 +685,35 @@ function initParticles() {
     resize();
     window.addEventListener('resize', resize);
 
-    function initParticlesArray() {
-        particles = [];
-        for (let i = 0; i < particleCount; i++) {
-            particles.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                radius: Math.random() * 2 + 1,
-                dx: (Math.random() - 0.5) * 0.3,
-                dy: (Math.random() - 0.5) * 0.3,
-            });
-        }
-    }
-    
-    initParticlesArray();
-
     function animate() {
-        if (!ctx) {
-            if (animationId) cancelAnimationFrame(animationId);
-            return;
-        }
-        
+        if (!ctx) return;
+        time += 0.003;
         ctx.clearRect(0, 0, width, height);
-        
+
         const isDark = document.body.classList.contains('dark-mode');
-        particles.forEach(p => {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.15)';
-            ctx.fill();
+        const alpha = isDark ? 0.25 : 0.12;
 
-            p.x += p.dx;
-            p.y += p.dy;
+        blobs.forEach(b => {
+            b.x += b.dx + Math.sin(time * 0.5 + b.r) * 0.001;
+            b.y += b.dy + Math.cos(time * 0.4 + b.g) * 0.001;
+            if (b.x < 0 || b.x > 1) b.dx *= -1;
+            if (b.y < 0 || b.y > 1) b.dy *= -1;
 
-            if (p.x < 0 || p.x > width) p.dx *= -1;
-            if (p.y < 0 || p.y > height) p.dy *= -1;
+            const cx = b.x * width;
+            const cy = b.y * height;
+            const radius = Math.min(width, height) * b.size;
+            
+            const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+            grad.addColorStop(0, `rgba(${b.r}, ${b.g}, ${b.b}, ${alpha})`);
+            grad.addColorStop(0.5, `rgba(${b.r}, ${b.g}, ${b.b}, ${alpha * 0.3})`);
+            grad.addColorStop(1, `rgba(${b.r}, ${b.g}, ${b.b}, 0)`);
+            
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, width, height);
         });
 
-        if (!isLowEndDevice) {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 150) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.1 * (1 - distance / 150)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        animationId = requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
     }
-    
     animate();
 }
 
@@ -1691,7 +1936,22 @@ window.filterTools = function() {
 };
 
 // =================================================================
-// 15. التهيئة عند تحميل الصفحة
+// 15. Glow effect for category cards
+// =================================================================
+function initCategoryCardGlow() {
+    document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            card.style.setProperty('--mouse-x', x + '%');
+            card.style.setProperty('--mouse-y', y + '%');
+        });
+    });
+}
+
+// =================================================================
+// 16. التهيئة عند تحميل الصفحة
 // =================================================================
 function initApp() {
     // بدء الجلسة
@@ -1715,6 +1975,7 @@ function initApp() {
     setupClearSearch();
     initTheme();
     initParticles();
+    initLanguage();
     typeEffect();
     initNetworkStatus();
     window.addEventListener('scroll', updateProgressBar);
@@ -1790,13 +2051,10 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// =================================================================
-// 17. Service Worker
-// =================================================================
 window.addEventListener('online', () => {
-    if (window.showToast) window.showToast('Internet connection restored', 'success');
+    if (window.showToast) window.showToast(t('connection_restored'), 'success');
 });
 
 window.addEventListener('offline', () => {
-    if (window.showToast) window.showToast('No internet connection. Some features may not work.', 'error');
+    if (window.showToast) window.showToast(t('offline'), 'error');
 });

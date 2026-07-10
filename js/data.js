@@ -1,224 +1,106 @@
 // Abdulrahman AI - البيانات
 const categories = [
     {
-        name: "Premium AI Models",
-        icon: "fa-solid fa-brain",
-        tools: [
-            { name: "GPT-5", desc: "Most advanced OpenAI model with supercharged reasoning.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Best", badgeColor: "gold" },
-            { name: "GPT-5-Pro", desc: "Professional tier with unlimited access.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Pro", badgeColor: "purple" },
-            { name: "GPT-5-Chat", desc: "Optimized for conversational AI.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Chat", badgeColor: "blue" },
-            { name: "GPT-5-mini", desc: "Fast and efficient for simple tasks.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Fast", badgeColor: "green" },
-            { name: "Claude-Sonnet-4.5", desc: "Top-tier Anthropic model for complex analysis.", url: "https://claude.ai", icon: "fa-solid fa-comment", badge: "Best", badgeColor: "gold" },
-            { name: "Claude-Opus-4", desc: "Anthropic's most capable model.", url: "https://claude.ai", icon: "fa-solid fa-comment", badge: "Pro", badgeColor: "purple" },
-            { name: "Claude-Opus-4.1", desc: "Enhanced reasoning and accuracy.", url: "https://claude.ai", icon: "fa-solid fa-comment", badge: "New", badgeColor: "cyan" },
-            { name: "Gemini-2.5-Pro", desc: "Google's most advanced multimodal AI.", url: "https://gemini.google.com", icon: "fa-brands fa-google", badge: "Best", badgeColor: "gold" },
-            { name: "Grok-4", desc: "xAI's latest model with real-time knowledge.", url: "https://x.ai/grok", icon: "fa-solid fa-rocket", badge: "New", badgeColor: "orange" },
-            { name: "o3", desc: "Advanced reasoning model.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Reasoning", badgeColor: "blue" },
-            { name: "o4-mini", desc: "Compact reasoning model for efficiency.", url: "https://chat.openai.com", icon: "fa-brands fa-openai", badge: "Fast", badgeColor: "green" },
-            { name: "DeepSeek-V4-Pro-EL", desc: "High-performance reasoning model.", url: "https://chat.deepseek.com", icon: "fa-solid fa-brain", badge: "Pro", badgeColor: "purple" },
-            { name: "DeepSeek-V4-Flash-EL", desc: "Lightning-fast responses.", url: "https://chat.deepseek.com", icon: "fa-solid fa-bolt", badge: "Fast", badgeColor: "green" },
-            { name: "Qwen3.6-Max-Preview", desc: "Alibaba's latest flagship model.", url: "https://chat.qwen.ai", icon: "fa-solid fa-comment-dots", badge: "Preview", badgeColor: "cyan" }
-        ]
-    },
-    {
-        name: "Search & Research",
-        icon: "fa-solid fa-magnifying-glass-chart",
-        tools: [
-            { name: "Web-Search", desc: "General web search powered by AI.", url: "https://chat.openai.com", icon: "fa-solid fa-globe" },
-            { name: "GPT-4o-Search", desc: "OpenAI model with web search.", url: "https://chat.openai.com", icon: "fa-brands fa-openai" },
-            { name: "GPT-4o-mini-Search", desc: "Fast search with OpenAI.", url: "https://chat.openai.com", icon: "fa-brands fa-openai" },
-            { name: "o3-deep-research", desc: "Comprehensive research AI.", url: "https://chat.openai.com", icon: "fa-solid fa-microscope" },
-            { name: "o4-mini-deep-research", desc: "Quick deep research.", url: "https://chat.openai.com", icon: "fa-solid fa-microscope" },
-            { name: "Gemini Search", desc: "Google's search AI.", url: "https://gemini.google.com", icon: "fa-brands fa-google" }
-        ]
-    },
-    {
-        name: "Developer Workspace",
-        icon: "fa-solid fa-code",
-        tools: [
-            { name: "App-Creator", desc: "Build apps from prompts.", url: "https://bolt.new", icon: "fa-solid fa-rocket" },
-            { name: "GPT-5-Codex", desc: "Code generation and debugging.", url: "https://github.com/features/copilot", icon: "fa-brands fa-github" },
-            { name: "Python AI", desc: "Python coding assistant.", url: "https://replit.com", icon: "fa-brands fa-python" },
-            { name: "DebugMyCode", desc: "Smart code debugging.", url: "https://cursor.sh", icon: "fa-solid fa-bug" },
-            { name: "Seed-2.0-Code", desc: "Code completion AI.", url: "https://codeium.com", icon: "fa-solid fa-seedling" },
-            { name: "PlantUMLbot", desc: "Generate UML diagrams.", url: "https://plantuml.com", icon: "fa-solid fa-diagram-project" },
-            { name: "PowerAppsMaster", desc: "Microsoft Power Apps assistant.", url: "https://powerapps.microsoft.com", icon: "fa-brands fa-microsoft" },
-            { name: "CopilotStudio", desc: "Create AI agents.", url: "https://copilotstudio.microsoft.com", icon: "fa-brands fa-microsoft" },
-            { name: "PowerPlatform100", desc: "Microsoft Power Platform tools.", url: "https://powerplatform.microsoft.com", icon: "fa-brands fa-microsoft" },
-            { name: "Kluge", desc: "AI-powered development assistant.", url: "https://kluge.ai", icon: "fa-solid fa-code" }
-        ]
-    },
-    {
-        name: "AI Image Studio",
-        icon: "fa-solid fa-image",
-        tools: [
-            { name: "Magic-Mirror-AI", desc: "Transform photos with AI.", url: "https://designs.ai", icon: "fa-solid fa-wand-magic-sparkles" },
-            { name: "Beautiful-Picture", desc: "Generate stunning images.", url: "https://midjourney.com", icon: "fa-solid fa-image" },
-            { name: "Wow-Dream", desc: "Dream-like image generation.", url: "https://dream.ai", icon: "fa-solid fa-cloud-moon" },
-            { name: "Dream-Wow", desc: "High-quality image creation.", url: "https://playgroundai.com", icon: "fa-solid fa-wand-magic-sparkles" },
-            { name: "Glitter-Glitch", desc: "Create glitch art effects.", url: "https://designs.ai", icon: "fa-solid fa-sparkles" },
-            { name: "UPSCALER-lite", desc: "Quick image upscaling.", url: "https://designs.ai", icon: "fa-solid fa-magnifying-glass-plus" },
-            { name: "Seedream-5.0-Lite-EL", desc: "Fast image generation.", url: "https://designs.ai", icon: "fa-solid fa-seedling" },
-            { name: "Ask-OctopAI", desc: "AI image analysis.", url: "https://designs.ai", icon: "fa-solid fa-octopus-deploy" },
-            { name: "Danbooru-Chat", desc: "Anime-style image search.", url: "https://designs.ai", icon: "fa-solid fa-face-smile" },
-            { name: "ALT-text-Files", desc: "Generate image alt text.", url: "https://designs.ai", icon: "fa-solid fa-font" }
-        ]
-    },
-    {
-        name: "AI Video Studio",
-        icon: "fa-solid fa-video",
-        tools: [
-            { name: "Ai-PROMPT-ViD", desc: "Prompt-based video creation.", url: "https://designs.ai", icon: "fa-solid fa-wand-magic-sparkles" },
-            { name: "ProfessionalVideos", desc: "Create professional videos.", url: "https://runwayml.com", icon: "fa-solid fa-film" },
-            { name: "HappyHorse-1.0-EL", desc: "Fun video generation.", url: "https://designs.ai", icon: "fa-solid fa-horse" },
-            { name: "Seedance-2.0-Fast-EL", desc: "Fast video rendering.", url: "https://designs.ai", icon: "fa-solid fa-seedling" },
-            { name: "MiMo-V2.5", desc: "Multimodal video AI.", url: "https://designs.ai", icon: "fa-solid fa-video" },
-            { name: "MiMo-V2.5-Pro", desc: "Professional video AI.", url: "https://designs.ai", icon: "fa-solid fa-film" },
-            { name: "Sora-2-Pro", desc: "OpenAI's advanced video model.", url: "https://openai.com/sora", icon: "fa-solid fa-video" },
-            { name: "Kling-2.5-Turbo", desc: "Turbo video generation.", url: "https://klingai.com", icon: "fa-solid fa-clapperboard" }
-        ]
-    },
-    {
-        name: "AI Audio Lab",
-        icon: "fa-solid fa-microphone",
-        tools: [
-            { name: "Gemini-3.1-Flash-TTS", desc: "Google's fast text-to-speech.", url: "https://designs.ai", icon: "fa-brands fa-google" },
-            { name: "Echo", desc: "Voice echo effects.", url: "https://designs.ai", icon: "fa-solid fa-waveform" },
-            { name: "ElevenLabs-v3", desc: "Realistic voice AI.", url: "https://elevenlabs.io", icon: "fa-solid fa-waveform" },
-            { name: "ElevenLabs-Music", desc: "AI music generation.", url: "https://elevenlabs.io", icon: "fa-solid fa-music" },
-            { name: "Suno-Music", desc: "Create full songs with AI.", url: "https://suno.ai", icon: "fa-solid fa-music" },
-            { name: "Murf-Voice", desc: "Professional voiceovers.", url: "https://murf.ai", icon: "fa-solid fa-microphone" }
-        ]
-    },
-    {
-        name: "Content Creator Hub",
-        icon: "fa-solid fa-pen-fancy",
-        tools: [
-            { name: "LinkedIn.GPTbot", desc: "LinkedIn post optimizer.", url: "https://designs.ai", icon: "fa-brands fa-linkedin" },
-            { name: "LetterOfComplaint", desc: "Generate complaint letters.", url: "https://designs.ai", icon: "fa-solid fa-file-lines" },
-            { name: "AI-Writing-Cleaner", desc: "Clean and polish writing.", url: "https://quillbot.com", icon: "fa-solid fa-spell-check" },
-            { name: "FictionWriterCleaner", desc: "Fiction writing assistant.", url: "https://novelai.net", icon: "fa-solid fa-book" },
-            { name: "ChooseYourReality", desc: "Interactive fiction AI.", url: "https://aidungeon.io", icon: "fa-solid fa-book-open" },
-            { name: "RecipeFromFridge", desc: "AI recipe generator.", url: "https://designs.ai", icon: "fa-solid fa-utensils" },
-            { name: "AITimeTravel", desc: "Historical content creation.", url: "https://designs.ai", icon: "fa-solid fa-clock-rotate-left" }
-        ]
-    },
-    {
-        name: "Smart Agents",
-        icon: "fa-solid fa-robot",
-        tools: [
-            { name: "Assistant", desc: "General AI assistant.", url: "https://chat.openai.com", icon: "fa-solid fa-user-tie" },
-            { name: "AllGPT", desc: "Access all GPT models.", url: "https://poe.com", icon: "fa-solid fa-gears" },
-            { name: "BotSearch", desc: "Find the right bot.", url: "https://designs.ai", icon: "fa-solid fa-magnifying-glass" },
-            { name: "Poe-Bot-Finder", desc: "Discover Poe bots.", url: "https://poe.com", icon: "fa-solid fa-robot" },
-            { name: "AIConcierge", desc: "Personal AI assistant.", url: "https://designs.ai", icon: "fa-solid fa-bell-concierge" },
-            { name: "AgenticAI-v01", desc: "Autonomous AI agent.", url: "https://designs.ai", icon: "fa-solid fa-brain" },
-            { name: "0mn1Scienc3", desc: "Science research agent.", url: "https://designs.ai", icon: "fa-solid fa-flask" },
-            { name: "VerifyTrustAI", desc: "Fact-checking agent.", url: "https://designs.ai", icon: "fa-solid fa-shield-halved" },
-            { name: "AugmentedLLM", desc: "Enhanced language model.", url: "https://huggingface.co", icon: "fa-solid fa-brain" }
-        ]
-    },
-    {
-        name: "Creative Generation Lab",
-        icon: "fa-solid fa-wand-magic-sparkles",
-        tools: [
-            { name: "FLUX-schnell", desc: "Ultra-fast image generation.", url: "https://designs.ai", icon: "fa-solid fa-bolt" },
-            { name: "Imagen", desc: "Google's image generation.", url: "https://imagen.google.com", icon: "fa-brands fa-google" },
-            { name: "StableDiffusionXL", desc: "High quality Stable Diffusion.", url: "https://stability.ai", icon: "fa-solid fa-dice-d6" },
-            { name: "Veo-3.1", desc: "Google's video AI.", url: "https://designs.ai", icon: "fa-solid fa-video" },
-            { name: "Kling-2.5-Turbo-Pro", desc: "Turbo video generation.", url: "https://klingai.com", icon: "fa-solid fa-rocket" }
-        ]
-    },
-    {
-        name: "AI Utilities",
-        icon: "fa-solid fa-toolbox",
-        tools: [
-            { name: "FileFormatShifter", desc: "Convert file formats.", url: "https://designs.ai", icon: "fa-solid fa-file-arrow-right" },
-            { name: "DecisionValidator", desc: "AI decision helper.", url: "https://designs.ai", icon: "fa-solid fa-scale-balanced" },
-            { name: "Emojis", desc: "AI emoji generator.", url: "https://designs.ai", icon: "fa-solid fa-face-smile" },
-            { name: "Oracle-von-Cleef", desc: "Wise AI advisor.", url: "https://designs.ai", icon: "fa-solid fa-hat-cowboy" },
-            { name: "Rappgod", desc: "Rap lyrics generator.", url: "https://designs.ai", icon: "fa-solid fa-microphone-lines" },
-            { name: "CreativeWriter", desc: "Creative content AI.", url: "https://writesonic.com", icon: "fa-solid fa-pen-nib" },
-            { name: "TranslationMaster", desc: "Professional translation.", url: "https://deepl.com", icon: "fa-solid fa-language" },
-            { name: "TextAnalyzer", desc: "Analyze text quality.", url: "https://quillbot.com", icon: "fa-solid fa-magnifying-glass-chart" }
-        ]
-    },
-    {
         name: "مساعدات الذكاء الاصطناعي",
+        nameEn: "AI Assistants",
         icon: "fa-solid fa-robot",
         tools: [
-            { name: "ChatGPT", desc: "كتابة – برمجة – بحث – شرح – أفكار.", url: "https://chat.openai.com", icon: "fa-brands fa-openai" },
-            { name: "Claude", desc: "تحليل وكتابة نصوص طويلة.", url: "https://claude.ai", icon: "fa-solid fa-comment" },
-            { name: "Gemini", desc: "مساعد ذكاء اصطناعي متعدد الوسائط.", url: "https://gemini.google.com", icon: "fa-brands fa-google" },
-            { name: "Microsoft Copilot", desc: "مساعد محادثة ومعلومات.", url: "https://copilot.microsoft.com", icon: "fa-brands fa-microsoft" },
-            { name: "Perplexity AI", desc: "محرك بحث يجيب مع مصادر.", url: "https://www.perplexity.ai", icon: "fa-solid fa-magnifying-glass" },
-            { name: "Hugging Face", desc: "استضافة ونماذج AI مفتوحة المصدر.", url: "https://huggingface.co", icon: "fa-solid fa-face-smile" },
-            { name: "Poe", desc: "منصة تفاعل مع نماذج AI متعددة.", url: "https://poe.com", icon: "fa-solid fa-comments" },
-            { name: "DeepAI", desc: "واجهات برمجية AI مجانية.", url: "https://deepai.org", icon: "fa-solid fa-brain" },
-            { name: "LLaMA", desc: "نموذج ذكاء اصطناعي مفتوح المصدر.", url: "https://ai.meta.com/llama", icon: "fa-brands fa-meta" },
-            { name: "Qwen Chat", desc: "روبوت دردشة متقدم.", url: "https://chat.qwen.ai", icon: "fa-solid fa-comment-dots" },
-            { name: "HuggingChat", desc: "دردشة مفتوحة المصدر.", url: "https://huggingface.co/chat", icon: "fa-solid fa-face-smile" },
-            { name: "YouChat", desc: "محرك بحث مع دردشة.", url: "https://you.com", icon: "fa-solid fa-y" },
-            { name: "Phind", desc: "محرك بحث للمبرمجين.", url: "https://www.phind.com", icon: "fa-solid fa-code" },
-            { name: "Forefront AI", desc: "منصة نماذج ذكاء اصطناعي متعددة.", url: "https://forefront.ai", icon: "fa-solid fa-star" },
-            { name: "Janitor AI", desc: "إنشاء روبوتات دردشة AI قابلة للتخصيص.", url: "https://janitorai.com", icon: "fa-solid fa-robot" },
-            { name: "Arena AI", desc: "بيئة تفاعلية لتجربة نماذج الذكاء الاصطناعي.", url: "https://arena.ai", icon: "fa-solid fa-gamepad" },
-            { name: "Yupp AI", desc: "منصة متكاملة لأدوات الذكاء الاصطناعي.", url: "https://yupp.ai", icon: "fa-solid fa-brain" },
-            { name: "Chatsonic", desc: "روبوت محادثة متقدم.", url: "https://writesonic.com/chatsonic", icon: "fa-solid fa-headphones" },
-            { name: "Ora", desc: "تشغيل وتجربة نماذج الذكاء الاصطناعي.", url: "https://ora.ai", icon: "fa-solid fa-rocket" },
-            { name: "Google Search Labs", desc: "تجارب أدوات AI من Google Labs.", url: "https://labs.google.com", icon: "fa-brands fa-google" },
-            { name: "Noty AI", desc: "تدوين تلقائي من الصوت.", url: "https://noty.ai", icon: "fa-solid fa-note-sticky" },
-            { name: "Tinywow AI", desc: "تحويل وتحرير مستندات وPDF.", url: "https://tinywow.com", icon: "fa-solid fa-file-pdf" }
+            { name: "ChatGPT", desc: "كتابة – برمجة – بحث – شرح – أفكار.", descEn: "Writing – coding – research – explanation – ideas.", url: "https://chat.openai.com", icon: "fa-brands fa-openai" },
+            { name: "Claude", desc: "تحليل وكتابة نصوص طويلة.", descEn: "Analysis and long-form text generation.", url: "https://claude.ai", icon: "fa-solid fa-comment" },
+            { name: "Gemini", desc: "مساعد ذكاء اصطناعي متعدد الوسائط.", descEn: "Multimodal AI assistant.", url: "https://gemini.google.com", icon: "fa-brands fa-google" },
+            { name: "Microsoft Copilot", desc: "مساعد محادثة ومعلومات.", descEn: "Chat and information assistant.", url: "https://copilot.microsoft.com", icon: "fa-brands fa-microsoft" },
+            { name: "Perplexity AI", desc: "محرك بحث يجيب مع مصادر.", descEn: "Search engine with cited sources.", url: "https://www.perplexity.ai", icon: "fa-solid fa-magnifying-glass" },
+            { name: "Hugging Face", desc: "استضافة ونماذج AI مفتوحة المصدر.", descEn: "Hosting and open-source AI models.", url: "https://huggingface.co", icon: "fa-solid fa-face-smile" },
+            { name: "Poe", desc: "منصة تفاعل مع نماذج AI متعددة.", descEn: "Platform to interact with multiple AI models.", url: "https://poe.com", icon: "fa-solid fa-comments" },
+            { name: "DeepAI", desc: "واجهات برمجية AI مجانية.", descEn: "Free AI APIs.", url: "https://deepai.org", icon: "fa-solid fa-brain" },
+            { name: "LLaMA", desc: "نموذج ذكاء اصطناعي مفتوح المصدر.", descEn: "Open-source AI model.", url: "https://ai.meta.com/llama", icon: "fa-brands fa-meta" },
+            { name: "Qwen Chat", desc: "روبوت دردشة متقدم.", descEn: "Advanced chatbot.", url: "https://chat.qwen.ai", icon: "fa-solid fa-comment-dots" },
+            { name: "HuggingChat", desc: "دردشة مفتوحة المصدر.", descEn: "Open-source chat.", url: "https://huggingface.co/chat", icon: "fa-solid fa-face-smile" },
+            { name: "YouChat", desc: "محرك بحث مع دردشة.", descEn: "Search engine with chat.", url: "https://you.com", icon: "fa-solid fa-y" },
+            { name: "Phind", desc: "محرك بحث للمبرمجين.", descEn: "Search engine for programmers.", url: "https://www.phind.com", icon: "fa-solid fa-code" },
+            { name: "Forefront AI", desc: "منصة نماذج ذكاء اصطناعي متعددة.", descEn: "Platform with multiple AI models.", url: "https://forefront.ai", icon: "fa-solid fa-star" },
+            { name: "Janitor AI", desc: "إنشاء روبوتات دردشة AI قابلة للتخصيص.", descEn: "Create customizable AI chatbots.", url: "https://janitorai.com", icon: "fa-solid fa-robot" },
+            { name: "Arena AI", desc: "بيئة تفاعلية لتجربة نماذج الذكاء الاصطناعي.", descEn: "Interactive environment to test AI models.", url: "https://arena.ai", icon: "fa-solid fa-gamepad" },
+            { name: "Yupp AI", desc: "منصة متكاملة لأدوات الذكاء الاصطناعي.", descEn: "All-in-one AI tools platform.", url: "https://yupp.ai", icon: "fa-solid fa-brain" },
+            { name: "Chatsonic", desc: "روبوت محادثة متقدم.", descEn: "Advanced chatbot.", url: "https://writesonic.com/chatsonic", icon: "fa-solid fa-headphones" },
+            { name: "Ora", desc: "تشغيل وتجربة نماذج الذكاء الاصطناعي.", descEn: "Run and test AI models.", url: "https://ora.ai", icon: "fa-solid fa-rocket" },
+            { name: "Google Search Labs", desc: "تجارب أدوات AI من Google Labs.", descEn: "AI tool experiments from Google Labs.", url: "https://labs.google.com", icon: "fa-brands fa-google" },
+            { name: "Noty AI", desc: "تدوين تلقائي من الصوت.", descEn: "Automatic note-taking from audio.", url: "https://noty.ai", icon: "fa-solid fa-note-sticky" },
+            { name: "Tinywow AI", desc: "تحويل وتحرير مستندات وPDF.", descEn: "Convert and edit documents and PDFs.", url: "https://tinywow.com", icon: "fa-solid fa-file-pdf" },
+            { name: "DeepSeek", desc: "نموذج ذكاء اصطناعي صيني مفتوح المصدر بأداء منافس.", descEn: "Competitive open-source Chinese AI model.", url: "https://chat.deepseek.com", icon: "fa-solid fa-brain" },
+            { name: "Mistral AI", desc: "نماذج لغوية أوروبية مفتوحة المصدر تنافس GPT.", descEn: "Open-source European language models competing with GPT.", url: "https://mistral.ai", icon: "fa-solid fa-brain" },
+            { name: "Pi", desc: "مساعد شخصي من Inflection AI للمحادثات الطبيعية.", descEn: "Personal assistant from Inflection AI for natural conversations.", url: "https://pi.ai", icon: "fa-solid fa-comment" },
+            { name: "Meta AI", desc: "مساعد من Meta مدمج في واتساب وإنستغرام.", descEn: "Meta assistant integrated in WhatsApp and Instagram.", url: "https://www.meta.ai", icon: "fa-brands fa-meta" },
+            { name: "Character.ai", desc: "منصة محادثة مع شخصيات افتراضية متعددة.", descEn: "Chat platform with multiple virtual characters.", url: "https://character.ai", icon: "fa-solid fa-robot" },
+            { name: "Jais", desc: "نموذج لغوي عربي ضخم من G42 الإماراتية.", descEn: "Large Arabic language model from UAE's G42.", url: "https://jais.co", icon: "fa-solid fa-language" },
+            { name: "علّام - ALLaM", desc: "نموذج لغوي عربي من SDAIA السعودية.", descEn: "Arabic language model from Saudi's SDAIA.", url: "https://allam.ai", icon: "fa-solid fa-language" },
+            { name: "Araby.ai", desc: "منصة ذكاء اصطناعي عربية شاملة.", descEn: "Comprehensive Arabic AI platform.", url: "https://araby.ai", icon: "fa-solid fa-globe" },
+            { name: "مصباح - Misbah", desc: "مساعد ذكاء اصطناعي عربي يفهم لهجتك.", descEn: "Arabic AI assistant that understands your dialect.", url: "https://misbah.chat", icon: "fa-solid fa-lightbulb" }
         ]
     },
     {
         name: "البرمجة والتطوير",
+        nameEn: "Programming & Development",
         icon: "fa-solid fa-code",
         tools: [
-            { name: "GitHub Copilot", desc: "يكتب الكود تلقائياً.", url: "https://github.com/features/copilot", icon: "fa-brands fa-github" },
-            { name: "Cursor", desc: "محرر أكواد بالذكاء الاصطناعي.", url: "https://cursor.sh", icon: "fa-solid fa-cursor" },
-            { name: "Replit", desc: "برمجة مباشرة داخل المتصفح.", url: "https://replit.com", icon: "fa-solid fa-code" },
-            { name: "Codeium", desc: "مساعد برمجي مجاني.", url: "https://codeium.com", icon: "fa-solid fa-bolt" },
-            { name: "v0.dev", desc: "تصميم واجهات React تلقائيًا.", url: "https://v0.dev", icon: "fa-solid fa-layer-group" },
-            { name: "Bolt.new", desc: "بناء مواقع وتطبيقات بسرعة.", url: "https://bolt.new", icon: "fa-solid fa-bolt" },
-            { name: "Supabase", desc: "قواعد بيانات وتطبيقات مفتوحة المصدر.", url: "https://supabase.com", icon: "fa-solid fa-database" },
-            { name: "Firebase", desc: "باك اند جاهز وخدمات خلفية.", url: "https://firebase.google.com", icon: "fa-brands fa-google" },
-            { name: "Vercel", desc: "نشر المواقع والتطبيقات بسهولة.", url: "https://vercel.com", icon: "fa-solid fa-cloud-upload-alt" },
-            { name: "GitLab", desc: "منصة تطوير مع AI.", url: "https://gitlab.com", icon: "fa-brands fa-gitlab" },
-            { name: "LangChain", desc: "إطار عمل لتطبيقات LLM.", url: "https://langchain.com", icon: "fa-solid fa-link" },
-            { name: "Netlify", desc: "استضافة مواقع مجانية ونشر تلقائي.", url: "https://www.netlify.com", icon: "fa-solid fa-globe" },
-            { name: "Retool", desc: "بناء أدوات داخلية بسرعة.", url: "https://retool.com", icon: "fa-solid fa-toolbox" },
-            { name: "Tldraw AI", desc: "رسم وتحويله إلى كود برمجي.", url: "https://tldraw.com", icon: "fa-solid fa-draw-polygon" },
-            { name: "Cogram", desc: "مساعدة برمجية ذكية داخل IDE.", url: "https://www.cogram.com", icon: "fa-solid fa-code" },
-            { name: "Bloop AI", desc: "مساعد تطوير برمجيات سريع.", url: "https://bloop.ai", icon: "fa-solid fa-code-branch" },
-            { name: "Emergent.sh", desc: "يساعد المطورين في بناء البرامج.", url: "https://emergent.sh", icon: "fa-solid fa-code-branch" },
-            { name: "Rork", desc: "إدارة وتنظيم المشاريع البرمجية.", url: "https://rork.com", icon: "fa-solid fa-diagram-project" }
+            { name: "GitHub Copilot", desc: "يكتب الكود تلقائياً.", descEn: "Auto-writes code.", url: "https://github.com/features/copilot", icon: "fa-brands fa-github" },
+            { name: "Cursor", desc: "محرر أكواد بالذكاء الاصطناعي.", descEn: "AI-powered code editor.", url: "https://cursor.sh", icon: "fa-solid fa-cursor" },
+            { name: "Replit", desc: "برمجة مباشرة داخل المتصفح.", descEn: "Code directly in the browser.", url: "https://replit.com", icon: "fa-solid fa-code" },
+            { name: "Codeium", desc: "مساعد برمجي مجاني.", descEn: "Free coding assistant.", url: "https://codeium.com", icon: "fa-solid fa-bolt" },
+            { name: "v0.dev", desc: "تصميم واجهات React تلقائيًا.", descEn: "Auto-generate React UIs.", url: "https://v0.dev", icon: "fa-solid fa-layer-group" },
+            { name: "Bolt.new", desc: "بناء مواقع وتطبيقات بسرعة.", descEn: "Build websites and apps quickly.", url: "https://bolt.new", icon: "fa-solid fa-bolt" },
+            { name: "Supabase", desc: "قواعد بيانات وتطبيقات مفتوحة المصدر.", descEn: "Open-source databases and apps.", url: "https://supabase.com", icon: "fa-solid fa-database" },
+            { name: "Firebase", desc: "باك اند جاهز وخدمات خلفية.", descEn: "Ready-made backend services.", url: "https://firebase.google.com", icon: "fa-brands fa-google" },
+            { name: "Vercel", desc: "نشر المواقع والتطبيقات بسهولة.", descEn: "Deploy websites and apps easily.", url: "https://vercel.com", icon: "fa-solid fa-cloud-upload-alt" },
+            { name: "GitLab", desc: "منصة تطوير مع AI.", descEn: "Development platform with AI.", url: "https://gitlab.com", icon: "fa-brands fa-gitlab" },
+            { name: "LangChain", desc: "إطار عمل لتطبيقات LLM.", descEn: "Framework for LLM applications.", url: "https://langchain.com", icon: "fa-solid fa-link" },
+            { name: "Netlify", desc: "استضافة مواقع مجانية ونشر تلقائي.", descEn: "Free hosting and auto-deploy.", url: "https://www.netlify.com", icon: "fa-solid fa-globe" },
+            { name: "Retool", desc: "بناء أدوات داخلية بسرعة.", descEn: "Build internal tools quickly.", url: "https://retool.com", icon: "fa-solid fa-toolbox" },
+            { name: "Tldraw AI", desc: "رسم وتحويله إلى كود برمجي.", descEn: "Draw and convert to code.", url: "https://tldraw.com", icon: "fa-solid fa-draw-polygon" },
+            { name: "Cogram", desc: "مساعدة برمجية ذكية داخل IDE.", descEn: "Smart coding assistant inside IDE.", url: "https://www.cogram.com", icon: "fa-solid fa-code" },
+            { name: "Bloop AI", desc: "مساعد تطوير برمجيات سريع.", descEn: "Fast software development assistant.", url: "https://bloop.ai", icon: "fa-solid fa-code-branch" },
+            { name: "Emergent.sh", desc: "يساعد المطورين في بناء البرامج.", descEn: "Helps developers build software.", url: "https://emergent.sh", icon: "fa-solid fa-code-branch" },
+            { name: "Rork", desc: "إدارة وتنظيم المشاريع البرمجية.", descEn: "Manage and organize coding projects.", url: "https://rork.com", icon: "fa-solid fa-diagram-project" },
+            { name: "Tabnine", desc: "مساعد إكمال أكواد يعمل محلياً بخصوصية عالية.", descEn: "Local code completion assistant with high privacy.", url: "https://tabnine.com", icon: "fa-solid fa-code" },
+            { name: "Sourcegraph Cody", desc: "مساعد برمجي يفهم قاعدة الكود بالكامل.", descEn: "Coding assistant that understands entire codebase.", url: "https://sourcegraph.com/cody", icon: "fa-solid fa-code" },
+            { name: "Windsurf Editor", desc: "محرر كود AI من Codeium مع وكيل ذكي.", descEn: "AI code editor from Codeium with smart agent.", url: "https://codeium.com/windsurf", icon: "fa-solid fa-wind" },
+            { name: "Ollama", desc: "تشغيل نماذج AI محلياً على جهازك بخصوصية كاملة.", descEn: "Run AI models locally on your device with full privacy.", url: "https://ollama.ai", icon: "fa-solid fa-microchip" },
+            { name: "Groq", desc: "محرك استدلال AI فائق السرعة على أجهزة LPU.", descEn: "Ultra-fast AI inference engine on LPU hardware.", url: "https://groq.com", icon: "fa-solid fa-bolt" },
+            { name: "Snyk AI", desc: "منصة أمان تطبيقات تكتشف الثغرات وتقترح إصلاحات.", descEn: "App security platform that detects vulnerabilities and suggests fixes.", url: "https://snyk.io", icon: "fa-solid fa-shield" },
+            { name: "Lovable", desc: "منصة تطوير تطبيقات ويب من وصف نصي مع نشر فوري.", descEn: "Web app development platform from text description with instant deploy.", url: "https://lovable.dev", icon: "fa-solid fa-rocket" },
+            { name: "CodeSandbox", desc: "محرر أكواد سحابي لتجربة المشاريع ومشاركة المعايير.", descEn: "Cloud code editor for testing projects and sharing sandboxes.", url: "https://codesandbox.io", icon: "fa-solid fa-cube" },
+            { name: "StackBlitz", desc: "بيئة تطوير ويب سريعة تعمل في المتصفح فوراً.", descEn: "Fast web development environment running instantly in browser.", url: "https://stackblitz.com", icon: "fa-solid fa-bolt" }
         ]
     },
     {
         name: "إنشاء المواقع والتطبيقات",
+        nameEn: "Website & App Building",
         icon: "fa-solid fa-globe",
         tools: [
-            { name: "Durable AI", desc: "إنشاء موقع كامل خلال أقل من دقيقة.", url: "https://durable.co", icon: "fa-solid fa-rocket" },
-            { name: "Wix ADI", desc: "إنشاء موقع كامل تلقائياً.", url: "https://www.wix.com", icon: "fa-brands fa-wix" },
-            { name: "WordPress AI", desc: "إنشاء وإدارة مواقع ومدونات.", url: "https://wordpress.com", icon: "fa-brands fa-wordpress" },
-            { name: "Shopify Magic", desc: "إنشاء متجر إلكتروني.", url: "https://www.shopify.com", icon: "fa-brands fa-shopify" },
-            { name: "Framer AI", desc: "تصميم مواقع تفاعلية.", url: "https://www.framer.com", icon: "fa-solid fa-framer" },
-            { name: "Webflow AI", desc: "إنشاء مواقع احترافية متجاوبة.", url: "https://webflow.com", icon: "fa-brands fa-webflow" },
-            { name: "Squarespace AI", desc: "تصميم مواقع احترافية.", url: "https://www.squarespace.com", icon: "fa-brands fa-squarespace" },
-            { name: "Zyro AI", desc: "تصميم مواقع بسرعة.", url: "https://zyro.com", icon: "fa-solid fa-bolt" },
-            { name: "Bookmark", desc: "إنشاء موقع بخطوات بسيطة.", url: "https://www.bookmark.com", icon: "fa-solid fa-bookmark" },
-            { name: "Bubble", desc: "إنشاء مواقع وأنظمة كاملة.", url: "https://bubble.io", icon: "fa-solid fa-shapes" },
-            { name: "Base44", desc: "إنشاء تطبيقات وأنظمة بسهولة.", url: "https://base44.com", icon: "fa-solid fa-layer-group" },
-            { name: "Glide", desc: "تحويل Google Sheets إلى تطبيق كامل.", url: "https://www.glideapps.com", icon: "fa-brands fa-google" },
-            { name: "Adalo", desc: "إنشاء تطبيقات موبايل بسهولة.", url: "https://www.adalo.com", icon: "fa-solid fa-mobile-alt" },
-            { name: "Softr", desc: "بناء مواقع من Airtable بدون برمجة.", url: "https://www.softr.io", icon: "fa-solid fa-table" },
-            { name: "Uizard", desc: "تحويل النص إلى واجهات رقمية.", url: "https://uizard.io", icon: "fa-solid fa-wand-magic-sparkles" },
-            { name: "Rocket.new", desc: "إنشاء تطبيقات تلقائياً.", url: "https://www.rocket.new", icon: "fa-solid fa-rocket" }
+            { name: "Durable AI", desc: "إنشاء موقع كامل خلال أقل من دقيقة.", descEn: "Build a complete website in under a minute.", url: "https://durable.co", icon: "fa-solid fa-rocket" },
+            { name: "Wix ADI", desc: "إنشاء موقع كامل تلقائياً.", descEn: "Auto-create a complete website.", url: "https://www.wix.com", icon: "fa-brands fa-wix" },
+            { name: "WordPress AI", desc: "إنشاء وإدارة مواقع ومدونات.", descEn: "Create and manage websites and blogs.", url: "https://wordpress.com", icon: "fa-brands fa-wordpress" },
+            { name: "Shopify Magic", desc: "إنشاء متجر إلكتروني.", descEn: "Create an online store.", url: "https://www.shopify.com", icon: "fa-brands fa-shopify" },
+            { name: "Framer AI", desc: "تصميم مواقع تفاعلية.", descEn: "Design interactive websites.", url: "https://www.framer.com", icon: "fa-solid fa-framer" },
+            { name: "Webflow AI", desc: "إنشاء مواقع احترافية متجاوبة.", descEn: "Build professional responsive websites.", url: "https://webflow.com", icon: "fa-brands fa-webflow" },
+            { name: "Squarespace AI", desc: "تصميم مواقع احترافية.", descEn: "Design professional websites.", url: "https://www.squarespace.com", icon: "fa-brands fa-squarespace" },
+            { name: "Zyro AI", desc: "تصميم مواقع بسرعة.", descEn: "Design websites quickly.", url: "https://zyro.com", icon: "fa-solid fa-bolt" },
+            { name: "Bookmark", desc: "إنشاء موقع بخطوات بسيطة.", descEn: "Create a website in simple steps.", url: "https://www.bookmark.com", icon: "fa-solid fa-bookmark" },
+            { name: "Bubble", desc: "إنشاء مواقع وأنظمة كاملة.", descEn: "Build websites and complete systems.", url: "https://bubble.io", icon: "fa-solid fa-shapes" },
+            { name: "Base44", desc: "إنشاء تطبيقات وأنظمة بسهولة.", descEn: "Create apps and systems easily.", url: "https://base44.com", icon: "fa-solid fa-layer-group" },
+            { name: "Glide", desc: "تحويل Google Sheets إلى تطبيق كامل.", descEn: "Turn Google Sheets into a full app.", url: "https://www.glideapps.com", icon: "fa-brands fa-google" },
+            { name: "Adalo", desc: "إنشاء تطبيقات موبايل بسهولة.", descEn: "Create mobile apps easily.", url: "https://www.adalo.com", icon: "fa-solid fa-mobile-alt" },
+            { name: "Softr", desc: "بناء مواقع من Airtable بدون برمجة.", descEn: "Build websites from Airtable without coding.", url: "https://www.softr.io", icon: "fa-solid fa-table" },
+            { name: "Uizard", desc: "تحويل النص إلى واجهات رقمية.", descEn: "Convert text to digital interfaces.", url: "https://uizard.io", icon: "fa-solid fa-wand-magic-sparkles" },
+            { name: "Rocket.new", desc: "إنشاء تطبيقات تلقائياً.", descEn: "Auto-create applications.", url: "https://www.rocket.new", icon: "fa-solid fa-rocket" },
+            { name: "Builder.io", desc: "منصة بناء مواقع مرئية مع دعم React وVue.", descEn: "Visual website builder with React and Vue support.", url: "https://builder.io", icon: "fa-solid fa-cube" },
+            { name: "WeWeb", desc: "منصة بناء واجهات ويب تفاعلية بدون برمجة.", descEn: "Interactive web frontend builder without coding.", url: "https://weweb.io", icon: "fa-solid fa-code" },
+            { name: "Hostinger Horizons", desc: "إنشاء مواقع احترافية بالذكاء الاصطناعي من Hostinger.", descEn: "AI-powered professional website builder from Hostinger.", url: "https://www.hostinger.com/horizons", icon: "fa-solid fa-rocket" }
         ]
     },
     {
         name: "إنشاء الصور والتصميم",
+        nameEn: "Image Generation & Design",
         icon: "fa-solid fa-image",
         tools: [
             { name: "Midjourney", desc: "توليد صور إبداعية.", url: "https://www.midjourney.com", icon: "fa-solid fa-image" },
@@ -266,11 +148,14 @@ const categories = [
             { name: "Freepik", desc: "أدوات تصميم AI.", url: "https://freepik.com", icon: "fa-solid fa-image" },
             { name: "Designs AI", desc: "أدوات تصميم وشعارات احترافية.", url: "https://designs.ai", icon: "fa-solid fa-wand-magic-sparkles" },
             { name: "Pollo AI", desc: "إنشاء صور وفيديو.", url: "https://pollo.ai", icon: "fa-solid fa-video" },
-            { name: "Qwen (Image/Video)", desc: "مولد صور وفيديو.", url: "https://qwen.ai", icon: "fa-solid fa-wand-magic-sparkles" }
+            { name: "Qwen (Image/Video)", desc: "مولد صور وفيديو.", url: "https://qwen.ai", icon: "fa-solid fa-wand-magic-sparkles" },
+            { name: "Krea AI", desc: "منصة توليد صور AI في الوقت الفعلي مع تحكم بصري متقدم.", url: "https://krea.ai", icon: "fa-solid fa-wand-magic-sparkles" },
+            { name: "Recraft AI", desc: "منصة تصميم AI متقدمة لإنشاء رسومات وأيقونات وصور.", url: "https://recraft.ai", icon: "fa-solid fa-paintbrush" }
         ]
     },
     {
         name: "صناعة الفيديو",
+        nameEn: "Video Production",
         icon: "fa-solid fa-video",
         tools: [
             { name: "Sora", desc: "مولد فيديو نص إلى فيديو.", url: "https://openai.com/sora", icon: "fa-solid fa-video" },
@@ -294,14 +179,15 @@ const categories = [
             { name: "Elai.io", desc: "إنشاء فيديوهات تعليمية.", url: "https://elai.io", icon: "fa-solid fa-graduation-cap" },
             { name: "Video Maker", desc: "إنشاء فيديو من النصوص.", url: "https://designs.ai/video-maker", icon: "fa-solid fa-video" },
             { name: "AI Animation Generator", desc: "إنشاء أنيميشن.", url: "https://designs.ai/ai-animation-generator", icon: "fa-solid fa-film" },
-            { name: "AI Motion Graphics", desc: "إنشاء موشن جرافيك.", url: "https://designs.ai", icon: "fa-solid fa-film" },
-            { name: "AI Video Subtitle Maker", desc: "إضافة ترجمة للفيديو.", url: "https://designs.ai", icon: "fa-solid fa-closed-captioning" },
-            { name: "AI Video Scene Generator", desc: "إنشاء مشاهد فيديو.", url: "https://designs.ai", icon: "fa-solid fa-film" },
-            { name: "AI Video Template Maker", desc: "إنشاء قوالب فيديو.", url: "https://designs.ai", icon: "fa-solid fa-clapperboard" }
+            { name: "AI Motion Graphics", desc: "إنشاء موشن جرافيك.", url: "https://www.adobe.com/products/aftereffects.html", icon: "fa-solid fa-film" },
+            { name: "AI Video Subtitle Maker", desc: "إضافة ترجمة للفيديو.", url: "https://www.capcut.com", icon: "fa-solid fa-closed-captioning" },
+            { name: "AI Video Scene Generator", desc: "إنشاء مشاهد فيديو.", url: "https://runwayml.com", icon: "fa-solid fa-film" },
+            { name: "AI Video Template Maker", desc: "إنشاء قوالب فيديو.", url: "https://invideo.io", icon: "fa-solid fa-clapperboard" }
         ]
     },
     {
         name: "الصوت والموسيقى",
+        nameEn: "Audio & Music",
         icon: "fa-solid fa-microphone",
         tools: [
             { name: "ElevenLabs", desc: "أصوات واقعية بالذكاء الاصطناعي.", url: "https://elevenlabs.io", icon: "fa-solid fa-waveform" },
@@ -329,16 +215,22 @@ const categories = [
             { name: "EchoWave", desc: "محرّر صوت AI.", url: "https://echowave.ai", icon: "fa-solid fa-waveform" },
             { name: "Speechnotes", desc: "تحويل الصوت إلى نص.", url: "https://speechnotes.co", icon: "fa-solid fa-microphone" },
             { name: "Speech Maker", desc: "تحويل النص إلى صوت.", url: "https://designs.ai/speech-maker", icon: "fa-solid fa-microphone" },
-            { name: "AI Voice Cloning", desc: "استنساخ الصوت.", url: "https://designs.ai", icon: "fa-solid fa-microphone-alt" },
-            { name: "AI Voice Over", desc: "إنشاء تعليق صوتي.", url: "https://designs.ai", icon: "fa-solid fa-microphone" },
-            { name: "AI Podcast Generator", desc: "إنشاء بودكاست.", url: "https://designs.ai", icon: "fa-solid fa-podcast" },
-            { name: "AI Music Generator", desc: "توليد موسيقى.", url: "https://designs.ai", icon: "fa-solid fa-music" },
-            { name: "AI Sound Effect Generator", desc: "إنشاء مؤثرات صوتية.", url: "https://designs.ai", icon: "fa-solid fa-waveform" },
-            { name: "AI Audio", desc: "إنشاء أو تعديل الصوت.", url: "https://designs.ai", icon: "fa-solid fa-headphones" }
+            { name: "AI Voice Cloning", desc: "استنساخ الصوت.", url: "https://elevenlabs.io", icon: "fa-solid fa-microphone-alt" },
+            { name: "AI Voice Over", desc: "إنشاء تعليق صوتي.", url: "https://murf.ai", icon: "fa-solid fa-microphone" },
+            { name: "AI Podcast Generator", desc: "إنشاء بودكاست.", url: "https://podcastle.ai", icon: "fa-solid fa-podcast" },
+            { name: "AI Music Generator", desc: "توليد موسيقى.", url: "https://suno.ai", icon: "fa-solid fa-music" },
+            { name: "AI Sound Effect Generator", desc: "إنشاء مؤثرات صوتية.", url: "https://www.lalal.ai", icon: "fa-solid fa-waveform" },
+            { name: "AI Audio", desc: "إنشاء أو تعديل الصوت.", url: "https://audo.ai", icon: "fa-solid fa-headphones" },
+            { name: "Udio", desc: "منصة توليد موسيقى بالذكاء الاصطناعي بجودة عالية.", url: "https://udio.com", icon: "fa-solid fa-music" },
+            { name: "Speechify", desc: "تحويل النصوص والكتب إلى صوت طبيعي للاستماع.", url: "https://speechify.com", icon: "fa-solid fa-headphones" },
+            { name: "Podcastle", desc: "منصة إنشاء وتحرير بودكاست بأدوات ذكاء اصطناعي.", url: "https://podcastle.ai", icon: "fa-solid fa-microphone" },
+            { name: "Audo AI", desc: "أداة تنقية الصوت وإزالة ضوضاء الخلفية تلقائياً.", url: "https://audo.ai", icon: "fa-solid fa-ear" },
+            { name: "AssemblyAI", desc: "API ذكاء اصطناعي صوتي متقدم لنسخ وتحليل المحادثات.", url: "https://assemblyai.com", icon: "fa-solid fa-microphone" }
         ]
     },
     {
         name: "الكتابة والمحتوى",
+        nameEn: "Writing & Content",
         icon: "fa-solid fa-pen-fancy",
         tools: [
             { name: "Jasper", desc: "كتابة المحتوى التسويقي.", url: "https://www.jasper.ai", icon: "fa-solid fa-pen-nib" },
@@ -382,11 +274,14 @@ const categories = [
             { name: "Phrasly", desc: "تحسين محتوى نصي.", url: "https://phrasly.ai", icon: "fa-solid fa-feather-pointed" },
             { name: "Snov Email Writer", desc: "كتابة رسائل بريد.", url: "https://snov.io/email-writer", icon: "fa-solid fa-envelope" },
             { name: "ZeroGPT", desc: "كشف المحتوى.", url: "https://zerogpt.com", icon: "fa-solid fa-magnifying-glass" },
-            { name: "Google Notebook LM", desc: "تدوين ذكي.", url: "https://notebooklm.google.com", icon: "fa-brands fa-google" }
+            { name: "Google Notebook LM", desc: "تدوين ذكي.", url: "https://notebooklm.google.com", icon: "fa-brands fa-google" },
+            { name: "ArWriter", desc: "أداة كتابة محتوى عربي احترافي بالذكاء الاصطناعي.", url: "https://arwriter.ai", icon: "fa-solid fa-pen-nib" },
+            { name: "قلم AI", desc: "محرر نصوص عربي ذكي يصحح الأخطاء النحوية والإملائية.", url: "https://qalam.ai", icon: "fa-solid fa-pen-fancy" }
         ]
     },
     {
         name: "العروض التقديمية",
+        nameEn: "Presentations",
         icon: "fa-solid fa-presentation-screen",
         tools: [
             { name: "Gamma", desc: "إنشاء عروض تقديمية.", url: "https://gamma.app", icon: "fa-solid fa-chart-pie" },
@@ -413,6 +308,7 @@ const categories = [
     },
     {
         name: "التسويق الرقمي",
+        nameEn: "Digital Marketing",
         icon: "fa-solid fa-bullhorn",
         tools: [
             { name: "AdCreative", desc: "إنشاء إعلانات وبنرات.", url: "https://www.adcreative.ai", icon: "fa-solid fa-rectangle-ad" },
@@ -447,17 +343,18 @@ const categories = [
             { name: "Gong", desc: "تحليل المبيعات.", url: "https://www.gong.io", icon: "fa-solid fa-gong" },
             { name: "Segment Twilio", desc: "بيانات عملاء.", url: "https://segment.com", icon: "fa-solid fa-chart-pie" },
             { name: "Feedly", desc: "متابعة الأخبار.", url: "https://feedly.com", icon: "fa-solid fa-rss" },
-            { name: "AI Ad Generator", desc: "إنشاء إعلانات.", url: "https://designs.ai", icon: "fa-solid fa-bullhorn" },
-            { name: "AI Campaign Generator", desc: "إنشاء حملات.", url: "https://designs.ai", icon: "fa-solid fa-bullhorn" },
-            { name: "AI Keyword Generator", desc: "توليد كلمات مفتاحية.", url: "https://designs.ai", icon: "fa-solid fa-key" },
-            { name: "AI Hashtag Generator", desc: "إنشاء هاشتاقات.", url: "https://designs.ai", icon: "fa-solid fa-hashtag" },
-            { name: "AI Marketing Strategy", desc: "اقتراح استراتيجية.", url: "https://designs.ai", icon: "fa-solid fa-chess-king" },
-            { name: "AI Trend Analyzer", desc: "تحليل الترند.", url: "https://designs.ai", icon: "fa-solid fa-chart-line" },
-            { name: "AI Audience Analyzer", desc: "تحليل الجمهور.", url: "https://designs.ai", icon: "fa-solid fa-chart-pie" }
+            { name: "AI Ad Generator", desc: "إنشاء إعلانات.", url: "https://www.adcreative.ai", icon: "fa-solid fa-bullhorn" },
+            { name: "AI Campaign Generator", desc: "إنشاء حملات.", url: "https://predis.ai", icon: "fa-solid fa-bullhorn" },
+            { name: "AI Keyword Generator", desc: "توليد كلمات مفتاحية.", url: "https://ahrefs.com", icon: "fa-solid fa-key" },
+            { name: "AI Hashtag Generator", desc: "إنشاء هاشتاقات.", url: "https://predis.ai", icon: "fa-solid fa-hashtag" },
+            { name: "AI Marketing Strategy", desc: "اقتراح استراتيجية.", url: "https://www.hubspot.com", icon: "fa-solid fa-chess-king" },
+            { name: "AI Trend Analyzer", desc: "تحليل الترند.", url: "https://trends.google.com", icon: "fa-solid fa-chart-line" },
+            { name: "AI Audience Analyzer", desc: "تحليل الجمهور.", url: "https://www.similarweb.com", icon: "fa-solid fa-chart-pie" }
         ]
     },
     {
         name: "إدارة السوشيال ميديا",
+        nameEn: "Social Media Management",
         icon: "fa-solid fa-hashtag",
         tools: [
             { name: "Buffer", desc: "جدولة المنشورات.", url: "https://buffer.com", icon: "fa-solid fa-layer-group" },
@@ -476,15 +373,16 @@ const categories = [
             { name: "Sendible", desc: "أتمتة نشر المحتوى.", url: "https://www.sendible.com", icon: "fa-solid fa-share-alt" },
             { name: "Vista Social", desc: "إدارة السوشيال ميديا.", url: "https://www.vistasocial.com", icon: "fa-solid fa-globe" },
             { name: "Beacons", desc: "أدوات صُنّاع المحتوى.", url: "https://beacons.ai", icon: "fa-solid fa-star" },
-            { name: "AI Social Post Generator", desc: "إنشاء منشورات.", url: "https://designs.ai", icon: "fa-solid fa-hashtag" },
-            { name: "AI Content Calendar", desc: "جدول نشر.", url: "https://designs.ai", icon: "fa-solid fa-calendar-days" },
-            { name: "AI Social Media Planner", desc: "تخطيط المحتوى.", url: "https://designs.ai", icon: "fa-solid fa-calendar-check" },
-            { name: "AI Content Idea Generator", desc: "توليد أفكار.", url: "https://designs.ai", icon: "fa-solid fa-lightbulb" },
-            { name: "AI Ad Performance Analyzer", desc: "تحليل الأداء.", url: "https://designs.ai", icon: "fa-solid fa-chart-bar" }
+            { name: "AI Social Post Generator", desc: "إنشاء منشورات.", url: "https://predis.ai", icon: "fa-solid fa-hashtag" },
+            { name: "AI Content Calendar", desc: "جدول نشر.", url: "https://buffer.com", icon: "fa-solid fa-calendar-days" },
+            { name: "AI Social Media Planner", desc: "تخطيط المحتوى.", url: "https://hootsuite.com", icon: "fa-solid fa-calendar-check" },
+            { name: "AI Content Idea Generator", desc: "توليد أفكار.", url: "https://buzzsumo.com", icon: "fa-solid fa-lightbulb" },
+            { name: "AI Ad Performance Analyzer", desc: "تحليل الأداء.", url: "https://metricool.com", icon: "fa-solid fa-chart-bar" }
         ]
     },
     {
         name: "التسويق بالبريد",
+        nameEn: "Email Marketing",
         icon: "fa-solid fa-envelope",
         tools: [
             { name: "Mailchimp", desc: "إنشاء حملات بريدية.", url: "https://mailchimp.com", icon: "fa-brands fa-mailchimp" },
@@ -501,11 +399,12 @@ const categories = [
             { name: "Omnisend", desc: "رسائل تسويقية.", url: "https://www.omnisend.com", icon: "fa-solid fa-bullhorn" },
             { name: "Benchmark Email", desc: "حملات بريدية.", url: "https://www.benchmarkemail.com", icon: "fa-solid fa-check" },
             { name: "Mailjet", desc: "رسائل بريد احترافية.", url: "https://www.mailjet.com", icon: "fa-solid fa-paper-plane" },
-            { name: "AI Email Template Maker", desc: "إنشاء قوالب بريد.", url: "https://designs.ai", icon: "fa-solid fa-envelope" }
+            { name: "AI Email Template Maker", desc: "إنشاء قوالب بريد.", url: "https://mailchimp.com", icon: "fa-solid fa-envelope" }
         ]
     },
     {
         name: "إدارة المشاريع",
+        nameEn: "Project Management",
         icon: "fa-solid fa-list-check",
         tools: [
             { name: "Notion", desc: "تنظيم الملاحظات والمهام.", url: "https://www.notion.so", icon: "fa-brands fa-notion" },
@@ -522,11 +421,13 @@ const categories = [
             { name: "Todoist", desc: "تنظيم مهام.", url: "https://todoist.com", icon: "fa-solid fa-check-double" },
             { name: "Quire", desc: "تنظيم المهام.", url: "https://quire.io", icon: "fa-solid fa-quote-right" },
             { name: "Zenkit", desc: "إدارة البيانات.", url: "https://zenkit.com", icon: "fa-solid fa-kanban" },
-            { name: "Fellow", desc: "متابعة المهام.", url: "https://fellow.app", icon: "fa-solid fa-users-viewfinder" }
+            { name: "Fellow", desc: "متابعة المهام.", url: "https://fellow.app", icon: "fa-solid fa-users-viewfinder" },
+            { name: "Linear AI", desc: "أداة إدارة مشاريع برمجية حديثة مع أتمتة ذكية.", url: "https://linear.app", icon: "fa-solid fa-diagram-project" }
         ]
     },
     {
         name: "الاجتماعات والتعاون",
+        nameEn: "Meetings & Collaboration",
         icon: "fa-solid fa-users",
         tools: [
             { name: "Zoom", desc: "اجتماعات فيديو.", url: "https://zoom.us", icon: "fa-brands fa-zoom" },
@@ -548,6 +449,7 @@ const categories = [
     },
     {
         name: "الأتمتة",
+        nameEn: "Automation",
         icon: "fa-solid fa-gears",
         tools: [
             { name: "Zapier", desc: "أتمتة المهام.", url: "https://zapier.com", icon: "fa-brands fa-zapier" },
@@ -580,11 +482,13 @@ const categories = [
             { name: "Workflow AI Tools", desc: "أتمتة.", url: "https://workflowai.com", icon: "fa-solid fa-diagram-project" },
             { name: "AI Meeting Assistant", desc: "تلخيص الاجتماعات.", url: "https://meetingassistant.ai", icon: "fa-solid fa-people-arrows" },
             { name: "ChatGPT for Google Sheets", desc: "تحليل البيانات.", url: "https://workspace.google.com/marketplace/app/chatgpt_for_google_sheets/", icon: "fa-brands fa-google" },
-            { name: "Fireflies Meeting Bot", desc: "تسجيل الاجتماعات.", url: "https://fireflies.ai", icon: "fa-solid fa-fire" }
+            { name: "Fireflies Meeting Bot", desc: "تسجيل الاجتماعات.", url: "https://fireflies.ai", icon: "fa-solid fa-fire" },
+            { name: "Jitterbit", desc: "منصة أتمتة وتكامل بين التطبيقات والأنظمة المؤسسية.", descEn: "Automation and integration platform for enterprise apps and systems.", url: "https://www.jitterbit.com", icon: "fa-solid fa-bolt" }
         ]
     },
     {
         name: "إضافات المتصفح",
+        nameEn: "Browser Extensions",
         icon: "fa-solid fa-puzzle-piece",
         tools: [
             { name: "Hunter", desc: "البحث عن إيميلات.", url: "https://hunter.io", icon: "fa-solid fa-envelope" },
@@ -602,6 +506,7 @@ const categories = [
     },
     {
         name: "التعليم والحياة",
+        nameEn: "Education & Life",
         icon: "fa-solid fa-graduation-cap",
         tools: [
             { name: "Duolingo", desc: "تعلم اللغات.", url: "https://www.duolingo.com", icon: "fa-brands fa-duolingo" },
@@ -637,12 +542,14 @@ const categories = [
             { name: "LearnWorlds", desc: "كورسات.", url: "https://learnworlds.com", icon: "fa-solid fa-chalkboard" },
             { name: "Flo Health", desc: "صحة.", url: "https://flo.health", icon: "fa-solid fa-heart-pulse" },
             { name: "Musixmatch", desc: "كلمات الأغاني.", url: "https://musixmatch.com", icon: "fa-solid fa-music" },
-            { name: "AI Course Content Generator", desc: "إنشاء محتوى تعليمي.", url: "https://designs.ai", icon: "fa-solid fa-graduation-cap" },
-            { name: "AI Ebook Generator", desc: "إنشاء كتب إلكترونية.", url: "https://designs.ai", icon: "fa-solid fa-book" }
+            { name: "AI Course Content Generator", desc: "إنشاء محتوى تعليمي.", url: "https://www.coursera.org", icon: "fa-solid fa-graduation-cap" },
+            { name: "AI Ebook Generator", desc: "إنشاء كتب إلكترونية.", url: "https://www.canva.com", icon: "fa-solid fa-book" },
+            { name: "Coursera Coach", desc: "مساعد تعليمي ذكي يرافقك أثناء الدورات مع إجابات فورية.", url: "https://www.coursera.org", icon: "fa-solid fa-graduation-cap" }
         ]
     },
     {
         name: "أدوات متخصصة",
+        nameEn: "Specialized AI Tools",
         icon: "fa-solid fa-toolbox",
         tools: [
             { name: "DeepL", desc: "ترجمة نصوص.", url: "https://www.deepl.com", icon: "fa-solid fa-language" },
@@ -657,11 +564,19 @@ const categories = [
             { name: "Figma AI Plugins", desc: "تصميم UI/UX.", url: "https://www.figma.com", icon: "fa-brands fa-figma" },
             { name: "Reimagine Home", desc: "تصميم داخلي.", url: "https://reimaginehome.ai", icon: "fa-solid fa-home" },
             { name: "Interior AI", desc: "تصميم غرف.", url: "https://interiorai.com", icon: "fa-solid fa-couch" },
-            { name: "Patterned AI", desc: "إنشاء أنماط.", url: "https://patterned.ai", icon: "fa-solid fa-shapes" }
+            { name: "Patterned AI", desc: "إنشاء أنماط.", url: "https://patterned.ai", icon: "fa-solid fa-shapes" },
+            { name: "Consensus", desc: "محرك بحث أكاديمي يستخلص إجابات من الأوراق العلمية.", url: "https://consensus.app", icon: "fa-solid fa-graduation-cap" },
+            { name: "Semantic Scholar", desc: "محرك بحث أكاديمي مجاني يفهم العلاقات بين الأبحاث.", url: "https://semanticscholar.org", icon: "fa-solid fa-book-open" },
+            { name: "Research Rabbit", desc: "اكتشاف أوراق بحثية ذات صلة تلقائياً مع خرائط بصرية.", url: "https://researchrabbitapp.com", icon: "fa-solid fa-network-wired" },
+            { name: "Julius AI", desc: "محلل بيانات ذكي يحوّل ملفات Excel إلى رسوم بيانية.", url: "https://julius.ai", icon: "fa-solid fa-chart-bar" },
+            { name: "ChatPDF", desc: "محادثة مع ملفات PDF لاستخلاص المعلومات بسهولة.", url: "https://chatpdf.com", icon: "fa-solid fa-file-pdf" },
+            { name: "Connected Papers", desc: "استكشاف بصري للأوراق الأكاديمية في رسم بياني تفاعلي.", url: "https://connectedpapers.com", icon: "fa-solid fa-share-nodes" },
+            { name: "Elicit", desc: "مساعد بحثي أكاديمي يحلل الأوراق ويستخلص النتائج.", url: "https://elicit.com", icon: "fa-solid fa-flask" }
         ]
     },
     {
         name: "تحليل وSEO",
+        nameEn: "Analytics & SEO",
         icon: "fa-solid fa-magnifying-glass-chart",
         tools: [
             { name: "SimilarWeb", desc: "تحليل المواقع.", url: "https://www.similarweb.com", icon: "fa-solid fa-chart-simple" },
@@ -686,6 +601,7 @@ const categories = [
     },
     {
         name: "وظائف وسير ذاتية",
+        nameEn: "Jobs & Resumes",
         icon: "fa-solid fa-user-tie",
         tools: [
             { name: "Kickresume", desc: "السيرة الذاتية.", url: "https://kickresume.com", icon: "fa-solid fa-file-lines" },
@@ -694,11 +610,12 @@ const categories = [
             { name: "BeamJobs", desc: "سيرة ذاتية.", url: "https://beamjobs.com", icon: "fa-solid fa-file-lines" },
             { name: "BoomJobs", desc: "سيرة ذاتية AI.", url: "https://boomjobs.com", icon: "fa-solid fa-rocket" },
             { name: "AI Resume Builders", desc: "بناء السيرة.", url: "https://www.resumebuilder.com", icon: "fa-solid fa-file" },
-            { name: "AI Resume Maker", desc: "تصميم سيرة.", url: "https://designs.ai", icon: "fa-solid fa-file-lines" }
+            { name: "AI Resume Maker", desc: "تصميم سيرة.", url: "https://kickresume.com", icon: "fa-solid fa-file-lines" }
         ]
     },
     {
         name: "أدوات Designs AI",
+        nameEn: "Designs AI Tools",
         icon: "fa-solid fa-wand-magic-sparkles",
         tools: [
             { name: "Image Maker", desc: "توليد الصور.", url: "https://designs.ai/image-maker", icon: "fa-solid fa-image" },
@@ -756,34 +673,71 @@ const categories = [
     },
     {
         name: "مواقع جمع أدوات AI",
+        nameEn: "AI Tool Aggregators",
         icon: "fa-solid fa-compass",
         tools: [
             { name: "Futurepedia", desc: "دليل أدوات AI.", url: "https://www.futurepedia.io", icon: "fa-solid fa-compass" },
             { name: "There's An AI", desc: "البحث عن أدوات AI.", url: "https://theresanaiforthat.com", icon: "fa-solid fa-magnifying-glass" }
         ]
+    },
+    {
+        name: "بناء تطبيقات الموبايل",
+        nameEn: "Mobile App Builders",
+        icon: "fa-solid fa-mobile-screen-button",
+        tools: [
+            { name: "FlutterFlow", desc: "بناء تطبيقات موبايل بـ Flutter بدون برمجة مع واجهة مرئية.", descEn: "Build mobile apps with Flutter visually without coding.", url: "https://flutterflow.io", icon: "fa-solid fa-mobile-screen" },
+            { name: "Thunkable", desc: "إنشاء تطبيقات موبايل بالسحب والإفلات بدون برمجة.", descEn: "Create mobile apps with drag-and-drop without coding.", url: "https://thunkable.com", icon: "fa-solid fa-mobile-alt" },
+            { name: "Draftbit", desc: "بناء تطبيقات موبايل من قواعد بيانات وواجهات مرئية.", descEn: "Build mobile apps from databases and visual interfaces.", url: "https://draftbit.com", icon: "fa-solid fa-mobile" },
+            { name: "Bravo Studio", desc: "تحويل تصاميم Figma إلى تطبيقات موبايل حقيقية.", descEn: "Convert Figma designs into real mobile apps.", url: "https://bravostudio.app", icon: "fa-brands fa-figma" },
+            { name: "AppGyver", desc: "منصة بناء تطبيقات بدون برمجة对企业级.", descEn: "Enterprise-grade no-code app building platform.", url: "https://www.appgyver.com", icon: "fa-solid fa-cube" },
+            { name: "Buzzy", desc: "تحويل تصاميم Figma إلى تطبيقات ويب وموبايل.", descEn: "Turn Figma designs into web and mobile apps.", url: "https://buzzy.buzz", icon: "fa-solid fa-bolt" },
+            { name: "RapidNative", desc: "إنشاء تطبيقات موبايل أصلية بالذكاء الاصطناعي.", descEn: "Create native mobile apps with AI assistance.", url: "https://rapidnative.com", icon: "fa-solid fa-rocket" }
+        ]
+    },
+    {
+        name: "منصات بدون برمجة ومنخفضة الكود",
+        nameEn: "No-Code & Low-Code Platforms",
+        icon: "fa-solid fa-layer-group",
+        tools: [
+            { name: "AppSheet", desc: "منصة Google لبناء تطبيقات بدون برمجة من البيانات.", descEn: "Google's no-code platform for building apps from data.", url: "https://www.appsheet.com", icon: "fa-brands fa-google" },
+            { name: "Mendix", desc: "منصة تطوير تطبيقات منخفضة الكود للمؤسسات.", descEn: "Enterprise low-code application development platform.", url: "https://www.mendix.com", icon: "fa-solid fa-cubes" },
+            { name: "OutSystems", desc: "منصة تطوير تطبيقات سريعة منخفضة الكود.", descEn: "Rapid low-code application development platform.", url: "https://www.outsystems.com", icon: "fa-solid fa-rocket" },
+            { name: "Noloco", desc: "بناء تطبيقات ويب nội部 من قواعد البيانات بدون برمجة.", descEn: "Build internal web apps from databases without coding.", url: "https://www.noloco.io", icon: "fa-solid fa-laptop-code" },
+            { name: "UI Bakery", desc: "منصة بناء أدوات داخلية منخفضة الكود للمطورين.", descEn: "Low-code internal tools builder for developers.", url: "https://uibakery.io", icon: "fa-solid fa-palette" },
+            { name: "Tempo", desc: "منصة بناء تطبيقات ويب منخفضة الكود مع تكامل Git.", descEn: "Low-code web app builder with Git integration.", url: "https://tempo.new", icon: "fa-solid fa-code-branch" }
+        ]
+    },
+    {
+        name: "أدوات الباك اند والبنية التحتية",
+        nameEn: "Backend & Infrastructure",
+        icon: "fa-solid fa-server",
+        tools: [
+            { name: "Firebase Studio", desc: "بيئة تطوير متكاملة من Google للباك اند والـ AI.", descEn: "Integrated development environment from Google for backend and AI.", url: "https://firebase.google.com", icon: "fa-brands fa-google" },
+            { name: "Xano", desc: "بناء باك اند قوي بدون برمجة مع قواعد بيانات وواجهات API.", descEn: "Build powerful backend without coding with database and API.", url: "https://xano.com", icon: "fa-solid fa-database" },
+            { name: "Backendless", desc: "منصة باك اند كخدمة مع تطوير تطبيقات بدون برمجة.", descEn: "Backend-as-a-service platform with no-code app development.", url: "https://backendless.com", icon: "fa-solid fa-cloud" },
+            { name: "ToolJet", desc: "بناء أدوات داخلية من قواعد البيانات والـ APIs بسرعة.", descEn: "Build internal tools from databases and APIs quickly.", url: "https://tooljet.com", icon: "fa-solid fa-wrench" },
+            { name: "Appsmith", desc: "منصة مفتوحة المصدر لبناء أدوات داخلية بسرعة.", descEn: "Open-source platform for building internal tools quickly.", url: "https://www.appsmith.com", icon: "fa-solid fa-hammer" },
+            { name: "Budibase", desc: "بناء تطبيقات الأعمال والأدوات الداخلية بدون برمجة.", descEn: "Build business apps and internal tools without coding.", url: "https://budibase.com", icon: "fa-solid fa-cubes" },
+            { name: "DronaHQ", desc: "منصة بناء أدوات داخلية منخفضة الكود للمؤسسات.", descEn: "Low-code internal tools builder for enterprises.", url: "https://www.dronahq.com", icon: "fa-solid fa-building" }
+        ]
+    },
+    {
+        name: "وكلاء وأتمتة الذكاء الاصطناعي",
+        nameEn: "AI Agents & Automation",
+        icon: "fa-solid fa-robot",
+        tools: [
+            { name: "Flowise AI", desc: "بناء وكلاء ذكاء اصطناعي تفاعليين بدون برمجة.", descEn: "Build interactive AI agents without coding.", url: "https://flowiseai.com", icon: "fa-solid fa-robot" },
+            { name: "Langflow", desc: "منصة بناء تطبيقات LLM مرئية مع سلاسل سير عمل.", descEn: "Visual LLM app builder with workflow chains.", url: "https://langflow.org", icon: "fa-solid fa-diagram-project" },
+            { name: "GitHub Spark", desc: "إنشاء تطبيقات ذكية باللغة الطبيعية من GitHub.", descEn: "Create intelligent apps from natural language from GitHub.", url: "https://github.com/features/spark", icon: "fa-brands fa-github" },
+            { name: "All Hands", desc: "وكلاء ذكاء اصطناعي مؤتمتة لمهام البرمجة والبحث.", descEn: "Automated AI agents for coding and research tasks.", url: "https://allhands.ai", icon: "fa-solid fa-handshake" },
+            { name: "Genvibe", desc: "وكلاء ذكاء اصطناعي لتحسين سير العمل والإنتاجية.", descEn: "AI agents for optimizing workflow and productivity.", url: "https://genvibe.com", icon: "fa-solid fa-bolt" },
+            { name: "CatDoes", desc: "وكلاء ذكاء اصطناعي متخصصون في مهام متعددة.", descEn: "AI agents specialized in multiple tasks.", url: "https://catdoes.com", icon: "fa-solid fa-robot" },
+            { name: "Dyad", desc: "مساعد برمجي ذكي يبني تطبيقات ويب كاملة من الألف إلى الياء.", descEn: "Smart coding assistant that builds complete web apps end-to-end.", url: "https://dyad.dev", icon: "fa-solid fa-code" },
+            { name: "Pythagora AI", desc: "منصة بناء تطبيقات ويب كاملة بالذكاء الاصطناعي مع معاينة فورية.", descEn: "Build complete web apps with AI with instant preview.", url: "https://pythagora.ai", icon: "fa-solid fa-square-root-variable" },
+            { name: "Create.xyz", desc: "منصة إنشاء تطبيقات ومنتجات ذكاء اصطناعي بدون برمجة.", descEn: "Build AI apps and products without coding.", url: "https://create.xyz", icon: "fa-solid fa-wand-magic-sparkles" }
+        ]
     }
 ];
-
-const translations = {
-    en: {
-        mainTitle: "Abdulrahman AI",
-        homeLink: "Home",
-        searchPlaceholder: "Search for AI tools...",
-        noResultsMsg: "No tools match your search. Try another keyword!",
-        backLink: "Back to all categories",
-        visitBtn: "Visit",
-        sidebarTitle: "Smart Menu",
-        statCategories: "Categories",
-        statTools: "Tools",
-        statFav: "Favorites",
-        topToolsTitle: "Most Visited",
-        favoritesTitle: "My Favorites",
-        copyright: "© 2026 Abdulrahman Radwan. All Rights Reserved.",
-        sortDefault: "Default",
-        sortName: "By Name",
-        sortCount: "By Count"
-    }
-};
 
 const typingTexts = [
     "500+ AI Tools in one place",

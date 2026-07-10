@@ -1,18 +1,58 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#6366f1"/>
-      <stop offset="50%" style="stop-color:#0ea5e9"/>
-      <stop offset="100%" style="stop-color:#f43f5e"/>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0B1120"/>
+      <stop offset="100%" style="stop-color:#1a1f3a"/>
     </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="50%" style="stop-color:#8B5CF6"/>
+      <stop offset="100%" style="stop-color:#F43F5E"/>
+    </linearGradient>
+    <linearGradient id="brain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60A5FA"/>
+      <stop offset="100%" style="stop-color:#A78BFA"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="512" height="512" rx="100" fill="#0f172a"/>
-  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#grad)" stroke-width="8" opacity="0.3"/>
-  <circle cx="256" cy="256" r="140" fill="none" stroke="url(#grad)" stroke-width="6" opacity="0.5"/>
-  <circle cx="256" cy="256" r="100" fill="url(#grad)"/>
-  <text x="256" y="290" font-family="Arial, sans-serif" font-size="100" font-weight="bold" fill="white" text-anchor="middle">AI</text>
-  <circle cx="150" cy="150" r="20" fill="#6366f1" opacity="0.8"/>
-  <circle cx="380" cy="180" r="15" fill="#0ea5e9" opacity="0.8"/>
-  <circle cx="400" cy="350" r="25" fill="#f43f5e" opacity="0.8"/>
-  <circle cx="120" cy="380" r="18" fill="#22c55e" opacity="0.8"/>
+  <!-- Background -->
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+  <!-- Border ring -->
+  <rect x="8" y="8" width="496" height="496" rx="102" fill="none" stroke="url(#accent)" stroke-width="2.5" opacity="0.3"/>
+  <!-- Brain icon -->
+  <g transform="translate(256,230)" filter="url(#glow)">
+    <!-- Left brain -->
+    <path d="M-10,-70 C-55,-70 -80,-40 -80,0 C-80,35 -60,60 -35,70 C-45,80 -55,95 -55,115" 
+          fill="none" stroke="url(#brain)" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+    <!-- Right brain -->
+    <path d="M10,-70 C55,-70 80,-40 80,0 C80,35 60,60 35,70 C45,80 55,95 55,115" 
+          fill="none" stroke="url(#brain)" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+    <!-- Center line -->
+    <line x1="0" y1="-80" x2="0" y2="120" stroke="url(#accent)" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+    <!-- Neural dots -->
+    <circle cx="-45" cy="-25" r="8" fill="url(#accent)" opacity="0.8"/>
+    <circle cx="45" cy="-25" r="8" fill="url(#accent)" opacity="0.8"/>
+    <circle cx="-25" cy="25" r="6" fill="url(#brain)" opacity="0.7"/>
+    <circle cx="25" cy="25" r="6" fill="url(#brain)" opacity="0.7"/>
+    <circle cx="0" cy="-55" r="10" fill="url(#accent)" opacity="0.9"/>
+    <circle cx="0" cy="80" r="7" fill="url(#brain)" opacity="0.6"/>
+    <!-- Connection lines -->
+    <line x1="-45" y1="-25" x2="0" y2="-55" stroke="url(#accent)" stroke-width="2" opacity="0.4"/>
+    <line x1="45" y1="-25" x2="0" y2="-55" stroke="url(#accent)" stroke-width="2" opacity="0.4"/>
+    <line x1="-25" y1="25" x2="0" y2="80" stroke="url(#brain)" stroke-width="2" opacity="0.3"/>
+    <line x1="25" y1="25" x2="0" y2="80" stroke="url(#brain)" stroke-width="2" opacity="0.3"/>
+  </g>
+  <!-- Text: AI -->
+  <text x="256" y="400" font-family="system-ui,-apple-system,Inter,sans-serif" font-size="72" font-weight="900" fill="url(#accent)" text-anchor="middle" letter-spacing="8">AI</text>
+  <!-- Version badge -->
+  <g transform="translate(385,60)">
+    <rect x="0" y="0" width="72" height="32" rx="16" fill="url(#accent)" opacity="0.9"/>
+    <text x="36" y="22" font-family="system-ui,-apple-system,sans-serif" font-size="14" font-weight="800" fill="white" text-anchor="middle">v2</text>
+  </g>
 </svg>
